@@ -1,0 +1,19 @@
+{
+  "domain": "harpersbazaar.com.au",
+  "url": "https://harpersbazaar.com.au/best-hairdressers-sydney",
+  "last_scraped_at": 1782119102.191021,
+  "html_hash": "ed2043707bcd6af63d1df583126d03d1",
+  "emails": [],
+  "phones": [],
+  "schema_data": {},
+  "business_name": "Checking your browser before redirecting.",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "partial",
+  "confidence_score": 0.2,
+  "pages_scraped": [
+    "homepage"
+  ]
+}

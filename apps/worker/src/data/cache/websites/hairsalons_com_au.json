@@ -1,0 +1,21 @@
+{
+  "domain": "hairsalons.com.au",
+  "url": "https://www.hairsalons.com.au/CitySydneyCitySYDNEY.htm",
+  "last_scraped_at": 1782249965.664982,
+  "html_hash": "7336b36bef151d58a631fae73e95d47c",
+  "emails": [],
+  "phones": [],
+  "schema_data": {},
+  "business_name": "Find the best SYDNEY Hair Salons &amp; Hairdressers",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "partial",
+  "confidence_score": 0.2,
+  "pages_scraped": [
+    "homepage",
+    "contact",
+    "internal"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "domain": "christopherhanna.com.au",
+  "url": "https://christopherhanna.com.au",
+  "last_scraped_at": 1782122768.056185,
+  "html_hash": "60f171a2725770cd4ceeb868de2784aa",
+  "emails": [
+    "info@christopherhanna.com.au"
+  ],
+  "phones": [
+    "02 9252 7772",
+    "0292527772",
+    "1142483788"
+  ],
+  "schema_data": {},
+  "business_name": "Christopher Hanna",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.8,
+  "pages_scraped": [
+    "homepage",
+    "about",
+    "services"
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "domain": "kawadahairstudio.com",
+  "url": "https://kawadahairstudio.com",
+  "last_scraped_at": 1782289913.215945,
+  "html_hash": "8e1aa79fd5242eb80ecbe22733985d97",
+  "emails": [
+    "info@kawadahairstudio.com",
+    "user@domain.com"
+  ],
+  "phones": [
+    "0000000000",
+    "028-084-8355",
+    "0280848355",
+    "1198736231",
+    "1618125962",
+    "1618125963",
+    "1691947884",
+    "1691952022",
+    "1691953774",
+    "1691954979",
+    "1692040455",
+    "1692042585",
+    "1692043785",
+    "1692106224",
+    "1692297585",
+    "1692299082",
+    "1721398517",
+    "1721401469",
+    "1767749762",
+    "1782196302",
+    "1782289911",
+    "1788315822",
+    "2000000000",
+    "2042659804",
+    "3141925352",
+    "5067451392",
+    "5333007812",
+    "6075257211",
+    "7333007812",
+    "7999982971",
+    "8072018004",
+    "8337737092",
+    "8480737927",
+    "9094952796",
+    "94-4033-8156",
+    "9769333970"
+  ],
+  "schema_data": {
+    "emails": [
+      "info@kawadahairstudio.com"
+    ],
+    "phones": [
+      "0280848355"
+    ],
+    "name": "Kawada Hair Studio",
+    "raw": {
+      "url": "https://kawadahairstudio.com",
+      "name": "Kawada Hair Studio",
+      "image": "https://static1.squarespace.com/static/6072a48a30558b6d18513246/t/64d920f47c704803f262bcea/1782196302822/",
+      "@context": "http://schema.org",
+      "@type": "LocalBusiness",
+      "legalName": "Kawada Hair Studio",
+      "address": "44-56 May St\nSt Peters, NSW, 2044\nAustralia",
+      "email": "info@kawadahairstudio.com",
+      "telephone": "0280848355",
+      "sameAs": [
+        "https://www.instagram.com/kawadahairstudio",
+        "https://www.facebook.com/kawadahairstudio",
+        "mailto:info@kawadahairstudio.com",
+        "https://www.google.com/search?gs_ssp=eJzj4tVP1zc0LDQsSDc3MYw3YLRSNagwSzI0SjK0SEpNMrNMNTVKsQIKGZompxgZWpobW6QaGKQaeQllJ5YnpiQqZCRmFikUl5SmZOYDAPP5FZk&amp;q=kawada+hair+studio&amp;oq=&amp;gs_lcrp=EgZjaHJvbWUqFQgAEC4YJxivARjHARjqAhiABBiKBTIVCAAQLhgnGK8BGMcBGOoCGIAEGIoFMgkIARAjGCcY6gIyDwgCECMYJxjqAhiABBiKBTIPCAMQIxgnGOoCGIAEGIoFMg8IBBAjGCcY6gIYgAQYigUyCQgFECMYJxjqAjIPCAYQIxgnGOoCGIAEGIoFMg8IBxAjGCcY6gIYgAQYigXSAQkxODAyajBqMTWoAgiwAgHxBVHdDmGdOLLH&amp;sourceid=chrome&amp;ie=UTF-8#mpd=~1198736231150650427/customers/reviews"
+      ],
+      "openingHours": "Mo 10:00-21:00, Tu 10:00-21:00, We 10:00-21:00, Th 10:00-21:00, Fr 10:00-21:00, Sa 10:00-17:00, "
+    }
+  },
+  "business_name": "Kawada Hair Studio",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 1.0,
+  "pages_scraped": [
+    "homepage",
+    "about",
+    "services",
+    "team",
+    "contact"
+  ]
+}

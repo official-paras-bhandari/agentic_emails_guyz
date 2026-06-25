@@ -1,0 +1,26 @@
+{
+  "domain": "franckprovost.com.au",
+  "url": "https://www.franckprovost.com.au",
+  "last_scraped_at": 1782209613.479124,
+  "html_hash": "d4fd6955faccd0e4cfdc3078129a749d",
+  "emails": [],
+  "phones": [
+    "0000000000",
+    "0000000001",
+    "1000000000"
+  ],
+  "schema_data": {},
+  "business_name": "Franck Provost Hair Salons",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "partial",
+  "confidence_score": 0.4,
+  "pages_scraped": [
+    "homepage",
+    "team",
+    "internal",
+    "about"
+  ]
+}

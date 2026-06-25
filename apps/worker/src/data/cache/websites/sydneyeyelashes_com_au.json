@@ -1,0 +1,38 @@
+{
+  "domain": "sydneyeyelashes.com.au",
+  "url": "http://sydneyeyelashes.com.au/eyelash-extensions-sydney-central",
+  "last_scraped_at": 1782294225.461216,
+  "html_hash": "c66f48f63061f3d15f08a9c52db79d04",
+  "emails": [
+    "kate@sydneyeyelashes.com.au"
+  ],
+  "phones": [],
+  "schema_data": {
+    "emails": [],
+    "phones": [],
+    "name": "Sydney Eyelashes",
+    "raw": {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "@id": "#website",
+      "url": "http://sydneyeyelashes.com.au/",
+      "name": "Sydney Eyelashes",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "http://sydneyeyelashes.com.au/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  },
+  "business_name": "Sydney Eyelashes",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.8,
+  "pages_scraped": [
+    "homepage",
+    "about"
+  ]
+}

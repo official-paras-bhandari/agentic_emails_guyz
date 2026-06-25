@@ -1,0 +1,22 @@
+{
+  "domain": "dingg.ai",
+  "url": "https://dingg.ai/salons-in/sydney",
+  "last_scraped_at": 1782123236.6548429,
+  "html_hash": "db7bf6ff44e60ba4c6eed4c67690b9d5",
+  "emails": [],
+  "phones": [
+    "3000000000"
+  ],
+  "schema_data": {},
+  "business_name": "AI Marketing for Salons in Sydney",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "partial",
+  "confidence_score": 0.4,
+  "pages_scraped": [
+    "homepage",
+    "services"
+  ]
+}

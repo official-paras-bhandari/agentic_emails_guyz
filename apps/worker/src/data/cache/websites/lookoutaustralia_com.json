@@ -1,0 +1,92 @@
+{
+  "domain": "lookoutaustralia.com",
+  "url": "https://lookoutaustralia.com/best-nail-salons-sydney",
+  "last_scraped_at": 1782123232.021714,
+  "html_hash": "b02315917ada78d48253ceb4cb22faf6",
+  "emails": [],
+  "phones": [
+    "02 9267 5000",
+    "02 9380 8008",
+    "6128592301",
+    "6129281450",
+    "6143228888"
+  ],
+  "schema_data": {
+    "emails": [],
+    "phones": [],
+    "name": "Lookout Australia",
+    "raw": {
+      "@context": "https://schema.org/",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://lookoutaustralia.com/#organization",
+          "name": "Look Out Australia",
+          "sameAs": [
+            "https://www.facebook.com/lookoutaustralia/about",
+            "https://twitter.com/lookoutaus"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://lookoutaustralia.com/#website",
+          "url": "https://lookoutaustralia.com",
+          "name": "Look Out Australia",
+          "publisher": {
+            "@id": "https://lookoutaustralia.com/#organization"
+          },
+          "inLanguage": "en-US"
+        },
+        {
+          "@type": "CollectionPage",
+          "@id": "https://lookoutaustralia.com/food-drinks/#webpage",
+          "url": "https://lookoutaustralia.com/food-drinks/",
+          "name": "Discover Food and Drinks Insights With Lookout Australia",
+          "isPartOf": {
+            "@id": "https://lookoutaustralia.com/#website"
+          },
+          "inLanguage": "en-US"
+        }
+      ],
+      "@type": "BreadcrumbList",
+      "@id": "#organization",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://lookoutaustralia.com/wp-content/uploads/2023/09/LookOutAustralia-Logo.png"
+      },
+      "url": "https://lookoutaustralia.com/",
+      "name": "Lookout Australia",
+      "description": "Your Gateway to Australian Adventures",
+      "alternateName": "Your Gateway to Australian Adventures",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@id": "https://lookoutaustralia.com",
+            "name": "Home"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@id": "https://lookoutaustralia.com/food-drinks/",
+            "name": "Food &amp; Drinks"
+          }
+        }
+      ]
+    }
+  },
+  "business_name": "Lookout Australia",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "partial",
+  "confidence_score": 0.6000000000000001,
+  "pages_scraped": [
+    "homepage",
+    "internal"
+  ]
+}

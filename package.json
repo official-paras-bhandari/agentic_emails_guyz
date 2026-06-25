@@ -1,0 +1,28 @@
+{
+  "name": "ai-outreach-crm",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev --workspace=apps/web",
+    "build:web": "npm run build --workspace=apps/web",
+    "lint:web": "npm run lint --workspace=apps/web",
+    "db:generate": "npm run generate --workspace=packages/db",
+    "db:push": "npm run push --workspace=packages/db",
+    "db:migrate": "npm run migrate:deploy --workspace=packages/db",
+    "infra:up": "docker compose up -d postgres redis",
+    "infra:down": "docker compose down",
+    "dev:worker-api": "cd apps/worker && PYTHONPATH=. venv/bin/uvicorn src.main:app --host 127.0.0.1 --port 8000",
+    "dev:worker-rq": "cd apps/worker && PYTHONPATH=. venv/bin/python src/queue_worker.py",
+    "dev:all": "bash scripts/dev_all.sh",
+    "test:e2e": "node --env-file=.env scripts/test_e2e.mjs",
+    "test:policy": "node --env-file=.env scripts/test_policy.mjs",
+    "test:worker": "cd apps/worker && WEBHOOK_SECRET=unit-test-webhook-secret MOCK_MODE=true PYTHONPATH=. venv/bin/python -m unittest discover -s tests -v",
+    "test:send": "node --env-file=.env scripts/test_send.mjs",
+    "test:security": "node --experimental-strip-types --env-file=apps/web/.env scripts/test_security.mjs",
+    "test:fixes": "node --experimental-strip-types --env-file=apps/web/.env scripts/test_fixes_unit.mjs",
+    "test:all": "npm run test:worker && npm run test:fixes && npm run test:e2e && npm run test:policy && npm run test:send && npm run test:security"
+  }
+}

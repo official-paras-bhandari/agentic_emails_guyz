@@ -1,0 +1,31 @@
+# Secrets and local configuration
+.env
+.env.local
+.env.*.local
+!.env.example
+**/.env
+!**/.env.example
+
+# JavaScript
+node_modules/
+.next/
+out/
+dist/
+*.tsbuildinfo
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Test and runtime output
+coverage/
+*.log
+*.pid
+.DS_Store
+
+# IDE files
+.idea/
+.vscode/

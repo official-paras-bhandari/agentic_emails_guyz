@@ -1,0 +1,33 @@
+{
+  "domain": "sydney.edu.au",
+  "url": "https://www.sydney.edu.au/business/about/contact-us.html",
+  "last_scraped_at": 1782119313.391737,
+  "html_hash": "476cfb532d3928e5c820c7be7e299743",
+  "emails": [
+    "business.pgresearch@sydney.edu.au",
+    "business.research-support@sydney.edu.au",
+    "business.research@sydney.edu.au",
+    "fiona.osullivan@sydney.edu.au",
+    "harrison.vesey@sydney.edu.au",
+    "privacy.enquiries@sydney.edu.au",
+    "sophia.demestre@sydney.edu.au"
+  ],
+  "phones": [
+    "+61 421 647 878",
+    "+61 438 847 463",
+    "+61 479 198 803"
+  ],
+  "schema_data": {},
+  "business_name": "The University of Sydney",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.8,
+  "pages_scraped": [
+    "homepage",
+    "about",
+    "contact"
+  ]
+}

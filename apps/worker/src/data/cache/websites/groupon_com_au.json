@@ -1,0 +1,53 @@
+{
+  "domain": "groupon.com.au",
+  "url": "https://www.groupon.com.au/coupons/sydney/colour-and-highlights",
+  "last_scraped_at": 1782202651.5380712,
+  "html_hash": "9fb92d40d7589c2dbad33a2bcbba7030",
+  "emails": [],
+  "phones": [
+    "1693142724",
+    "3277375866",
+    "5569753536"
+  ],
+  "schema_data": {
+    "emails": [],
+    "phones": [],
+    "name": "Groupon",
+    "raw": {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "name": "Groupon",
+      "url": "https://www.groupon.com.au",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.groupon.com.au/search?query=",
+        "query-input": "required name=query"
+      },
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.groupon.com.au/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Wishlist",
+          "item": "https://www.groupon.com.au#"
+        }
+      ]
+    }
+  },
+  "business_name": "Sydney Colour & Highlights: Up to 70% off Colour & Highlights in Sydney",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "partial",
+  "confidence_score": 0.6000000000000001,
+  "pages_scraped": [
+    "homepage",
+    "internal"
+  ]
+}

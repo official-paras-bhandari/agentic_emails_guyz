@@ -1,0 +1,100 @@
+{
+  "domain": "crownhotels.com.au",
+  "url": "https://www.crownhotels.com.au/sydney/crown-spa",
+  "last_scraped_at": 1782294221.646044,
+  "html_hash": "23e13a1846a675314b642c98e430cc01",
+  "emails": [
+    "reservations.mcp@crownhotels.com.au",
+    "spa.reservations@crownsydney.com.au"
+  ],
+  "phones": [
+    "+61 3 9292 6688",
+    "1230591307",
+    "1472243972"
+  ],
+  "schema_data": {
+    "emails": [
+      "reservations.mcp@crownhotels.com.au"
+    ],
+    "phones": [
+      "+61 3 9292 6688"
+    ],
+    "name": "Crown Promenade Melbourne",
+    "raw": {
+      "@context": "https://schema.org",
+      "@type": "Hotel",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@id": "https://www.crownhotels.com.au/melbourne",
+            "name": "Melbourne"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@id": "https://www.crownhotels.com.au/melbourne/crown-promenade",
+            "name": "Crown promenade melbourne"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@id": "https://www.crownhotels.com.au/melbourne/crown-promenade/contact",
+            "name": "Contact"
+          }
+        }
+      ],
+      "image": [
+        {
+          "@type": "ImageObject",
+          "contentUrl": "https://image-tc.galaxy.tf/wijpeg-cq7ae6c21hzbr0jw1d37n5650/contact-cpm.jpg",
+          "url": "https://image-tc.galaxy.tf/wijpeg-cq7ae6c21hzbr0jw1d37n5650/contact-cpm.jpg",
+          "caption": "Seating area in a Lobby at Crown Promenade Melbourne Hotel",
+          "width": 1588,
+          "height": 1058
+        }
+      ],
+      "starRating": {
+        "@type": "Rating",
+        "ratingValue": "Unrated"
+      },
+      "priceRange": "0.00 AUD",
+      "description": "Crown Promenade is for the savvy business and leisure traveller who seek accommodation where functionality, location and genuine service are what matter most.\r\n",
+      "name": "Crown Promenade Melbourne",
+      "telephone": "+61 3 9292 6688",
+      "email": "reservations.mcp@crownhotels.com.au",
+      "url": "https://www.crownhotels.com.au/melbourne/crown-promenade",
+      "sameAs": [
+        "https://www.facebook.com/crownhotels"
+      ],
+      "checkinTime": "",
+      "checkoutTime": "",
+      "hasMap": "https://www.google.com/maps/search/?api=1&query=-37.82378, 144.95992",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "8 Whiteman Street, Southbank, VIC 3006, Australia",
+        "addressLocality": "Southbank",
+        "addressRegion": "Victoria",
+        "postalCode": "3006",
+        "addressCountry": "AU"
+      }
+    }
+  },
+  "business_name": "Sydney",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 1.0,
+  "pages_scraped": [
+    "homepage",
+    "contact",
+    "about"
+  ]
+}

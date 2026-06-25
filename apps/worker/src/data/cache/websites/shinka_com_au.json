@@ -1,0 +1,30 @@
+{
+  "domain": "shinka.com.au",
+  "url": "https://shinka.com.au",
+  "last_scraped_at": 1782202838.422998,
+  "html_hash": "44806b3dacbcb4529dc5dee8a1547535",
+  "emails": [],
+  "phones": [
+    "(03) 3455 6622",
+    "(03) 3455 6623",
+    "(03) 5575 6767",
+    "(03) 5575 6768",
+    "(03) 6206 6202",
+    "(03) 6206 6203",
+    "03-5575-6767",
+    "03-5575-6768"
+  ],
+  "schema_data": {},
+  "business_name": "SHINKA Group Pty Ltd | Hair Salon in Sydney and Tokyo",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "partial",
+  "confidence_score": 0.4,
+  "pages_scraped": [
+    "homepage",
+    "about",
+    "internal"
+  ]
+}

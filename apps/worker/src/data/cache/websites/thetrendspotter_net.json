@@ -1,0 +1,30 @@
+{
+  "domain": "thetrendspotter.net",
+  "url": "https://www.thetrendspotter.net/best-hairdressing-salons-in-sydney",
+  "last_scraped_at": 1782118838.204492,
+  "html_hash": "697f5f6dcd675f9df4b45472e0bebd0d",
+  "emails": [
+    "info@thetrendspotter.net"
+  ],
+  "phones": [
+    "0123456789",
+    "1566599906",
+    "1566600283",
+    "2147483647",
+    "9007199254"
+  ],
+  "schema_data": {},
+  "business_name": "The Trend Spotter",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.8,
+  "pages_scraped": [
+    "homepage",
+    "about",
+    "contact",
+    "internal"
+  ]
+}

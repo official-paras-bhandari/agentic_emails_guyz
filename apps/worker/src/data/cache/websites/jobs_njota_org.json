@@ -1,0 +1,22 @@
+{
+  "domain": "jobs.njota.org",
+  "url": "https://jobs.njota.org/profiles/2448824-best-hair-salon-sydney",
+  "last_scraped_at": 1782250983.0636811,
+  "html_hash": "1aa6994223e77c36ab3a0cc971263fa7",
+  "emails": [],
+  "phones": [
+    "1782250505"
+  ],
+  "schema_data": {},
+  "business_name": "OT Job Opportunities",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "partial",
+  "confidence_score": 0.4,
+  "pages_scraped": [
+    "homepage",
+    "internal"
+  ]
+}

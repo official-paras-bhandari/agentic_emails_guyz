@@ -1,0 +1,21 @@
+{
+  "domain": "bestinau.com.au",
+  "url": "https://bestinau.com.au/best-hair-salons-sydney",
+  "last_scraped_at": 1782119235.0741608,
+  "html_hash": "2bfd0b5ed38d96df977e4205e42c28d7",
+  "emails": [],
+  "phones": [],
+  "schema_data": {},
+  "business_name": "Best in Australia",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "partial",
+  "confidence_score": 0.2,
+  "pages_scraped": [
+    "homepage",
+    "contact",
+    "internal"
+  ]
+}

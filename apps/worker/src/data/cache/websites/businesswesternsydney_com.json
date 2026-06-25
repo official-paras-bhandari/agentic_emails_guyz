@@ -1,0 +1,20 @@
+{
+  "domain": "businesswesternsydney.com",
+  "url": "https://www.businesswesternsydney.com",
+  "last_scraped_at": 1782119286.925302,
+  "html_hash": "5f3a2d8834e102acb5cea8f63265235a",
+  "emails": [],
+  "phones": [],
+  "schema_data": {},
+  "business_name": "Home",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "partial",
+  "confidence_score": 0.2,
+  "pages_scraped": [
+    "homepage",
+    "about"
+  ]
+}

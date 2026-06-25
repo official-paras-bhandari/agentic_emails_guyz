@@ -1,0 +1,24 @@
+{
+  "domain": "mysydneydetour.com",
+  "url": "https://mysydneydetour.com/best-salons-in-sydney",
+  "last_scraped_at": 1782251070.815716,
+  "html_hash": "b55e528ae3b982d86eb5de959db14d7c",
+  "emails": [],
+  "phones": [
+    "1651583542",
+    "1651583550",
+    "211032-7052"
+  ],
+  "schema_data": {},
+  "business_name": "My Sydney Detour",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "partial",
+  "confidence_score": 0.4,
+  "pages_scraped": [
+    "homepage",
+    "internal"
+  ]
+}

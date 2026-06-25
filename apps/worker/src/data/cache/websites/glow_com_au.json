@@ -1,0 +1,26 @@
+{
+  "domain": "glow.com.au",
+  "url": "https://glow.com.au/salons/sydney",
+  "last_scraped_at": 1782118850.698328,
+  "html_hash": "9b914e1bbc59cc742811df9a7fbb04cc",
+  "emails": [
+    "brands@glow.com.au",
+    "hello@glow.com.au",
+    "press@glow.com.au",
+    "team@glow.com.au"
+  ],
+  "phones": [],
+  "schema_data": {},
+  "business_name": "Best Salons + Beauty Clinics in Sydney (2026)",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.6000000000000001,
+  "pages_scraped": [
+    "homepage",
+    "about",
+    "internal"
+  ]
+}

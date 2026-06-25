@@ -1,0 +1,25 @@
+{
+  "domain": "luxeconceptsalon.com.au",
+  "url": "https://www.luxeconceptsalon.com.au/contact-us",
+  "last_scraped_at": 1782118891.81165,
+  "html_hash": "520364f1203fdf68882ad9f208b143f1",
+  "emails": [
+    "luxe@luxeconceptsalon.com.au"
+  ],
+  "phones": [
+    "(02) 9412 1244",
+    "1769997977"
+  ],
+  "schema_data": {},
+  "business_name": "Luxe Concept Salon",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.8,
+  "pages_scraped": [
+    "homepage",
+    "internal"
+  ]
+}

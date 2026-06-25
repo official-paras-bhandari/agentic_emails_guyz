@@ -1,0 +1,277 @@
+{
+  "domain": "pollyandstone.com.au",
+  "url": "https://www.pollyandstone.com.au",
+  "last_scraped_at": 1782118821.080332,
+  "html_hash": "e14263e0ff37e55f59e4638c910b8ad5",
+  "emails": [
+    "2062d0a4929b45348643784b5cb39c36@sentry.wixpress.com",
+    "271e9fa3230b4eec94b02bf95780f5f2@sentry.wixpress.com",
+    "460ff4620fa44cba8df530afde949785@sentry.wixpress.com",
+    "88170cb0c9d64f94b5821ca7fd2d55a4@sentry-next.wixpress.com",
+    "8c4075d5481d476e945486754f783364@sentry.io",
+    "8eb368c655b84e029ed79ad7a5c1718e@sentry.wixpress.com",
+    "9a65e97ebe8141fca0c4fd686f70996b@sentry.wixpress.com",
+    "c183baa23371454f99f417f6616b724d@sentry.wixpress.com",
+    "centralcoast@pollyandstone.com.au",
+    "dd0a55ccb8124b9c9d938e3acf41f8aa@sentry.wixpress.com",
+    "ed436f5053144538958ad06a5005e99a@sentry.wixpress.com",
+    "hello@pollyandstone.com.au"
+  ],
+  "phones": [
+    "+61431099521",
+    "+61435294866",
+    "00-8487-6366",
+    "0435294866",
+    "0471364339",
+    "0699996948",
+    "08-00538723",
+    "11-27356412",
+    "14-21607192",
+    "1781501563",
+    "1781508519",
+    "1781508520",
+    "1781509691",
+    "1781509692",
+    "1781521441",
+    "1781521442",
+    "1781521443",
+    "1781521759",
+    "1781521760",
+    "1781575248",
+    "1781575252",
+    "1781575253",
+    "1999998092",
+    "2545352419",
+    "3062148246",
+    "3280706520",
+    "35-8505-3391",
+    "36-5516-6104",
+    "39-9681-7518",
+    "4235483493",
+    "4534864378",
+    "4982609085",
+    "5053144538",
+    "5088315595",
+    "5113052600",
+    "56-8636-4340",
+    "5799999237",
+    "5983149635",
+    "6143109952",
+    "6143529486",
+    "71-52590893",
+    "76-4753-8303",
+    "7853110645",
+    "8024342949",
+    "84-07260493",
+    "92-5604-1148",
+    "9454954467",
+    "9899997711",
+    "9900000095"
+  ],
+  "schema_data": {
+    "emails": [],
+    "phones": [],
+    "name": "Polly and Stone",
+    "raw": {
+      "@context": "https://schema.org/",
+      "@graph": [
+        {
+          "@type": "HairSalon",
+          "name": "Polly & Stone \u2014 Turramurra",
+          "url": "https://www.pollyandstone.com.au",
+          "telephone": "+61435294866",
+          "email": "hello@pollyandstone.com.au",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Level 1, 4 Eastern Road",
+            "addressLocality": "Turramurra",
+            "addressRegion": "NSW",
+            "postalCode": "2074",
+            "addressCountry": "AU"
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": "Tuesday",
+              "opens": "09:00",
+              "closes": "17:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": "Wednesday",
+              "opens": "09:00",
+              "closes": "20:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": "Thursday",
+              "opens": "09:00",
+              "closes": "17:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": "Friday",
+              "opens": "09:00",
+              "closes": "17:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": "Saturday",
+              "opens": "09:00",
+              "closes": "15:00"
+            }
+          ],
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "281"
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Hair Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Balayage & Foils"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "P&S Intima \u2014 Specialist Colour Appointment"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Keratin & Nanoplasty Smoothing Treatment"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Highlights \u2014 Full, Half Head & Crown"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Ladies Haircut & Blow-dry"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Semi & Permanent Tints"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Wedding & Event Up-styles"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "ORIBE Luxury Hair Treatments"
+                }
+              }
+            ]
+          },
+          "priceRange": "$$$",
+          "image": "https://www.pollyandstone.com.au",
+          "sameAs": [
+            "https://www.instagram.com/pollyandstone/"
+          ]
+        },
+        {
+          "@type": "HairSalon",
+          "name": "Polly & Stone \u2014 Erina Heights",
+          "url": "https://www.pollyandstone.com.au",
+          "telephone": "+61431099521",
+          "email": "CentralCoast@pollyandstone.com.au",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "2/490a Central Coast Hwy",
+            "addressLocality": "Erina Heights",
+            "addressRegion": "NSW",
+            "postalCode": "2260",
+            "addressCountry": "AU"
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": "Tuesday",
+              "opens": "08:00",
+              "closes": "16:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": "Wednesday",
+              "opens": "08:00",
+              "closes": "16:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": "Thursday",
+              "opens": "08:00",
+              "closes": "16:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": "Friday",
+              "opens": "08:00",
+              "closes": "16:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": "Saturday",
+              "opens": "08:00",
+              "closes": "14:00"
+            }
+          ],
+          "priceRange": "$$$",
+          "image": "https://www.pollyandstone.com.au",
+          "sameAs": [
+            "https://www.instagram.com/pollyandstone/"
+          ]
+        }
+      ],
+      "@type": "WebSite",
+      "url": "https://www.pollyandstone.com.au",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://www.pollyandstone.com.au/search?q={search_term}"
+        },
+        "query-input": "required name=search_term"
+      },
+      "name": "Polly and Stone"
+    }
+  },
+  "business_name": "Polly and Stone",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 1.0,
+  "pages_scraped": [
+    "homepage",
+    "services",
+    "team",
+    "contact",
+    "internal"
+  ]
+}

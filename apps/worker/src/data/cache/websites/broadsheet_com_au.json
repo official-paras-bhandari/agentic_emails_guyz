@@ -1,0 +1,45 @@
+{
+  "domain": "broadsheet.com.au",
+  "url": "https://www.broadsheet.com.au/sydney/fashion/article/best-hair-salons-sydney-for-bondi-blonde",
+  "last_scraped_at": 1782119217.499488,
+  "html_hash": "19d161e4463e6e194d48983027edeb47",
+  "emails": [
+    "advertise@broadsheet.com.au",
+    "app@broadsheet.com.au",
+    "audrey@broadsheet.com.au",
+    "dan@broadsheet.com.au",
+    "directory@broadsheet.com.au",
+    "feedback@broadsheet.com.au",
+    "gitika@broadsheet.com.au",
+    "grace@broadsheet.com.au",
+    "images@broadsheet.com.au",
+    "lucy.bellbird@broadsheet.com.au",
+    "maggie@broadsheet.com.au",
+    "nick.connellan@broadsheet.com.au",
+    "shop@broadsheet.com.au",
+    "support@broadsheet.com.au",
+    "thingstodo@broadsheet.com.au"
+  ],
+  "phones": [
+    "0024647947",
+    "3213395482",
+    "4258506309",
+    "4650768580",
+    "50-5233-4218",
+    "88-20998010",
+    "9052656860"
+  ],
+  "schema_data": {},
+  "business_name": "The Best Salons in Sydney to Get That Famous Bondi Blond",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.8,
+  "pages_scraped": [
+    "homepage",
+    "about",
+    "internal"
+  ]
+}

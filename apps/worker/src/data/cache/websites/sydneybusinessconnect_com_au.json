@@ -1,0 +1,132 @@
+{
+  "domain": "sydneybusinessconnect.com.au",
+  "url": "https://www.sydneybusinessconnect.com.au",
+  "last_scraped_at": 1782119025.988689,
+  "html_hash": "7bd5f6bad37a4b42dcc3bb80c3f8cf35",
+  "emails": [
+    "info@sydneybusinessconnect.com.au"
+  ],
+  "phones": [
+    "(02) 9072 1139",
+    "0462346105"
+  ],
+  "schema_data": {
+    "emails": [],
+    "phones": [],
+    "name": "Terms of Use - Sydney Business Connect",
+    "raw": {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "https://www.sydneybusinessconnect.com.au/about/terms",
+      "url": "https://www.sydneybusinessconnect.com.au/about/terms",
+      "name": "Terms of Use - Sydney Business Connect",
+      "headline": "Read Sydney Business Connect terms of use.",
+      "about": "Terms of Use",
+      "inLanguage": "en-US",
+      "dateModified": "2026-06-01T00:00:00+10:00",
+      "mainEntityOfPage": "https://www.sydneybusinessconnect.com.au/about/terms",
+      "author": {
+        "@id": "https://www.sydneybusinessconnect.com.au/#organization"
+      },
+      "publisher": {
+        "@id": "https://www.sydneybusinessconnect.com.au/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://www.sydneybusinessconnect.com.au/#website"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "/images/Sydney-Business-Connect_2.png"
+      },
+      "keywords": [
+        "sydney business directory",
+        "local business directory"
+      ],
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://www.sydneybusinessconnect.com.au/#website",
+          "name": "Sydney Business Connect",
+          "url": "https://www.sydneybusinessconnect.com.au/",
+          "inLanguage": "en-US",
+          "dateModified": "2026-06-01T00:00:00+10:00",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://www.sydneybusinessconnect.com.au/search_results?q={search_term_string}",
+            "query-input": "required name=search_term_string",
+            "name": "Search Directory: Sydney Business Connect"
+          },
+          "publisher": {
+            "@id": "https://www.sydneybusinessconnect.com.au/#organization"
+          }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://www.sydneybusinessconnect.com.au/#organization",
+          "name": "Sydney Business Connect",
+          "description": "Search Our Business Directory Today! Explore Sydney's top-rated local business directory for small business. Discover pure local, trusted businesses across our Sydney Business Network. Connect with local businesses today!",
+          "url": "https://www.sydneybusinessconnect.com.au/",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://www.sydneybusinessconnect.com.au/#webpage"
+          },
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "email": "info@sydneybusinessconnect.com.au",
+              "contactType": "customer support",
+              "availableLanguage": [
+                "en"
+              ],
+              "areaServed": "AU"
+            }
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "AU",
+            "postalCode": "AU",
+            "addressLocality": "AU",
+            "streetAddress": "AU"
+          },
+          "telephone": "(02) 9072 1139",
+          "sameAs": [
+            "https://www.facebook.com/groups/www.sydneybusinessconnect.com.au"
+          ],
+          "logo": {
+            "@type": "ImageObject",
+            "@id": "https://www.sydneybusinessconnect.com.au/#logo",
+            "url": "/images/Sydney-Business-Connect_2.png"
+          },
+          "image": {
+            "@type": "ImageObject",
+            "@id": "https://www.sydneybusinessconnect.com.au/#image",
+            "url": "/images/Sydney-Business-Connect_2.png"
+          },
+          "keywords": [
+            "Local Business Directory Sydney",
+            "Best Business Listings Sydney",
+            "Sydney Business Network",
+            "Business Directory Australia",
+            "Online Business Directory Sydney",
+            "Small Business Directory Sydney.",
+            "Sydney Business Connect",
+            "Local Business Directory",
+            "Sydney Business Directory"
+          ]
+        }
+      ]
+    }
+  },
+  "business_name": "Sydney Business Connect",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 1.0,
+  "pages_scraped": [
+    "homepage",
+    "contact",
+    "about"
+  ]
+}

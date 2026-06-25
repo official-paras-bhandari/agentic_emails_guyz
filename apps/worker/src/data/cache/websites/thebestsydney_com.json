@@ -1,0 +1,32 @@
+{
+  "domain": "thebestsydney.com",
+  "url": "https://www.thebestsydney.com/best-hair-salons-sydney",
+  "last_scraped_at": 1782119243.459404,
+  "html_hash": "f0d8c316658815df26caa5d99e431d7e",
+  "emails": [
+    "dkhairstudio.dk@gmail.com",
+    "info@inch.hair",
+    "info@pierrehaddad.com",
+    "relax@avedapaddington.com",
+    "support@thebestsydney.com",
+    "susanhairandbeautysalon@gmail.com"
+  ],
+  "phones": [
+    "02 8385 3687",
+    "0410581602",
+    "0431408293",
+    "3369521457"
+  ],
+  "schema_data": {},
+  "business_name": "The Best Sydney",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.8,
+  "pages_scraped": [
+    "homepage",
+    "services"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "domain": "gossip.sm",
+  "url": "https://www.gossip.sm/2018/05/02/sydneys-royals-hair-awarded-as-the-best-salon-in-nswact-and-australia.html",
+  "last_scraped_at": 1782047799.65022,
+  "html_hash": "9d012e52d845238051c722542bba9d0a",
+  "emails": [
+    "gossip@globelife.com",
+    "info@globelife.com"
+  ],
+  "phones": [
+    "+39 02 48402600",
+    "+39 0331 1706328",
+    "02 48402600",
+    "39 0331 1706",
+    "3921561891",
+    "7901003487"
+  ],
+  "schema_data": {},
+  "business_name": "\u2764\ufe0f Gossip &amp; News - Notizie parrucchieri",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.8,
+  "pages_scraped": [
+    "homepage",
+    "internal"
+  ]
+}

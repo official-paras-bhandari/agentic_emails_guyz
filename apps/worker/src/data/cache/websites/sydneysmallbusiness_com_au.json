@@ -1,0 +1,19 @@
+{
+  "domain": "sydneysmallbusiness.com.au",
+  "url": "https://sydneysmallbusiness.com.au",
+  "last_scraped_at": 1782119052.300309,
+  "html_hash": "68aee8ba96ce93c37526515b6a60c78d",
+  "emails": [],
+  "phones": [],
+  "schema_data": {},
+  "business_name": "403",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "partial",
+  "confidence_score": 0.2,
+  "pages_scraped": [
+    "homepage"
+  ]
+}

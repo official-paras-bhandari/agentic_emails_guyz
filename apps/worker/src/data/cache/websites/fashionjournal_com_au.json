@@ -1,0 +1,35 @@
+{
+  "domain": "fashionjournal.com.au",
+  "url": "https://fashionjournal.com.au/beauty/hair-salon-sydney",
+  "last_scraped_at": 1782119239.443855,
+  "html_hash": "fda7796c525f58a925f8ceb1186f1378",
+  "emails": [
+    "accounts@furstmedia.com.au",
+    "advertise@fashionjournal.com.au",
+    "chosen-sprite@2x.png",
+    "interns@fashionjournal.com.au",
+    "jillian@furstmedia.com.au",
+    "pr@fashionjournal.com.au",
+    "submissions@fashionjournal.com.au"
+  ],
+  "phones": [
+    "1533861532",
+    "1538620360",
+    "1974336248",
+    "8088689584"
+  ],
+  "schema_data": {},
+  "business_name": "Fashion Journal",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.8,
+  "pages_scraped": [
+    "homepage",
+    "about",
+    "contact",
+    "internal"
+  ]
+}

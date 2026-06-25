@@ -1,0 +1,25 @@
+{
+  "domain": "beauticianonline.com",
+  "url": "https://www.beauticianonline.com/book-beauty-salon-online-in-sydney-nsw",
+  "last_scraped_at": 1782047782.2021508,
+  "html_hash": "2baadde8ba932921e390bf644f0e775f",
+  "emails": [
+    "info@beauticianonline.com",
+    "prannayshahi@gmail.com"
+  ],
+  "phones": [],
+  "schema_data": {},
+  "business_name": "Beautician Online",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.6000000000000001,
+  "pages_scraped": [
+    "homepage",
+    "about",
+    "contact",
+    "internal"
+  ]
+}

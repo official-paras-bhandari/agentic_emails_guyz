@@ -1,0 +1,37 @@
+{
+  "domain": "royalshair.com.au",
+  "url": "https://royalshair.com.au",
+  "last_scraped_at": 1782122754.137304,
+  "html_hash": "e53e415460426caecc148c5cc1886f82",
+  "emails": [
+    "info@royalshair.com.au"
+  ],
+  "phones": [
+    "(02) 9481 8844",
+    "(02) 9680 2069",
+    "(02) 9939 5858",
+    "02 9477 4441",
+    "1134812343",
+    "1874372383",
+    "3463219342",
+    "3635902444",
+    "6666666666",
+    "7105373635",
+    "7550377833",
+    "7659529806",
+    "7684718723"
+  ],
+  "schema_data": {},
+  "business_name": "Royals Hair | Hair \u25c6 Sydney",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.8,
+  "pages_scraped": [
+    "homepage",
+    "internal",
+    "about"
+  ]
+}

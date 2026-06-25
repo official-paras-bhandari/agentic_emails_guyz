@@ -1,0 +1,27 @@
+{
+  "domain": "misterwhat-au.com",
+  "url": "https://www.misterwhat-au.com/sydney/beauty-salon",
+  "last_scraped_at": 1782250979.850494,
+  "html_hash": "40c7822a7765d61c7a6c21b9a832edfc",
+  "emails": [],
+  "phones": [
+    "+39 0382 049305",
+    "2783404698",
+    "39 0382 0493",
+    "6251364667",
+    "6319228291"
+  ],
+  "schema_data": {},
+  "business_name": "Beauty Salon in Sydney",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "partial",
+  "confidence_score": 0.4,
+  "pages_scraped": [
+    "homepage",
+    "about",
+    "internal"
+  ]
+}

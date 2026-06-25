@@ -1,0 +1,70 @@
+{
+  "domain": "organichairculture.com",
+  "url": "https://www.organichairculture.com/?srsltid=AfmBOoou_P77IVJWw2JS4Laa6ZDX0DNNHDBN3FDlI6ZP3NxTfTehxEwu",
+  "last_scraped_at": 1782209552.814744,
+  "html_hash": "3822a138deca080cca6a391e26df8cde",
+  "emails": [
+    "0e6a29e4756740a8a63493e912ba2174@sentry.wixpress.com",
+    "271e9fa3230b4eec94b02bf95780f5f2@sentry.wixpress.com",
+    "460ff4620fa44cba8df530afde949785@sentry.wixpress.com",
+    "8c4075d5481d476e945486754f783364@sentry.io",
+    "9a65e97ebe8141fca0c4fd686f70996b@sentry.wixpress.com",
+    "baf30a2b91654c5a840931f0137bed30@sentry.wixpress.com",
+    "ed436f5053144538958ad06a5005e99a@sentry.wixpress.com"
+  ],
+  "phones": [
+    "00-8487-6366",
+    "0021214296",
+    "07-2918-9924",
+    "11-27356412",
+    "1340183344",
+    "14-21607192",
+    "1687951685",
+    "1782209544",
+    "1782209546",
+    "1782209550",
+    "1782209551",
+    "2545352419",
+    "3299999237",
+    "35-8505-3391",
+    "36-5516-6104",
+    "4399995803",
+    "4661168041",
+    "5053144538",
+    "6000003814",
+    "76-4753-8303",
+    "8113751284",
+    "8213436487",
+    "92-5604-1148",
+    "9899997711"
+  ],
+  "schema_data": {
+    "emails": [],
+    "phones": [],
+    "name": "organichairculture",
+    "raw": {
+      "@context": "https://schema.org/",
+      "@type": "WebSite",
+      "name": "organichairculture",
+      "url": "https://www.organichairculture.com",
+      "image": "https://static.wixstatic.com/media/9739f8_04fbd5ec8e564008822e97b81bafef98~mv2.png",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "AU",
+        "addressLocality": "Sydney",
+        "addressRegion": "NSW"
+      }
+    }
+  },
+  "business_name": "organichairculture",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 1.0,
+  "pages_scraped": [
+    "homepage",
+    "internal"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "domain": "visitnsw.com",
+  "url": "https://www.visitnsw.com",
+  "last_scraped_at": 1782119282.843276,
+  "html_hash": "c937047be0815fbdce6e60a9a665990b",
+  "emails": [],
+  "phones": [
+    "1127968979",
+    "1781878956",
+    "1782119281",
+    "2147483647",
+    "2490277833",
+    "2661405945",
+    "3266140594",
+    "4558535826",
+    "6000000005",
+    "8999999999",
+    "9000000003"
+  ],
+  "schema_data": {
+    "emails": [],
+    "phones": [],
+    "name": "New South Wales, Australia | Official NSW Tourism Website",
+    "raw": {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "logo": "https://www.visitnsw.com/themes/custom/visitnsw_dnsw_boostrap/logo.svg",
+      "url": "https://www.visitnsw.com",
+      "sameAs": [
+        "https://www.facebook.com/visitnsw",
+        "https://twitter.com/NewSouthWales",
+        "https://www.youtube.com/user/visitnsw",
+        "https://instagram.com/visitnsw",
+        "https://pinterest.com/NSWTips",
+        "https://www.visitnsw.com/nsw-tales"
+      ],
+      "name": "New South Wales, Australia | Official NSW Tourism Website",
+      "description": "Enjoy the best of NSW! Discover popular towns, things to do this weekend, road trips, restaurants, accommodation & more on the Official NSW Travel Website."
+    }
+  },
+  "business_name": "New South Wales, Australia | Official NSW Tourism Website",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "partial",
+  "confidence_score": 0.6000000000000001,
+  "pages_scraped": [
+    "homepage",
+    "contact",
+    "internal"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "domain": "salon.com.au",
+  "url": "https://wsalon.com.au",
+  "last_scraped_at": 1782293055.007039,
+  "html_hash": "2d0b3a95aefd9056b766820360089bc7",
+  "emails": [
+    "info@salon.com.au",
+    "info@wsalon.com.au",
+    "sebastian@aldusleaf.org"
+  ],
+  "phones": [
+    "02 8283 4473",
+    "3333333333",
+    "4143646408",
+    "6666666666",
+    "6669921875",
+    "7498535442"
+  ],
+  "schema_data": {},
+  "business_name": "W Salon",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.8,
+  "pages_scraped": [
+    "homepage",
+    "services",
+    "internal"
+  ]
+}

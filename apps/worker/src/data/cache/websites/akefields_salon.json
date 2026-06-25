@@ -1,0 +1,392 @@
+{
+  "domain": "akefields.salon",
+  "url": "https://wakefields.salon",
+  "last_scraped_at": 1782249962.264543,
+  "html_hash": "72ced67881117a6b3e79f0e2e8223ab8",
+  "emails": [
+    "-@mikaylap.hair",
+    "-@taylorx.hairx",
+    "hello@wakefields.salon"
+  ],
+  "phones": [
+    "+61283579388",
+    "1073381704",
+    "1095406792",
+    "1394295767",
+    "1766399064",
+    "1772640976",
+    "1772640991",
+    "1772641016",
+    "1772641042",
+    "1772641183",
+    "1772641628",
+    "1772641643",
+    "1772641653",
+    "1772643701",
+    "1772643717",
+    "1772643794",
+    "1772643806",
+    "1772643824",
+    "1772643837",
+    "1772643848",
+    "1772643861",
+    "1782249959",
+    "1782249961",
+    "1829944380",
+    "1829945416",
+    "1829945419",
+    "2925728515",
+    "3068825305",
+    "403075-9995",
+    "42-17822499",
+    "4325469064",
+    "4325469090",
+    "4325469097",
+    "4325469126",
+    "4325469162",
+    "4325469228",
+    "4325469696",
+    "4325469700",
+    "4325469703",
+    "4325471089",
+    "4325471128",
+    "4325471158",
+    "4325471161",
+    "4325471168",
+    "4325471181",
+    "4325471187",
+    "4325471191",
+    "6128357938",
+    "6416095647",
+    "7552838565",
+    "7552838631",
+    "7552838697",
+    "7552838795",
+    "7552838926",
+    "7552839286",
+    "7552841187",
+    "7552841220",
+    "7552841252",
+    "7552847085",
+    "7552847151",
+    "7552847413",
+    "7552847446",
+    "7552847511",
+    "7552847642",
+    "7552847708",
+    "7552847740"
+  ],
+  "schema_data": {
+    "emails": [],
+    "phones": [
+      "+61283579388"
+    ],
+    "name": "Wakefields",
+    "raw": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://wakefields.salon/#salon",
+      "name": "Wakefields",
+      "description": "Award-winning hair salon in Surry Hills, Sydney, founded by celebrity stylist Dane Wakefield. Featured in Vogue Australia and Elle Australia. Specialising in balayage, highlights, colour correction, precision cuts, styling, keratin treatments and extensions. Partners with O&M, Rogue Beauty and Robe Haircare.",
+      "url": "https://wakefields.salon",
+      "logo": "https://wakefields.salon/cdn/shop/files/Wakefields-Logo.png?v=1766399064&width=500",
+      "image": "https://wakefields.salon/cdn/shop/files/Wakefields-Logo.png?v=1766399064&width=500",
+      "telephone": "+61283579388",
+      "priceRange": "$$$",
+      "currenciesAccepted": "AUD",
+      "paymentAccepted": "Cash, Credit Card, Debit Card",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Level 1/255 Riley Street",
+        "addressLocality": "Surry Hills",
+        "addressRegion": "NSW",
+        "postalCode": "2010",
+        "addressCountry": "AU"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -33.8815,
+        "longitude": 151.2129
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Sydney"
+        },
+        {
+          "@type": "Place",
+          "name": "Surry Hills"
+        }
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Tuesday",
+          "opens": "10:00",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Wednesday",
+          "opens": "12:00",
+          "closes": "21:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Thursday",
+          "opens": "10:00",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Friday",
+          "opens": "10:00",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:00",
+          "closes": "15:00"
+        }
+      ],
+      "founder": {
+        "@type": "Person",
+        "name": "Dane Wakefield",
+        "jobTitle": "Director",
+        "description": "Celebrity hair stylist with 17+ years experience. Shark Beauty ambassador, O&M C\u00d8R.Creator. Clients include Abbie Chatfield, Elle Ferguson and Olympia Vallance. Featured in Vogue Australia, Elle Australia, StyleIcons and Beauty Heaven.",
+        "knowsAbout": [
+          "Balayage",
+          "Colour Correction",
+          "Hair Colouring",
+          "Hair Styling",
+          "Celebrity Hair"
+        ],
+        "sameAs": [
+          "https://www.elle.com.au/beauty/brunette-hair-trends/",
+          "https://www.elle.com.au/beauty/hair-trends-2025/",
+          "https://www.styleicons.com.au/news/5-minutes-with-dane-wakefield/",
+          "https://www.beautyheaven.com.au/hair/autumn-hairstyle-trends/"
+        ]
+      },
+      "knowsAbout": [
+        "Balayage",
+        "Highlights",
+        "Hair Colour",
+        "Colour Correction",
+        "Keratin Treatments",
+        "Hair Extensions",
+        "Wedding Hair",
+        "Men's Barbering"
+      ],
+      "award": [
+        "O&M C\u00d8R.Creator Program",
+        "Featured in Vogue Australia",
+        "Featured in Elle Australia"
+      ],
+      "sameAs": [
+        "https://www.instagram.com/wakefields._",
+        "https://www.styleicons.com.au/news/salon-profile-wakefields/",
+        "https://www.styleicons.com.au/news/5-minutes-with-dane-wakefield/"
+      ],
+      "mentions": [
+        {
+          "@type": "Article",
+          "name": "Vogue Australia \u2014 How Celebrity Stylist Dane Wakefield Brings the Salon Experience Home",
+          "url": "https://www.vogue.com.au/partner-content/editorial/how-celebrity-stylist-dane-wakefield-brings-the-salon-experience-home-with-shark-beauty/news-story/f4212722dac749c792dc55e491e3f68b"
+        },
+        {
+          "@type": "Article",
+          "name": "Elle Australia \u2014 Brunette Hair Trends",
+          "url": "https://www.elle.com.au/beauty/brunette-hair-trends/"
+        },
+        {
+          "@type": "Article",
+          "name": "Elle Australia \u2014 Hair Trends 2025",
+          "url": "https://www.elle.com.au/beauty/hair-trends-2025/"
+        },
+        {
+          "@type": "Article",
+          "name": "StyleIcons \u2014 Salon Profile: Wakefields",
+          "url": "https://www.styleicons.com.au/news/salon-profile-wakefields/"
+        },
+        {
+          "@type": "Article",
+          "name": "StyleIcons \u2014 5 Minutes with Dane Wakefield",
+          "url": "https://www.styleicons.com.au/news/5-minutes-with-dane-wakefield/"
+        },
+        {
+          "@type": "Article",
+          "name": "Beauty Heaven \u2014 Autumn Hairstyle Trends",
+          "url": "https://www.beautyheaven.com.au/hair/autumn-hairstyle-trends/"
+        }
+      ],
+      "potentialAction": {
+        "@type": "ReserveAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://www.fresha.com/a/wakefields-surry-hills-255-riley-street-mlkt3yom/all-offer?menu=true&pId=1203059",
+          "actionPlatform": [
+            "https://schema.org/DesktopWebPlatform",
+            "https://schema.org/MobileWebPlatform"
+          ]
+        },
+        "result": {
+          "@type": "Reservation",
+          "name": "Book an Appointment"
+        }
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What services does Wakefields offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Wakefields offers a full range of professional hair services including highlights, balayage, global colour, regrowth, toners, precision haircuts, blowdries, upstyles, wedding hair, men's barber cuts, keratin treatments and hair extensions. All services are performed by our team of experienced stylists and colourists at our Surry Hills salon."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where is Wakefields Salon located?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Wakefields is located at Level 1/255 Riley Street, Surry Hills NSW 2010, in the heart of Sydney's inner east. We're easily accessible from the CBD, Darlinghurst, Paddington, Redfern and surrounding suburbs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does a balayage cost at Wakefields?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Balayage at Wakefields starts from $220 for a half head and from $300 for a full head. Final pricing depends on hair length, density and the look you're after. We recommend booking a colour consultation for a tailored quote."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are Wakefields' opening hours?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Wakefields is open Tuesday 10am\u20136pm, Wednesday 12pm\u20139pm, Thursday and Friday 10am\u20136pm, and Saturday 8am\u20133pm. We are closed on Sundays and Mondays."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Wakefields do hair extensions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Wakefields offers professional hair extensions. Because every set is custom-matched and tailored, we require an in-salon consultation first. The consultation fee is $100 and is fully redeemable against your extension service."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I book an appointment at Wakefields?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can book online through our Fresha booking page, call us on +61 2 8357 9388, or send us a message through the contact page on our website. Online booking is available 24/7 with real-time availability."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Wakefields offer a first-time client discount?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. First-time clients can join the Wakefields Hair Club to receive 10% off a colour and haircut booking. Simply enter your details to download your personal Hair Club card and redeem it on your first visit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I get a last-minute hair appointment in Sydney?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Wakefields in Surry Hills offers online booking through Fresha with real-time availability, so you can check for same-day or next-day openings instantly. We're open six days a week including late nights on Wednesdays until 9pm and early Saturdays from 8am. Book online or call +61 2 8357 9388 to check availability."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the best hair salon in Sydney?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Wakefields is an award-winning hair salon in Surry Hills, Sydney, known for specialising in balayage, colour correction, highlights and precision cuts. Our team includes master colourists and senior stylists with extensive industry experience. We offer a full service menu from $80, a dedicated new-client consultation process, and a loyalty program with exclusive perks."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where can I get a good balayage in Sydney?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Wakefields in Surry Hills is known for balayage, with multiple senior colourists and master colourists on the team who specialise in hand-painted colour techniques. Half head balayage starts from $220 and full head from $300. New clients can book a colour consultation for $100, fully redeemable against the service."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Best hairdresser near Surry Hills?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Wakefields is located right in Surry Hills at Level 1/255 Riley Street, NSW 2010. We're a short walk from Central Station and easily accessible from the CBD, Darlinghurst, Paddington, Redfern and Chippendale. Our team of master stylists and colourists offers everything from cuts and colour to keratin treatments and extensions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does a haircut cost in Surry Hills?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "At Wakefields in Surry Hills, a haircut and blowdry starts from $180, a blowdry from $80, and men's barber cuts from $80. Upstyles start from $150 and wedding hair from $200. All cuts are performed by experienced stylists using precision techniques."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Wakefields offer wedding hair services?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Wakefields offers professional wedding hair styling from $200, as well as upstyles from $150 for bridal parties and special occasions. We recommend booking a trial consultation in advance to plan your look."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a keratin treatment and how much does it cost in Sydney?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A keratin treatment smooths and strengthens hair by infusing it with a protein complex, reducing frizz and adding shine that lasts for months. At Wakefields in Surry Hills, keratin treatments start from $400, with a men's option from $300. It's one of our most popular services for Sydney's humidity."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who is Dane Wakefield?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Dane Wakefield is a celebrity hair stylist and founder of Wakefields salon in Surry Hills, Sydney. With 17+ years in the industry, he's a Shark Beauty ambassador and O&M C\u00d8R.Creator. His clients include Abbie Chatfield, Elle Ferguson and Olympia Vallance, and his work has been featured in Vogue Australia, Elle Australia, StyleIcons and Beauty Heaven."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What products does Wakefields use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Wakefields partners with O&M, Rogue Beauty and Robe Haircare \u2014 brands aligned with a clean, no-nasties approach to hair and scalp care. The salon is committed to sustainability and uses professional-grade products that prioritise hair health."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are there any good men's barbers in Surry Hills?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Wakefields in Surry Hills offers men's barber cuts from $80 and barber cut with beard grooming from $100. We also offer men's keratin treatments from $300. Our barbers and senior stylists specialise in both classic and contemporary men's styles."
+          }
+        }
+      ]
+    }
+  },
+  "business_name": "wakefieldssalon",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 1.0,
+  "pages_scraped": [
+    "homepage",
+    "team",
+    "contact",
+    "internal"
+  ]
+}

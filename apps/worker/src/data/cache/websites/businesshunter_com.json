@@ -1,0 +1,24 @@
+{
+  "domain": "businesshunter.com",
+  "url": "https://www.businesshunter.com",
+  "last_scraped_at": 1782119298.726215,
+  "html_hash": "96ea4d73120a712d9641b7709ae75607",
+  "emails": [
+    "info@businesshunter.com"
+  ],
+  "phones": [
+    "(02) 9466 4665"
+  ],
+  "schema_data": {},
+  "business_name": "Business Hunter",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.8,
+  "pages_scraped": [
+    "homepage",
+    "about"
+  ]
+}

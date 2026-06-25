@@ -1,0 +1,67 @@
+{
+  "domain": "extrasilky.com",
+  "url": "https://www.extrasilky.com",
+  "last_scraped_at": 1782293052.366184,
+  "html_hash": "ef85e236d92fd78388bd45f0e50979c7",
+  "emails": [
+    "hello@extrasilky.com",
+    "user@domain.com"
+  ],
+  "phones": [
+    "+61 400 026 423",
+    "0000000000",
+    "0000007735",
+    "1601971020",
+    "1602333275",
+    "1603614626",
+    "1682490535",
+    "1699945803",
+    "1701920127",
+    "1701942927",
+    "1704860602",
+    "1705633955",
+    "1749524407",
+    "1768995737",
+    "3141925352",
+    "8539461639",
+    "9769333970"
+  ],
+  "schema_data": {
+    "emails": [],
+    "phones": [
+      "+61 400 026 423"
+    ],
+    "name": "Extra Silky",
+    "raw": {
+      "url": "https://www.extrasilky.com",
+      "name": "Extra Silky",
+      "image": "https://static1.squarespace.com/static/5f7c234cfbee423984cebae4/t/5f9537a18dac6b256dc36720/1768995737919/",
+      "@context": "http://schema.org",
+      "@type": "LocalBusiness",
+      "legalName": "Extra Silky",
+      "address": "426 Parramatta Road\nPetersham, NSW, 2049\nAustralia",
+      "email": "",
+      "telephone": "+61 400 026 423",
+      "sameAs": [
+        "https://www.instagram.com/extrasilky/",
+        "https://www.tiktok.com/@extrasilky",
+        "https://www.facebook.com/extrasilky/"
+      ],
+      "openingHours": ", , , , , , "
+    }
+  },
+  "business_name": "Extra Silky",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 1.0,
+  "pages_scraped": [
+    "homepage",
+    "about",
+    "team",
+    "contact",
+    "internal"
+  ]
+}

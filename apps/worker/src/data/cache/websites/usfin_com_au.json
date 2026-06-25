@@ -1,0 +1,96 @@
+{
+  "domain": "usfin.com.au",
+  "url": "https://www.usfin.com.au",
+  "last_scraped_at": 1782202605.932852,
+  "html_hash": "45db922db946aa2239db03da80c0f5e9",
+  "emails": [
+    "hello@usfin.com.au",
+    "user@domain.com"
+  ],
+  "phones": [
+    "(02) 8590 2119",
+    "+61421172701",
+    "0000000000",
+    "0000007735",
+    "1512531128",
+    "1512533883",
+    "1512604435",
+    "1512862834",
+    "1523768841",
+    "1553912185",
+    "1558835963",
+    "1558840292",
+    "1559367424",
+    "1567654781",
+    "1580116553",
+    "1583232059",
+    "1613709779",
+    "1620866661",
+    "1624851697",
+    "1624851701",
+    "1624852892",
+    "1624852897",
+    "1624852957",
+    "1624852962",
+    "1624853082",
+    "1624853086",
+    "1624853650",
+    "1624855237",
+    "1624855397",
+    "1624855486",
+    "1624855496",
+    "1625207559",
+    "1625209845",
+    "1779854465",
+    "1782202601",
+    "2244648165",
+    "3141925352",
+    "4743415531",
+    "6142117270",
+    "7632319272",
+    "9223372036",
+    "9345840781",
+    "9769333970"
+  ],
+  "schema_data": {
+    "emails": [
+      "hello@usfin.com.au"
+    ],
+    "phones": [
+      "+61421172701"
+    ],
+    "name": "USFIN ATELIER produced by assort",
+    "raw": {
+      "url": "https://www.usfin.com.au",
+      "name": "USFIN ATELIER produced by assort",
+      "description": "<p>Sydney. Genderless. More Than A Hair Salon.</p>",
+      "image": "https://static1.squarespace.com/static/5a21fb0449fc2b2179ec193e/t/695c9454bcf7d00a7b7d3c38/1779854465599/",
+      "@context": "http://schema.org",
+      "@type": "LocalBusiness",
+      "legalName": "USFIN ATELIER produced by assort",
+      "address": "5/591 George Street\nSydney, NSW, 2000\nAustralia",
+      "email": "hello@usfin.com.au",
+      "telephone": "+61421172701",
+      "sameAs": [
+        "https://www.facebook.com/usfinatelier/",
+        "mailto:hello@usfin.com.au",
+        "https://www.instagram.com/usfinatelier/?hl=en",
+        "https://www.youtube.com/channel/UCNr8IfbjYFKm1v_FxEx9PbA"
+      ],
+      "openingHours": "Mo 11:00-20:00, Tu 11:00-20:00, We 11:00-20:00, Th 11:00-20:00, Fr 11:00-20:00, Sa 11:00-20:00, "
+    }
+  },
+  "business_name": "USFIN ATELIER produced by assort",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 1.0,
+  "pages_scraped": [
+    "homepage",
+    "about",
+    "contact",
+    "services"
+  ]
+}

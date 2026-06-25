@@ -1,0 +1,27 @@
+{
+  "domain": "mylocalsalon.com.au",
+  "url": "https://www.mylocalsalon.com.au/new-south-wales/sydney",
+  "last_scraped_at": 1782118877.644458,
+  "html_hash": "29f7c2074e86b4d2280544802e1e1443",
+  "emails": [
+    "info@mylocalsalon.com.au",
+    "support@shortcuts.com.au"
+  ],
+  "phones": [
+    "3306803770"
+  ],
+  "schema_data": {},
+  "business_name": "Sydney Hairdresser, Nails, Massage, Day Spa, Hair &amp; Beauty Salons",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.8,
+  "pages_scraped": [
+    "homepage",
+    "contact",
+    "about",
+    "internal"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "domain": "theaureview.com",
+  "url": "https://www.theaureview.com/arts/five-free-arts-events-performances-you-cant-miss-at-sydney-festival-2017",
+  "last_scraped_at": 1782202776.4967942,
+  "html_hash": "cee6e654a343fa8c841ec6a570abddfb",
+  "emails": [
+    "advertising@heathmedia.com.au",
+    "bookseditor@theaureview.com",
+    "chris@theaureview.com",
+    "editor@theaureview.com",
+    "larry@theaureview.com",
+    "matthew@theaureview.com",
+    "peter@theaureview.com"
+  ],
+  "phones": [
+    "1782202770",
+    "1782202772",
+    "1782202775",
+    "1782202776",
+    "6141832576"
+  ],
+  "schema_data": {},
+  "business_name": "The AU Review",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.8,
+  "pages_scraped": [
+    "homepage",
+    "internal",
+    "about",
+    "contact"
+  ]
+}

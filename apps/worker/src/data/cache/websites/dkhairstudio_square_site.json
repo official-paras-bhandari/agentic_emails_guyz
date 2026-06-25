@@ -1,0 +1,36 @@
+{
+  "domain": "dkhairstudio.square.site",
+  "url": "https://dkhairstudio.square.site",
+  "last_scraped_at": 1782293000.25948,
+  "html_hash": "6eddaa2a8382a152ce536cd8823cc0e2",
+  "emails": [
+    "13e49d785d8d4f828038b6136f3b48ba@sentry.io",
+    "hi@mystore.com"
+  ],
+  "phones": [
+    "1591611694",
+    "1737505464",
+    "1768002600",
+    "1769218200",
+    "1769241481",
+    "1769242027",
+    "1769242042",
+    "1769242057",
+    "1769242071",
+    "1775030842",
+    "1781866836",
+    "9546452943",
+    "9854755181"
+  ],
+  "schema_data": {},
+  "business_name": null,
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.6000000000000001,
+  "pages_scraped": [
+    "homepage"
+  ]
+}

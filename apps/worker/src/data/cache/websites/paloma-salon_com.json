@@ -1,0 +1,62 @@
+{
+  "domain": "paloma-salon.com",
+  "url": "https://www.paloma-salon.com",
+  "last_scraped_at": 1782251166.404955,
+  "html_hash": "ad4863b446e6920bfc6048869a58db3d",
+  "emails": [
+    "info@paloma-salon.com",
+    "user@domain.com"
+  ],
+  "phones": [
+    "(02) 9360 7739",
+    "0000000000",
+    "0000007735",
+    "1618511383",
+    "1618511387",
+    "1618511437",
+    "1618511440",
+    "1618512009",
+    "1729922616",
+    "1729926363",
+    "1729928051",
+    "1730000534",
+    "1730003673",
+    "1730199847",
+    "1759214295",
+    "2804298724",
+    "3141925352",
+    "5055350553",
+    "7249189173",
+    "7433776217",
+    "9066453084",
+    "9769333970"
+  ],
+  "schema_data": {
+    "emails": [],
+    "phones": [],
+    "name": "Paloma Salon",
+    "raw": {
+      "url": "https://www.paloma-salon.com",
+      "name": "Paloma Salon",
+      "image": "https://static1.squarespace.com/static/671c86373448b86d382f6d2e/t/671c94a76bf199389f48b0fa/1759214295871/",
+      "@context": "http://schema.org",
+      "@type": "LocalBusiness",
+      "address": "",
+      "openingHours": ""
+    }
+  },
+  "business_name": "Paloma Salon",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 1.0,
+  "pages_scraped": [
+    "homepage",
+    "about",
+    "contact",
+    "team",
+    "internal"
+  ]
+}

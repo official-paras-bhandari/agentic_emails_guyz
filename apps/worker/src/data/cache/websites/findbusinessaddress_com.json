@@ -1,0 +1,26 @@
+{
+  "domain": "findbusinessaddress.com",
+  "url": "https://findbusinessaddress.com/absinthe-salon-sydney-contact-number-2699",
+  "last_scraped_at": 1782119246.808026,
+  "html_hash": "3beea7bc326da07c17cfb7d6d568ab97",
+  "emails": [
+    "enquiries@absinthesalon.com.au",
+    "groups@baseentertainment.com"
+  ],
+  "phones": [
+    "02 9211 6632",
+    "4209662781"
+  ],
+  "schema_data": {},
+  "business_name": "absinthe salon sydney Contact Number, Email Address",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.8,
+  "pages_scraped": [
+    "homepage",
+    "contact"
+  ]
+}

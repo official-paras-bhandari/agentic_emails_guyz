@@ -1,0 +1,27 @@
+{
+  "domain": "petalhairdesigns.org",
+  "url": "https://petalhairdesigns.org",
+  "last_scraped_at": 1782202780.764238,
+  "html_hash": "81c861cfac2ec57b5b9c454359ce96be",
+  "emails": [
+    "petalhairdesigns@gmail.com"
+  ],
+  "phones": [
+    "(02) 7010 4829"
+  ],
+  "schema_data": {},
+  "business_name": "Petal Hair Designs",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.8,
+  "pages_scraped": [
+    "homepage",
+    "about",
+    "services",
+    "contact",
+    "internal"
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "domain": "salonher.com",
+  "url": "https://www.salonher.com",
+  "last_scraped_at": 1782048226.117901,
+  "html_hash": "7a5c4d2b14608a7c9c0bb334d293740f",
+  "emails": [
+    "hello@salonher.com"
+  ],
+  "phones": [
+    "+61293573452",
+    "02 9357 3452",
+    "3333333333",
+    "49-5584-9009",
+    "6129357345"
+  ],
+  "schema_data": {
+    "emails": [],
+    "phones": [],
+    "name": "The Space",
+    "raw": {
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      "name": "The Space",
+      "url": "/space-2",
+      "description": "A warm, welcoming space in Sydney's inner city, Salon HER was brought to life by the award-winning design agency Folk Studio.",
+      "about": {
+        "@type": "HairSalon",
+        "name": "Salon HER",
+        "description": "A warm, welcoming space in Sydney's inner city, Salon HER was brought to life by the award-winning design agency Folk Studio. Inspired by Michael's love of travel, and some of his favourite hotel bars in downtown LA, the space is both elevated and welcoming, thanks to our dedicated, expert team and a diverse range of loyal clients.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1/227 Victoria Street",
+          "addressLocality": "Darlinghurst",
+          "addressRegion": "NSW",
+          "postalCode": "2010",
+          "addressCountry": "AU"
+        },
+        "telephone": "+61293573452",
+        "email": "hello@salonher.com",
+        "url": "https://www.salonher.com",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Tuesday",
+            "opens": "09:00",
+            "closes": "16:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Wednesday",
+            "opens": "10:00",
+            "closes": "21:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Thursday",
+            "opens": "10:00",
+            "closes": "20:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Friday",
+            "opens": "09:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "08:00",
+            "closes": "14:00"
+          }
+        ],
+        "image": "https://cdn.prod.website-files.com/639984d94eeebe68838b2e62/69a768908ef8438f20ccc56e_The%20Space%20Hero.webp"
+      }
+    }
+  },
+  "business_name": "Salon HER",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 1.0,
+  "pages_scraped": [
+    "homepage",
+    "team",
+    "contact",
+    "services",
+    "internal"
+  ]
+}

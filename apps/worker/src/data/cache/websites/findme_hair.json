@@ -1,0 +1,279 @@
+{
+  "domain": "findme.hair",
+  "url": "https://www.findme.hair/hair-salon/sydney",
+  "last_scraped_at": 1782293855.863818,
+  "html_hash": "3af85844e66564624a56ce6e8c4aca0f",
+  "emails": [],
+  "phones": [
+    "(02) 6638 9771",
+    "(02) 7258 3847",
+    "(02) 8018 9401",
+    "(02) 8054 2635",
+    "(02) 8590 2119",
+    "(02) 8964 4671",
+    "(02) 9061 3398",
+    "(02) 9188 2841",
+    "(02) 9221 7070",
+    "(02) 9232 4268",
+    "(02) 9232 8358",
+    "(02) 9239 0988",
+    "(02) 9268 0092",
+    "(02) 9283 7911",
+    "(02) 9365 6104",
+    "(02) 9525 3756",
+    "(02) 9592 0822",
+    "(02) 9664 7400",
+    "(03) 5348 1313",
+    "(03) 5916 1619",
+    "(03) 7003 4210",
+    "(03) 7016 7324",
+    "(07) 3161 2366",
+    "36-67302358",
+    "61-9830-2532"
+  ],
+  "schema_data": {
+    "emails": [],
+    "phones": [],
+    "name": "Barber Shops in Australia",
+    "raw": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.findme.hair/#organization",
+          "name": "findme.hair",
+          "alternateName": "Find Me Hair",
+          "url": "https://www.findme.hair",
+          "logo": "https://www.findme.hair/og-image.jpg",
+          "description": "Australia's hand-verified hair salon and barber directory. Hair only \u2014 no beauty, no nails, no spa.",
+          "areaServed": {
+            "@type": "Country",
+            "name": "Australia"
+          },
+          "knowsAbout": [
+            "hairdressers",
+            "barbers",
+            "hair salons",
+            "mobile hairdressers",
+            "haircut",
+            "balayage",
+            "bridal hair",
+            "kids haircuts",
+            "mens haircuts",
+            "curly hair",
+            "hair extensions",
+            "Australian salons"
+          ],
+          "sameAs": [
+            "https://www.sheargenius.com.au"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://www.findme.hair/#website",
+          "url": "https://www.findme.hair",
+          "name": "findme.hair",
+          "description": "Australia's hand-verified hair salon and barber directory.",
+          "inLanguage": "en-AU",
+          "publisher": {
+            "@id": "https://www.findme.hair/#organization"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://www.findme.hair/search?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ],
+      "@type": "FAQPage",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "url": "https://www.findme.hair/salon/hair-beauty-retreat-daylesford-daylesford",
+          "name": "Hair & Beauty Retreat Daylesford"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "url": "https://www.findme.hair/salon/master-cut-by-ibrahim-waterloo",
+          "name": "Master Cut by Ibrahim"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "url": "https://www.findme.hair/salon/beefs-barbers-richmond-richmond",
+          "name": "Beef's Barbers Richmond"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "url": "https://www.findme.hair/salon/barber-parlour-padstow",
+          "name": "Barber Parlour"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "url": "https://www.findme.hair/salon/the-moustachery-men-s-barber-grooming-paddington-paddington",
+          "name": "The Moustachery (Men\u2019s Barber & Grooming, Paddington)"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "url": "https://www.findme.hair/salon/johnnys-barber-woolloongabba",
+          "name": "Johnny's Barber"
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "url": "https://www.findme.hair/salon/the-blades-barber-north-hobart",
+          "name": "The Blades Barber"
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "url": "https://www.findme.hair/salon/wealthy-gents-caringbah-barber-shop-caringbah",
+          "name": "Wealthy Gents - Caringbah Barber Shop"
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "url": "https://www.findme.hair/salon/beefs-barbers-mornington-mornington",
+          "name": "Beef's Barbers Mornington"
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "url": "https://www.findme.hair/salon/the-universal-barbershop-mount-druitt",
+          "name": "The Universal Barbershop"
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "url": "https://www.findme.hair/salon/masroni-barber-shop-malaga",
+          "name": "Masroni Barber Shop"
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "url": "https://www.findme.hair/salon/the-blades-barber-moonah-moonah",
+          "name": "The Blades Barber Moonah"
+        },
+        {
+          "@type": "ListItem",
+          "position": 13,
+          "url": "https://www.findme.hair/salon/mates-barbershop-surfers-paradise",
+          "name": "Mate's Barbershop"
+        },
+        {
+          "@type": "ListItem",
+          "position": 14,
+          "url": "https://www.findme.hair/salon/richie-s-barber-newport",
+          "name": "Richie\u2019s Barber"
+        },
+        {
+          "@type": "ListItem",
+          "position": 15,
+          "url": "https://www.findme.hair/salon/m7-barbers-kippax-holt",
+          "name": "M7 Barbers Kippax"
+        },
+        {
+          "@type": "ListItem",
+          "position": 16,
+          "url": "https://www.findme.hair/salon/beefs-barbers-abbotsford-abbotsford",
+          "name": "Beef's Barbers Abbotsford"
+        },
+        {
+          "@type": "ListItem",
+          "position": 17,
+          "url": "https://www.findme.hair/salon/barberie-coogee",
+          "name": "Barberie"
+        },
+        {
+          "@type": "ListItem",
+          "position": 18,
+          "url": "https://www.findme.hair/salon/judena-hair-north-bondi",
+          "name": "Judena Hair"
+        },
+        {
+          "@type": "ListItem",
+          "position": 19,
+          "url": "https://www.findme.hair/salon/mobile-barber-shop-depot-bundall",
+          "name": "Mobile Barber Shop Depot"
+        },
+        {
+          "@type": "ListItem",
+          "position": 20,
+          "url": "https://www.findme.hair/salon/who-s-next-innaloo-innaloo",
+          "name": "Who\u2019s Next Innaloo"
+        },
+        {
+          "@type": "ListItem",
+          "position": 21,
+          "url": "https://www.findme.hair/salon/kingsman-barbers-caulfield-north",
+          "name": "Kingsman Barbers"
+        },
+        {
+          "@type": "ListItem",
+          "position": 22,
+          "url": "https://www.findme.hair/salon/erfan-barber-potts-point",
+          "name": "ERFAN Barber"
+        },
+        {
+          "@type": "ListItem",
+          "position": 23,
+          "url": "https://www.findme.hair/salon/luxury-barbershop-windsor",
+          "name": "Luxury barbershop"
+        },
+        {
+          "@type": "ListItem",
+          "position": 24,
+          "url": "https://www.findme.hair/salon/art-of-fades-barbershop-casula",
+          "name": "Art of Fades Barbershop"
+        }
+      ],
+      "name": "Barber Shops in Australia",
+      "numberOfItems": 24,
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does a barber shop do?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Australian barber shops range from traditional old-school shops with hot towel shaves to modern style bars offering fades, designs, and grooming services. Whether you want a classic short back and sides or a contemporary skin fade, there's a barber for you."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What should I look for in a barber shop?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Walk-in vs booking \u2014 some barbers are walk-in only, while others take appointments Ask about their specialties \u2014 fades, razor work, and beard grooming are all distinct skills Check if they offer hot towel shaves (not all barbers do anymore) Look at recent reviews mentioning the specific barber you'd see"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where can I find a barber shops in Australia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Barber Shops are listed across every Australian state on findme.hair. Use the listings above or browse by city to find one near you."
+          }
+        }
+      ]
+    }
+  },
+  "business_name": "Hair Salons in Sydney",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "partial",
+  "confidence_score": 0.6000000000000001,
+  "pages_scraped": [
+    "homepage",
+    "services"
+  ]
+}

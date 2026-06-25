@@ -1,0 +1,289 @@
+{
+  "domain": "thepolyglotgroup.com",
+  "url": "https://www.thepolyglotgroup.com",
+  "last_scraped_at": 1782119291.009269,
+  "html_hash": "000021c0201d1b83ffcc732a68acbda8",
+  "emails": [],
+  "phones": [
+    "+27 64 826 2314",
+    "+33 762127728",
+    "+64 27 269 5566",
+    "1206406545",
+    "1493231540",
+    "1647598618",
+    "1671854761",
+    "33 76212772"
+  ],
+  "schema_data": {
+    "emails": [],
+    "phones": [],
+    "name": "The Polyglot Group",
+    "raw": {
+      "@context": "https://schema.org/",
+      "@graph": [
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#about-us",
+          "name": "About Us",
+          "url": "https://www.thepolyglotgroup.com/about-us/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#about-us",
+          "name": "About Us",
+          "url": "https://www.thepolyglotgroup.com/about-us/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#meet-our-family",
+          "name": "Meet Our Family",
+          "url": "https://www.thepolyglotgroup.com/about-us/meet-our-team/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#news",
+          "name": "News",
+          "url": "https://www.thepolyglotgroup.com/news/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#partners",
+          "name": "Partners",
+          "url": "https://www.thepolyglotgroup.com/about-us/partners/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#contact-us",
+          "name": "Contact Us",
+          "url": "https://www.thepolyglotgroup.com/contact-us/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#services",
+          "name": "Services",
+          "url": "https://www.thepolyglotgroup.com/services/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#dfille49f2f-services",
+          "name": "Services",
+          "url": "https://www.thepolyglotgroup.com/services/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#business-setup",
+          "name": "Business Setup",
+          "url": "https://www.thepolyglotgroup.com/services/business-setup/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#human-resources",
+          "name": "Human Resources",
+          "url": "https://www.thepolyglotgroup.com/services/human-resources/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#recruitment",
+          "name": "Recruitment",
+          "url": "https://www.thepolyglotgroup.com/services/talent-acquisition/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#employer-of-record-eor",
+          "name": "Employer of Record (EOR)",
+          "url": "https://www.thepolyglotgroup.com/services/employer-of-record/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#payroll-outsourcing",
+          "name": "Payroll Outsourcing",
+          "url": "https://www.thepolyglotgroup.com/services/payroll-outsourcing/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#case-studies",
+          "name": "Case Studies",
+          "url": "https://www.thepolyglotgroup.com/case-study/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#cls-1fillfff-cls-2fille49f33-case-studies",
+          "name": "Case Studies",
+          "url": "https://www.thepolyglotgroup.com/case-study/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#decathlon",
+          "name": "Decathlon",
+          "url": "https://www.thepolyglotgroup.com/case-study/decathlon/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#lombardi",
+          "name": "Lombardi",
+          "url": "https://www.thepolyglotgroup.com/case-study/lombardi/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#pierre-fabre",
+          "name": "Pierre Fabre",
+          "url": "https://www.thepolyglotgroup.com/case-study/pierre-fabre/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#witron",
+          "name": "Witron",
+          "url": "https://www.thepolyglotgroup.com/case-study/witron/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#elecnor",
+          "name": "Elecnor",
+          "url": "https://www.thepolyglotgroup.com/case-study/elecnor-moree-farm/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#view-all",
+          "name": "View All",
+          "url": "https://www.thepolyglotgroup.com/case-study/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#resources",
+          "name": "Resources",
+          "url": "https://www.thepolyglotgroup.com/resources/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#resources",
+          "name": "Resources",
+          "url": "https://www.thepolyglotgroup.com/resources/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#blog",
+          "name": "Blog",
+          "url": "https://www.thepolyglotgroup.com/blog/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#globalpedia",
+          "name": "GlobalPedia",
+          "url": "https://www.thepolyglotgroup.com/globalpedia/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#podcasts",
+          "name": "Podcasts",
+          "url": "https://www.thepolyglotgroup.com/podcast/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#expand-to-australia-hub-new",
+          "name": "Expand To Australia Hub New",
+          "url": "https://www.thepolyglotgroup.com/expand-to-australia-resources-hub/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#talent-platform",
+          "name": "Talent Platform",
+          "url": "https://www.thepolyglotgroup.com/talent-platform/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#talent-platform",
+          "name": "Talent Platform",
+          "url": "https://www.thepolyglotgroup.com/talent-platform/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#find-a-job",
+          "name": "Find A Job",
+          "url": "https://thepolyglotgroup.careers-page.com/"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#talent-resources",
+          "name": "Talent Resources",
+          "url": "https://www.thepolyglotgroup.com/blog/#talent"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#join-our-team",
+          "name": "Join Our Team",
+          "url": "https://thepolyglotgroup.careers-page.com/open-application"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#join-our-talent-pool",
+          "name": "Join Our Talent Pool",
+          "url": "https://thepolyglotgroup.careers-page.com/open-application"
+        },
+        {
+          "@context": "https://schema.org/",
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.thepolyglotgroup.com/#contact-us",
+          "name": "Contact Us",
+          "url": "https://www.thepolyglotgroup.com/contact-us/"
+        }
+      ],
+      "@type": "Organization",
+      "@id": "https://www.thepolyglotgroup.com#Organization",
+      "headline": "The Polyglot Group",
+      "name": "The Polyglot Group",
+      "url": "https://www.thepolyglotgroup.com",
+      "description": "Simplify your business's growth with our tailored services in HR, Employer of Record, Recruitment, Payroll, Language Support & Business Setup.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.thepolyglotgroup.com?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "sameAs": []
+    }
+  },
+  "business_name": "The Polyglot Group",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "partial",
+  "confidence_score": 0.6000000000000001,
+  "pages_scraped": [
+    "homepage",
+    "about",
+    "contact"
+  ]
+}

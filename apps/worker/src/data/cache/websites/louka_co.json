@@ -1,0 +1,24 @@
+{
+  "domain": "louka.co",
+  "url": "https://louka.co",
+  "last_scraped_at": 1782251166.8500962,
+  "html_hash": "3a7dfa58b40ceaa1db832dfe0a9f5327",
+  "emails": [
+    "enquiries@loukahair.com.au"
+  ],
+  "phones": [
+    "(02) 9283 7911",
+    "0292837911"
+  ],
+  "schema_data": {},
+  "business_name": "Louka &amp; Co",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.8,
+  "pages_scraped": [
+    "homepage"
+  ]
+}

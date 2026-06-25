@@ -1,0 +1,301 @@
+{
+  "domain": "christianes.com.au",
+  "url": "https://christianes.com.au",
+  "last_scraped_at": 1782202596.935498,
+  "html_hash": "5c1c5658424ac741abdde3d7a190816a",
+  "emails": [
+    "info@christianes.com.au"
+  ],
+  "phones": [
+    "1413319607",
+    "1549943669",
+    "1550026169",
+    "1550205009",
+    "1554263487",
+    "1623734275",
+    "1638416430",
+    "1638417709",
+    "1712627031",
+    "1712627067",
+    "1712627137",
+    "1713310389",
+    "1713327830",
+    "1713331986",
+    "1716442604",
+    "1719455403",
+    "1719455477",
+    "1775246924",
+    "1775248181",
+    "1775248936",
+    "1775598672",
+    "1776795324",
+    "1776795467",
+    "1776795483",
+    "1776985559",
+    "1777071726",
+    "1777305744",
+    "1777305752",
+    "1777305836",
+    "1777305853",
+    "1777306218",
+    "1777306287",
+    "1777306347",
+    "1777306392",
+    "1777306408",
+    "1777306600",
+    "1777320242",
+    "1777320248",
+    "1777320764",
+    "1777320951",
+    "1777560059",
+    "1777588495",
+    "1777909528",
+    "1999999999",
+    "2147483000",
+    "2147483003"
+  ],
+  "schema_data": {
+    "emails": [],
+    "phones": [],
+    "name": "Christiane's Hair Design",
+    "raw": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": "https://christianes.com.au/",
+          "url": "https://christianes.com.au/",
+          "name": "Christiane's Hair Design | Hair Salons Sydney & Newcastle",
+          "isPartOf": {
+            "@id": "https://christianes.com.au/#website"
+          },
+          "about": {
+            "@id": "https://christianes.com.au/#organization"
+          },
+          "datePublished": "2014-10-10T11:47:25+00:00",
+          "dateModified": "2026-05-04T22:27:09+00:00",
+          "description": "Hair salons across Sydney, Newcastle & Central Coast. Specialists in colour, balayage, nanoplasty and extensions. Book your nearest salon.",
+          "breadcrumb": {
+            "@id": "https://christianes.com.au/#breadcrumb"
+          },
+          "inLanguage": "en-AU",
+          "potentialAction": [
+            {
+              "@type": "ReadAction",
+              "target": [
+                "https://christianes.com.au/"
+              ]
+            }
+          ]
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://christianes.com.au/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home"
+            }
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://christianes.com.au/#website",
+          "url": "https://christianes.com.au/",
+          "name": "Chrisitiane&#039;s Hair Design",
+          "description": "Professional Hair Salons",
+          "publisher": {
+            "@id": "https://christianes.com.au/#organization"
+          },
+          "potentialAction": [
+            {
+              "@type": "SearchAction",
+              "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://christianes.com.au/?s={search_term_string}"
+              },
+              "query-input": {
+                "@type": "PropertyValueSpecification",
+                "valueRequired": true,
+                "valueName": "search_term_string"
+              }
+            }
+          ],
+          "inLanguage": "en-AU"
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://christianes.com.au/#organization",
+          "name": "Christianes Hair Design",
+          "url": "https://christianes.com.au/",
+          "logo": {
+            "@type": "ImageObject",
+            "inLanguage": "en-AU",
+            "@id": "https://christianes.com.au/#/schema/logo/image/",
+            "url": "https://christianes.com.au/wp-content/uploads/2021/11/cropped-cropped-cropped-cropped-cropped-cropped-cropped-christianes-hair-design-logo-blackx2-1-1.png",
+            "contentUrl": "https://christianes.com.au/wp-content/uploads/2021/11/cropped-cropped-cropped-cropped-cropped-cropped-cropped-christianes-hair-design-logo-blackx2-1-1.png",
+            "width": 400,
+            "height": 191,
+            "caption": "Christianes Hair Design"
+          },
+          "image": {
+            "@id": "https://christianes.com.au/#/schema/logo/image/"
+          },
+          "sameAs": [
+            "https://www.facebook.com/christianeshair"
+          ]
+        }
+      ],
+      "@type": "HairSalon",
+      "name": "Christiane's Hair Design",
+      "url": "https://christianes.com.au/",
+      "logo": "https://christianes.com.au/wp-content/uploads/2019/01/New_Christianes_Logo_Black.png",
+      "image": "https://christianes.com.au/wp-content/uploads/2026/04/imgi_1_Website-banners-3.webp",
+      "description": "Christiane's Hair Design is a professional hair salon group with 12 locations across Sydney, Newcastle, and the Central Coast. Specialising in colour, balayage, hair extensions, keratin smoothing, nanoplasty, hair tinsel, and styling for all hair types.",
+      "priceRange": "$$",
+      "areaServed": [
+        "Sydney",
+        "Newcastle",
+        "Central Coast",
+        "NSW"
+      ],
+      "knowsAbout": [
+        "Hair Colour",
+        "Balayage",
+        "Hair Extensions",
+        "Keratin Smoothing",
+        "Nanoplasty",
+        "Hair Tinsel",
+        "Haircuts",
+        "Foils",
+        "Bridal Hair"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Hair Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Nanoplasty",
+              "description": "Permanent hair smoothing treatment \u2014 any length $399"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Balayage"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Hair Colour & Foils"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Hair Extensions"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Keratin Smoothing"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Hair Tinsel"
+            }
+          }
+        ]
+      },
+      "location": [
+        {
+          "@type": "HairSalon",
+          "name": "Christiane's Hair Design Bella Vista",
+          "url": "https://christianes.com.au/salons/christianes-hair-design-bella-vista/"
+        },
+        {
+          "@type": "HairSalon",
+          "name": "Christiane's Hair Design Box Hill",
+          "url": "https://christianes.com.au/salons/christianes-hair-design-box-hill/"
+        },
+        {
+          "@type": "HairSalon",
+          "name": "Christiane's Hair Design Erina",
+          "url": "https://christianes.com.au/salons/christianes-hair-design-erina/"
+        },
+        {
+          "@type": "HairSalon",
+          "name": "Christiane's Hair Design Gladesville",
+          "url": "https://christianes.com.au/salons/christianes-hair-design-gladesville/"
+        },
+        {
+          "@type": "HairSalon",
+          "name": "Christiane's Hair Design Glendale",
+          "url": "https://christianes.com.au/salons/christianes-hair-design-glendale/"
+        },
+        {
+          "@type": "HairSalon",
+          "name": "Christiane's Hair Design Gregory Hills",
+          "url": "https://christianes.com.au/salons/christianes-hair-design-gregory-hills/"
+        },
+        {
+          "@type": "HairSalon",
+          "name": "Christiane's Hair Design Jesmond",
+          "url": "https://christianes.com.au/salons/christianes-hair-design-jesmond/"
+        },
+        {
+          "@type": "HairSalon",
+          "name": "Christiane's Hair Design Kotara",
+          "url": "https://christianes.com.au/salons/christianes-hair-design-kotara/"
+        },
+        {
+          "@type": "HairSalon",
+          "name": "Christiane's Hair Design Menai",
+          "url": "https://christianes.com.au/salons/christianes-hair-design-menai/"
+        },
+        {
+          "@type": "HairSalon",
+          "name": "Christiane's Hair Design Raymond Terrace",
+          "url": "https://christianes.com.au/salons/christianes-hair-design-raymond-terrace/"
+        },
+        {
+          "@type": "HairSalon",
+          "name": "Christiane's Hair Design Richmond",
+          "url": "https://christianes.com.au/salons/christianes-hair-design-richmond/"
+        },
+        {
+          "@type": "HairSalon",
+          "name": "Christiane's Hair Design Rouse Hill",
+          "url": "https://christianes.com.au/salons/christianes-hair-design-rouse-hill/"
+        }
+      ]
+    }
+  },
+  "business_name": "Christiane's Hair Design",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 1.0,
+  "pages_scraped": [
+    "homepage",
+    "about",
+    "services",
+    "location",
+    "internal"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "domain": "themensgrooming.com.au",
+  "url": "https://www.themensgrooming.com.au",
+  "last_scraped_at": 1782118842.163116,
+  "html_hash": "1891b875a3909efbc74f5148f7309e8b",
+  "emails": [
+    "info@themensgrooming.com.au"
+  ],
+  "phones": [
+    "(02) 8068 1090",
+    "(02) 8824 3080",
+    "(02) 8904 1506",
+    "(02) 9247 3227",
+    "(02) 9411 6830",
+    "(02) 9418 8111",
+    "(02) 9621 6706",
+    "(02) 9878 2200",
+    "(02) 9905 0208",
+    "13-4897-9546",
+    "1427582343",
+    "17-0393-4109",
+    "281586-9489",
+    "4282736886",
+    "74-7512-4096"
+  ],
+  "schema_data": {},
+  "business_name": "The Men",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.8,
+  "pages_scraped": [
+    "homepage",
+    "about",
+    "location",
+    "contact"
+  ]
+}

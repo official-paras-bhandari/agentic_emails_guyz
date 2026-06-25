@@ -1,0 +1,34 @@
+{
+  "domain": "theparlourroom.com.au",
+  "url": "https://www.theparlourroom.com.au",
+  "last_scraped_at": 1782249915.2990808,
+  "html_hash": "ccc62940ff995bd4622f49e9af2882ef",
+  "emails": [
+    "collab@theparlourroom.com.au",
+    "press@theparlourroom.com.au",
+    "tpr@theparlourroom.com.au"
+  ],
+  "phones": [
+    "(02) 9188 8711",
+    "(02) 9664 4737",
+    "(02) 9665 9989",
+    "2147483647",
+    "3148514558",
+    "5799751640",
+    "8977085006"
+  ],
+  "schema_data": {},
+  "business_name": "The Parlour Room",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.8,
+  "pages_scraped": [
+    "homepage",
+    "about",
+    "internal",
+    "contact"
+  ]
+}

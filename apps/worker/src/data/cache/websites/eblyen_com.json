@@ -1,0 +1,51 @@
+{
+  "domain": "eblyen.com",
+  "url": "https://www.weblyen.com/how-to-open-a-salon-business",
+  "last_scraped_at": 1782047771.627746,
+  "html_hash": "a4c72060863bbff962361a71d6d6f2fe",
+  "emails": [
+    "info.weblyen@gmail.com",
+    "info@weblyen.com"
+  ],
+  "phones": [],
+  "schema_data": {
+    "emails": [],
+    "phones": [],
+    "name": "Weblyen- All the Help You Need Get Here",
+    "raw": {
+      "@context": "https://schema.org/",
+      "@type": "Organization",
+      "@id": "https://www.weblyen.com#Organization",
+      "headline": "Weblyen- All the Help You Need Get Here",
+      "name": "Weblyen- All the Help You Need Get Here",
+      "description": "Weblyen is an online platform to help online users who are needy. They can get a quick solution in the form of how to, fix, reviews, product guide articles and blogs.",
+      "url": "https://www.weblyen.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.weblyen.com?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "sameAs": [],
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.weblyen.com/wp-content/uploads/2020/04/cropped-weblyen-Logo.png",
+        "width": "264",
+        "height": "58"
+      }
+    }
+  },
+  "business_name": "Weblyen- All the Help You Need Get Here",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.8,
+  "pages_scraped": [
+    "homepage",
+    "team",
+    "about",
+    "contact",
+    "internal"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "domain": "stylz.com.au",
+  "url": "https://stylz.com.au",
+  "last_scraped_at": 1782118885.9125278,
+  "html_hash": "1d0872e4f6ff9a8af8e62d4de5bf31cf",
+  "emails": [],
+  "phones": [
+    "3478831881"
+  ],
+  "schema_data": {},
+  "business_name": "Stylz Hair | Hair Salons | Sydney Hairdressers | Hair Stylist |",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "partial",
+  "confidence_score": 0.4,
+  "pages_scraped": [
+    "homepage",
+    "about",
+    "services",
+    "contact"
+  ]
+}

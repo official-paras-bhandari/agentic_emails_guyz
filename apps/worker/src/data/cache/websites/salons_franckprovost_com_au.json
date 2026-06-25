@@ -1,0 +1,54 @@
+{
+  "domain": "salons.franckprovost.com.au",
+  "url": "https://salons.franckprovost.com.au/en/hairdresser/australia-61/australia/sydney-cbd/franck-provost-866",
+  "last_scraped_at": 1782202997.773054,
+  "html_hash": "9a20a98d22032f7bbf27b15ceebc10f6",
+  "emails": [],
+  "phones": [
+    "(02) 7255 0520",
+    "(02) 7255 0547",
+    "(02) 7257 9576",
+    "(02) 7258 3780",
+    "(02) 7258 3847",
+    "(02) 7258 3894",
+    "(02) 7258 3896",
+    "(03) 7046 3721",
+    "(07) 4463 8869",
+    "0000000000",
+    "0000000001",
+    "1000000000",
+    "2120706824",
+    "241004-1415",
+    "3261991882",
+    "8118647705",
+    "8666464897",
+    "9662567046"
+  ],
+  "schema_data": {
+    "emails": [],
+    "phones": [],
+    "name": "Franck Provost",
+    "raw": {
+      "@context": "http://schema.org",
+      "@type": "HairSalon",
+      "name": "Franck Provost",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.70",
+        "bestRating": 5,
+        "ratingCount": 16219
+      }
+    }
+  },
+  "business_name": "Franck Provost",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "partial",
+  "confidence_score": 0.6000000000000001,
+  "pages_scraped": [
+    "homepage",
+    "internal"
+  ]
+}

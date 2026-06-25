@@ -1,0 +1,27 @@
+{
+  "domain": "sloans.com.au",
+  "url": "https://sloans.com.au/best-hairdressers-sydney",
+  "last_scraped_at": 1782122747.956328,
+  "html_hash": "e7b5a0c52c3094e2c05840e029f8d380",
+  "emails": [
+    "info@sloans.com.au"
+  ],
+  "phones": [
+    "02 9420 4880",
+    "2026052203"
+  ],
+  "schema_data": {},
+  "business_name": "Best Hairdressers In Sydney",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.8,
+  "pages_scraped": [
+    "homepage",
+    "contact",
+    "services",
+    "internal"
+  ]
+}

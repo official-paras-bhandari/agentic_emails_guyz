@@ -1,0 +1,207 @@
+{
+  "domain": "sydneybusinesspages.com.au",
+  "url": "https://sydneybusinesspages.com.au",
+  "last_scraped_at": 1782119042.330297,
+  "html_hash": "b037f8e7074cdeb409e2c3ed7cdce876",
+  "emails": [
+    "info@shanedavid.com.au",
+    "sales@steamaster.com.au"
+  ],
+  "phones": [
+    "(02) 8012 4282",
+    "(02) 8020 5777",
+    "(02) 8205 9641",
+    "(02) 8355 5517",
+    "(02) 8811 1688",
+    "(02) 9018 1510",
+    "(02) 9090 4099",
+    "(02) 9090 4403",
+    "(02) 9090 4465",
+    "(02) 9165 8000",
+    "(02) 9502 2922",
+    "(02) 9531-0999",
+    "+61 393144304",
+    "+61 400 087 154",
+    "+61245054600",
+    "+61286075116",
+    "+61404298298",
+    "+61410790630",
+    "01300 855 677",
+    "02 8599 9985",
+    "02 9216 9074",
+    "02 96791246",
+    "02 9686 7288",
+    "02 9829 9881",
+    "02 9907 4608",
+    "02 9982 1000",
+    "0280845554",
+    "0282124611",
+    "0295197997",
+    "0298388880",
+    "03 93557779",
+    "03 9824 4180",
+    "0390133988",
+    "0395839017",
+    "0401096302",
+    "0402258657",
+    "0406659095",
+    "0407059383",
+    "0409007033",
+    "0409701303",
+    "0410668920",
+    "0419006267",
+    "0422150828",
+    "0424492775",
+    "0425275588",
+    "0426504955",
+    "0426813006",
+    "0431375975",
+    "0432375922",
+    "0433375288",
+    "0433664444",
+    "0439554437",
+    "0449537519",
+    "0450646209",
+    "0451092451",
+    "0468625958",
+    "0481360776",
+    "0490033404",
+    "0499642551",
+    "086-592-5819",
+    "0861122790",
+    "1016689462",
+    "1032713192",
+    "1205841035",
+    "1300011015",
+    "1300032566",
+    "1300167143",
+    "1300737208",
+    "1300915535",
+    "1300922220",
+    "1436874696",
+    "1627631617",
+    "1782052165",
+    "1782056152",
+    "1782119035",
+    "1782119041",
+    "1800262131",
+    "2935367375",
+    "3265131861",
+    "3339270414",
+    "3777197256",
+    "4276055261",
+    "5841447515",
+    "61 39314430",
+    "6103872086",
+    "6124505460",
+    "6128607511",
+    "6140429829",
+    "6141079063",
+    "6882493427",
+    "9673926660"
+  ],
+  "schema_data": {
+    "emails": [
+      "sales@steamaster.com.au"
+    ],
+    "phones": [
+      "01300 855 677"
+    ],
+    "name": "Steamaster",
+    "raw": {
+      "@context": "http://www.schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://sydneybusinesspages.com.au/listing/steamaster/#website",
+          "url": "https://sydneybusinesspages.com.au/listing/steamaster/",
+          "name": "Steamaster  | Sydney Business Pages",
+          "headline": "Do you want to establish a carpet cleaning company? We at Steamaster provide you with all the resources you need to give an immaculate carpet cleaning and ultimately make your business a success. Get everything you need, from high-quality equipment to carpet cleaning machines &#038; products, from industry-leading",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "url": "https://sydneybusinesspages.com.au/listing/steamaster/"
+          },
+          "datePublished": "2023-01-11T08:00:23+11:00",
+          "dateModified": "2025-03-23T08:23:14+11:00",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://sydneybusinesspages.com.au/?s={search_term_string}",
+            "query-input": "required name=search_term_string"
+          },
+          "author": {
+            "@type": "Person",
+            "@id": "https://sydneybusinesspages.com.au/author/steamaster/#person",
+            "url": "https://sydneybusinesspages.com.au/author/steamaster/",
+            "name": "steamaster"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "@id": "https://sydneybusinesspages.com.au/listing/steamaster/#Organization",
+            "url": "https://sydneybusinesspages.com.au/listing/steamaster/",
+            "name": "Sydney Business Pages",
+            "sameAs": [
+              "https://twitter.com/twitter"
+            ]
+          }
+        }
+      ],
+      "@type": "LocalBusiness",
+      "@id": "https://sydneybusinesspages.com.au/listing/steamaster/",
+      "name": "Steamaster",
+      "legalName": "Steamaster",
+      "description": "<p>Do you want to establish a carpet cleaning company? We at Steamaster provide you with all the resources you need to give an immaculate carpet cleaning and ultimately make your business a success. Get everything you need, from high-quality equipment to carpet cleaning machines &amp; products, from industry-leading brands that fit your budget and requirements. Not only are we a marketplace with everything you need, but we also provide guidance on how to operate the equipment, how to clean the equipment properly, and more. Why wait when we'll give you everything you need to get started? Join us today by contacting us.</p>\n",
+      "logo": [
+        "https://sydneybusinesspages.com.au/wp-content/uploads/listing-uploads/logo/2023/01/Selection_083.png"
+      ],
+      "url": "https://sydneybusinesspages.com.au/listing/steamaster/",
+      "telephone": "01300 855 677",
+      "email": "sales@steamaster.com.au",
+      "openingHours": [
+        "Mo 08:00-18:00",
+        "Tu 08:00-18:00",
+        "We 08:00-18:00",
+        "Th 08:00-18:00",
+        "Fr 08:00-18:00",
+        "Sa 08:00-18:00",
+        "Su 08:00-18:00"
+      ],
+      "photo": [
+        "https://sydneybusinesspages.com.au/wp-content/uploads/listing-uploads/cover/2023/01/Steamaster-3-.jpeg"
+      ],
+      "image": [
+        "https://sydneybusinesspages.com.au/wp-content/uploads/listing-uploads/cover/2023/01/Steamaster-3-.jpeg"
+      ],
+      "hasMap": "https://www.google.com/maps/@-33.90229,151.05855z",
+      "address": {
+        "address": "2190, Greenacre, New South Wales, Australia",
+        "lat": "-33.90229",
+        "lng": "151.05855"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "telephone": "01300 855 677",
+        "email": "sales@steamaster.com.au"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "-33.90229",
+        "longitude": "151.05855"
+      }
+    }
+  },
+  "business_name": "Sydney Business Pages",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 1.0,
+  "pages_scraped": [
+    "homepage",
+    "about",
+    "contact",
+    "services",
+    "team"
+  ]
+}

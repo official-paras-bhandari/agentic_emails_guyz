@@ -1,0 +1,31 @@
+{
+  "domain": "eventseye.com",
+  "url": "https://www.eventseye.com/fairs/pl0_salons_sydney_859.html",
+  "last_scraped_at": 1782122863.977105,
+  "html_hash": "e7ebf47a8494d23df0c657a1b4be9475",
+  "emails": [
+    "sales@iccsydney.com"
+  ],
+  "phones": [
+    "+61 (02) 9215 7100",
+    "+61 (02) 9282 5041",
+    "1065063423",
+    "1995232105",
+    "4403985655",
+    "6215884482",
+    "6454931215",
+    "8735088514"
+  ],
+  "schema_data": {},
+  "business_name": "Agenda mondial des salons",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.8,
+  "pages_scraped": [
+    "homepage",
+    "internal"
+  ]
+}

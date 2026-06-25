@@ -1,0 +1,70 @@
+{
+  "domain": "stevieenglish.com.au",
+  "url": "https://www.stevieenglish.com.au",
+  "last_scraped_at": 1782249989.677202,
+  "html_hash": "20ed8ab413bc20590bb5a2bf1284ce94",
+  "emails": [
+    "salon@stevieenglish.com.au",
+    "user@domain.com"
+  ],
+  "phones": [
+    "0000000000",
+    "0000007735",
+    "1015385103",
+    "1330500616",
+    "1371925536",
+    "1435748332",
+    "1435748704",
+    "1463569050",
+    "1733887918",
+    "1736221326",
+    "1736412524",
+    "1736484801",
+    "1737169734",
+    "1743658312",
+    "1743659893",
+    "1777523699",
+    "1888730000",
+    "3141925352",
+    "3403368350",
+    "3983325076",
+    "6082010251",
+    "6181955770",
+    "7270190210",
+    "9769333970"
+  ],
+  "schema_data": {
+    "emails": [],
+    "phones": [],
+    "name": "Stevie English Hair",
+    "raw": {
+      "url": "https://www.stevieenglish.com.au",
+      "name": "Stevie English Hair",
+      "image": "https://static1.squarespace.com/static/556ef972e4b0a1e1a97ddfd1/t/677f990fc04c704b348fba2f/1777523699731/",
+      "@context": "http://schema.org",
+      "@type": "LocalBusiness",
+      "legalName": "Stevie English Hair",
+      "address": "153 Glebe Point Rd\nGlebe, NSW, 2037\nAustralia",
+      "telephone": "",
+      "sameAs": [
+        "https://www.pinterest.com/englishhair/",
+        "http://www.facebook.com/10153851035501427",
+        "http://instagram.com/stevieenglishhair"
+      ],
+      "openingHours": ""
+    }
+  },
+  "business_name": "Stevie English Hair",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 1.0,
+  "pages_scraped": [
+    "homepage",
+    "about",
+    "team",
+    "contact"
+  ]
+}

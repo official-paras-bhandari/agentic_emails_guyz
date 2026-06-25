@@ -1,0 +1,60 @@
+{
+  "domain": "timeout.com",
+  "url": "https://www.timeout.com/sydney/health-and-beauty/the-best-hair-salons-in-sydney",
+  "last_scraped_at": 1782118855.715499,
+  "html_hash": "2b6d3de95f10cb149d50c0e400a150c1",
+  "emails": [],
+  "phones": [
+    "+44 20 7813 3000",
+    "1589000996",
+    "1782118813",
+    "1782118851",
+    "1782118854",
+    "20 7813 3000"
+  ],
+  "schema_data": {
+    "emails": [],
+    "phones": [],
+    "name": "Time Out",
+    "raw": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Time Out",
+      "name": "Time Out",
+      "image": "https://media.timeout.com/images/105178876/image.jpg",
+      "thumbnailUrl": "https://media.timeout.com/images/105178876/image.jpg",
+      "description": "The latest news and press releases from Time Out Group",
+      "author": [],
+      "creator": "",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Time Out",
+        "url": "https://www.timeout.com/about",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.timeout.com/dist/img/TO_logo2x.png"
+        }
+      },
+      "datePublished": "2021-09-07T23:00:00Z",
+      "dateModified": "2026-01-27T17:25:36Z",
+      "url": "https://www.timeout.com/about/latest-news",
+      "keywords": [
+        "City Life",
+        "Categories: City Life"
+      ],
+      "articleSection": "About"
+    }
+  },
+  "business_name": "The best hair salons in Sydney right now (autumn 2026)",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "partial",
+  "confidence_score": 0.6000000000000001,
+  "pages_scraped": [
+    "homepage",
+    "internal",
+    "about"
+  ]
+}

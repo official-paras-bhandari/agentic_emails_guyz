@@ -1,0 +1,26 @@
+{
+  "domain": "kamilshairdressing.com",
+  "url": "https://kamilshairdressing.com",
+  "last_scraped_at": 1782294276.932174,
+  "html_hash": "27019c2e87c130805f36cf358531d313",
+  "emails": [
+    "admin@kamilshairdressing.com"
+  ],
+  "phones": [
+    "0414591012"
+  ],
+  "schema_data": {},
+  "business_name": "Kamil's Hairdressing Salon \u2013 Award Winning Salon in Sydney's CBD",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.8,
+  "pages_scraped": [
+    "homepage",
+    "services",
+    "about",
+    "internal"
+  ]
+}

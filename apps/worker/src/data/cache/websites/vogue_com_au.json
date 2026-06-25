@@ -1,0 +1,23 @@
+{
+  "domain": "vogue.com.au",
+  "url": "https://www.vogue.com.au/beauty/hair/best-hair-salons-sydney/image-gallery/9f8e84688bab8fab774829a70b368702",
+  "last_scraped_at": 1782202997.981128,
+  "html_hash": "ac82677ba5d8518f181231a68da0fc18",
+  "emails": [
+    "accessissues@news.com.au"
+  ],
+  "phones": [
+    "1782202997"
+  ],
+  "schema_data": {},
+  "business_name": null,
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.6000000000000001,
+  "pages_scraped": [
+    "homepage"
+  ]
+}

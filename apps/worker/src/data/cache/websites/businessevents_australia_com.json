@@ -1,0 +1,27 @@
+{
+  "domain": "businessevents.australia.com",
+  "url": "https://businessevents.australia.com/en",
+  "last_scraped_at": 1782119302.452547,
+  "html_hash": "824f3923a96c55284a7c0997658e18b2",
+  "emails": [],
+  "phones": [
+    "1000000000",
+    "1357169647",
+    "1782119298",
+    "1782119300",
+    "1782119301"
+  ],
+  "schema_data": {},
+  "business_name": "businessevents.australia.com",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "partial",
+  "confidence_score": 0.4,
+  "pages_scraped": [
+    "homepage",
+    "contact",
+    "internal"
+  ]
+}

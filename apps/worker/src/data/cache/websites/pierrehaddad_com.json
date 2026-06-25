@@ -1,0 +1,167 @@
+{
+  "domain": "pierrehaddad.com",
+  "url": "https://pierrehaddad.com",
+  "last_scraped_at": 1782119106.192777,
+  "html_hash": "29714c7992c34da685dee0cc2421aae7",
+  "emails": [
+    "info@pierrehaddad.com"
+  ],
+  "phones": [
+    "(02) 9264 1115",
+    "02 29641115",
+    "02 9264 1115",
+    "02-17821191",
+    "1510762710",
+    "1566109206",
+    "1574937693",
+    "1628239120",
+    "1636623075",
+    "1770956259",
+    "1770956263",
+    "1782119102",
+    "1782119104",
+    "1793196255",
+    "2008125881",
+    "2106859156",
+    "2444087458",
+    "2776669662",
+    "4210999053",
+    "4210999079",
+    "4210999102",
+    "4210999653",
+    "4211000495",
+    "4396313185",
+    "4431500843",
+    "4614436139",
+    "47-17821191",
+    "4706985908",
+    "6119509219",
+    "69-4185-9343",
+    "7458900345",
+    "7458900607",
+    "7458900869",
+    "7458906439",
+    "7458913747",
+    "7921682032",
+    "7995630354",
+    "8089795723",
+    "8624951979",
+    "8741970706",
+    "9074253988",
+    "9253109782",
+    "9263199049",
+    "9274658019"
+  ],
+  "schema_data": {
+    "emails": [
+      "info@pierrehaddad.com"
+    ],
+    "phones": [
+      "(02) 9264 1115"
+    ],
+    "name": "Pierre Haddad Hair Management",
+    "raw": {
+      "@context": "http://schema.org",
+      "@type": "WebSiteElement",
+      "additionalType": "https://en.wikipedia.org/wiki/Beauty_salon",
+      "name": "Pierre Haddad Hair Management",
+      "description": "Visit the number one hair salon in Sydney for all things hair. Choose us as your hairdresser in the Sydney CBD and experience the Pierre Haddad difference!",
+      "telephone": "(02) 9264 1115",
+      "email": "info@pierrehaddad.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "SHOP 4/255 PITT ST",
+        "addressLocality": "Sydney",
+        "addressRegion": "NSW",
+        "addressCountry": "Australia",
+        "postalCode": "2000"
+      },
+      "url": "https://pierrehaddad.com/",
+      "logo": "https://cdn.shopify.com/s/files/1/0611/9509/2191/files/White-Black-Gold-PH-Logo-768x127-1_300x300.png?v=1636623075",
+      "sameAs": [
+        "https://www.facebook.com/PierreHaddadHair",
+        "https://www.instagram.com/pierrehaddadhair/?hl=en"
+      ],
+      "SiteNavigationElement": [
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Pierre Haddad Hair Management",
+          "url": "https://pierrehaddad.com/"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Pierre\u2019s Legacy",
+          "url": "https://pierrehaddad.com/pages/pierre-haddad-legacy"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Collection",
+          "url": "https://pierrehaddad.com/collections"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Shampoo",
+          "url": "https://pierrehaddad.com/collections/shampoo"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Conditioner",
+          "url": "https://pierrehaddad.com/collections/conditioner"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Treatment",
+          "url": "https://pierrehaddad.com/collections/treatment"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Styling",
+          "url": "https://pierrehaddad.com/collections/styling"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Styling Tools",
+          "url": "https://pierrehaddad.com/collections/styling-tools"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Services",
+          "url": "https://pierrehaddad.com/pages/services"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Our Team",
+          "url": "https://pierrehaddad.com/pages/our-team"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Blog",
+          "url": "https://pierrehaddad.com/blogs/blog"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "FAQ",
+          "url": "https://pierrehaddad.com/pages/faq"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Contact us",
+          "url": "https://pierrehaddad.com/pages/contact-us"
+        }
+      ]
+    }
+  },
+  "business_name": "Pierre Haddad Hair Management",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 1.0,
+  "pages_scraped": [
+    "homepage",
+    "services",
+    "team",
+    "contact"
+  ]
+}

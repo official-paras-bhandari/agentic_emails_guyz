@@ -1,0 +1,27 @@
+{
+  "domain": "hair-salon-en.lorealprofessionnel.com",
+  "url": "https://hair-salon-en.lorealprofessionnel.com/hair-salon/au/sydney",
+  "last_scraped_at": 1782048245.712588,
+  "html_hash": "7f92a359687034b2272616b803a5b633",
+  "emails": [],
+  "phones": [
+    "2147483645",
+    "2147483646",
+    "2147483647",
+    "2999999999",
+    "3333333333",
+    "6666666667"
+  ],
+  "schema_data": {},
+  "business_name": null,
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "partial",
+  "confidence_score": 0.2,
+  "pages_scraped": [
+    "homepage",
+    "internal"
+  ]
+}

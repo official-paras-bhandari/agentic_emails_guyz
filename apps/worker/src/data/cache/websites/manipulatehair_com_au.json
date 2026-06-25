@@ -1,0 +1,71 @@
+{
+  "domain": "manipulatehair.com.au",
+  "url": "https://manipulatehair.com.au",
+  "last_scraped_at": 1782202700.875793,
+  "html_hash": "ac9498ad66014f36ec9a488c61fd248f",
+  "emails": [
+    "info@manipulatehair.com.au",
+    "user@domain.com"
+  ],
+  "phones": [
+    "(02) 9232 4268",
+    "(02) 9299 0717",
+    "0000000000",
+    "0000007735",
+    "02 9232 4268",
+    "1403260543",
+    "1408567275",
+    "1457347918",
+    "1457409002",
+    "1465971890",
+    "1476345763",
+    "1655207099",
+    "1754003506",
+    "1754003635",
+    "1754023158",
+    "1754033486",
+    "1754389208",
+    "3141925352",
+    "4796721468",
+    "9769333970"
+  ],
+  "schema_data": {
+    "emails": [
+      "info@manipulatehair.com.au"
+    ],
+    "phones": [
+      "02 9232 4268"
+    ],
+    "name": "Manipulate Hair Salon",
+    "raw": {
+      "url": "https://manipulatehair.com.au",
+      "name": "Manipulate Hair Salon",
+      "description": "",
+      "image": "https://static1.squarespace.com/static/56dd09b34c2f858cb438a016/t/62d4092e71917366f3544017/1754033486507/",
+      "@context": "http://schema.org",
+      "@type": "LocalBusiness",
+      "legalName": "Manipulate Hair Salon",
+      "address": "The Strand Arcade level  2 shop 300 \n412 -414 George street Sydney\nAustralia",
+      "email": "info@manipulatehair.com.au",
+      "telephone": "02 9232 4268",
+      "sameAs": [
+        "https://www.instagram.com/manipulatehairstudio/",
+        "https://www.facebook.com/manipulatehairstudio?checkpoint_src=any",
+        "https://c6a250f851994a9ca20fc43a8a563f7c.elf.site",
+        "https://www.tiktok.com/@manipulatehair?lang=en-GB"
+      ],
+      "openingHours": ", Tu 09:00-19:00, We 09:00-18:00, Th 09:00-21:00, Fr 09:00-19:00, Sa 09:00-17:00, "
+    }
+  },
+  "business_name": "Manipulate Hair Salon",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 1.0,
+  "pages_scraped": [
+    "homepage",
+    "location"
+  ]
+}

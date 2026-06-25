@@ -1,0 +1,32 @@
+{
+  "domain": "beautysalons.com.au",
+  "url": "https://www.beautysalons.com.au/new-south-wales/sydney",
+  "last_scraped_at": 1782118870.352871,
+  "html_hash": "17b19875c5ca34d4909fb30ba4f9db82",
+  "emails": [
+    "service@beautysalons.com.au",
+    "supportservice@beautysalons.com.au",
+    "supportstaff@beautysalons.com.au"
+  ],
+  "phones": [
+    "(02) 9267 1378",
+    "(02) 9273 8808",
+    "(02) 9696 2642",
+    "(02) 9955 8873",
+    "1839456439"
+  ],
+  "schema_data": {},
+  "business_name": "BeautySalons.com.au",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.8,
+  "pages_scraped": [
+    "homepage",
+    "contact",
+    "about",
+    "location"
+  ]
+}

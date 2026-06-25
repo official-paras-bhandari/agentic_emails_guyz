@@ -1,0 +1,25 @@
+{
+  "domain": "bestinsydney.com.au",
+  "url": "https://bestinsydney.com.au/beauty-salons-sydney",
+  "last_scraped_at": 1782122849.23009,
+  "html_hash": "b9413bd46915c174b657ff72179a6cf1",
+  "emails": [],
+  "phones": [
+    "514051-6261",
+    "75-4366-9835"
+  ],
+  "schema_data": {},
+  "business_name": "Best in Sydney",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "partial",
+  "confidence_score": 0.4,
+  "pages_scraped": [
+    "homepage",
+    "services",
+    "about",
+    "contact"
+  ]
+}

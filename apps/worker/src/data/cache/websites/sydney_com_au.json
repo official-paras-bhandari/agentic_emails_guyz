@@ -1,0 +1,22 @@
+{
+  "domain": "sydney.com.au",
+  "url": "https://www.sydney.com.au",
+  "last_scraped_at": 1782119214.151853,
+  "html_hash": "6c7ea1a6d6bf7b1893dea6a8c8186735",
+  "emails": [],
+  "phones": [],
+  "schema_data": {},
+  "business_name": "Where to get married in Sydney",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "partial",
+  "confidence_score": 0.2,
+  "pages_scraped": [
+    "homepage",
+    "location",
+    "about",
+    "internal"
+  ]
+}

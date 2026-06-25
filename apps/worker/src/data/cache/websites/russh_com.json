@@ -1,0 +1,42 @@
+{
+  "domain": "russh.com",
+  "url": "https://www.russh.com/best-hair-salons-sydney",
+  "last_scraped_at": 1782118817.3529,
+  "html_hash": "b03f2d9ce1aefa506cf45aa255850f1a",
+  "emails": [
+    "info@russh.com"
+  ],
+  "phones": [
+    "00 1199 1199",
+    "10 1199 1199",
+    "1781834198",
+    "1781925578",
+    "1781943874",
+    "1782109393",
+    "20 1199 1199",
+    "2246749912",
+    "2795493637",
+    "30 1199 1199",
+    "3208040941",
+    "40 1199 1199",
+    "50 1199 1199",
+    "60 1199 1199",
+    "70 1199 1199",
+    "80 1199 1199",
+    "90 1199 1199"
+  ],
+  "schema_data": {},
+  "business_name": "RUSSH",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 0.8,
+  "pages_scraped": [
+    "homepage",
+    "contact",
+    "internal",
+    "about"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "baseUrl": "..",
+    "types": ["node"],
+    "paths": {
+      "@packages/db": ["packages/db/src"],
+      "@packages/shared": ["packages/shared/src"]
+    }
+  }
+}

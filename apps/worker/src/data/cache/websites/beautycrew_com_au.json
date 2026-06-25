@@ -1,0 +1,59 @@
+{
+  "domain": "beautycrew.com.au",
+  "url": "https://www.beautycrew.com.au/best-nail-salons-sydney",
+  "last_scraped_at": 1782118848.35114,
+  "html_hash": "1105b857b23bedc7037815a8f2069cc7",
+  "emails": [
+    "paula.wu@aremedia.com.au"
+  ],
+  "phones": [
+    "+61293942000",
+    "02 9282 8000",
+    "1644394839",
+    "1716336771",
+    "1716347310",
+    "1760578396",
+    "1760617549",
+    "1781878956",
+    "1782118843",
+    "1782118845",
+    "1782118847",
+    "187830-2258",
+    "2147483647",
+    "3355927313",
+    "6129394200",
+    "8999999999"
+  ],
+  "schema_data": {
+    "emails": [],
+    "phones": [
+      "+61293942000"
+    ],
+    "name": "Beauty Crew",
+    "raw": {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://www.beautycrew.com.au",
+      "name": "Beauty Crew",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+61293942000",
+        "contactType": "customer service"
+      },
+      "logo": "https://www.beautycrew.com.au/public/images/BC_BrandLogo_SD.png"
+    }
+  },
+  "business_name": "Beauty Crew",
+  "suburb": null,
+  "address": null,
+  "services": null,
+  "social_links": [],
+  "crawl_status": "success",
+  "confidence_score": 1.0,
+  "pages_scraped": [
+    "homepage",
+    "about",
+    "contact",
+    "internal"
+  ]
+}
