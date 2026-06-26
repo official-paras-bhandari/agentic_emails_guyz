@@ -286,8 +286,7 @@ export function AppSidebar() {
       if (!res.ok) {
         throw new Error("Logout failed");
       }
-      router.replace("/login");
-      router.refresh();
+      window.location.assign("/login");
     } catch (err) {
       console.error("Logout failed:", err);
       showToast("Logout failed", "error");

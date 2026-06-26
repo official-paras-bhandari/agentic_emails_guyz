@@ -5,15 +5,15 @@ import { ProfileGate } from "@/components/auth/ProfileGate";
 export default function Home() {
   return (
     <div className="h-full">
-      <ProfileGate>
-        <Suspense fallback={
-          <div className="flex items-center justify-center min-h-[400px] text-zinc-500 font-medium">
-            Loading command center...
-          </div>
-        }>
+      <Suspense fallback={
+        <div className="flex items-center justify-center min-h-[400px] text-zinc-500 font-medium">
+          Loading command center...
+        </div>
+      }>
+        <ProfileGate>
           <DashboardView />
-        </Suspense>
-      </ProfileGate>
+        </ProfileGate>
+      </Suspense>
     </div>
   );
 }

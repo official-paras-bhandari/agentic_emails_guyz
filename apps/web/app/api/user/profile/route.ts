@@ -58,11 +58,17 @@ export async function PATCH(req: NextRequest) {
     if (!user) return NextResponse.json({ error: 'User not found' }, { status: 404 });
 
     const data: Record<string, string | null> = {};
-    if ('name' in body) data.name = normalizeText(body.name);
-    if ('email' in body) data.email = normalizeText(body.email);
-    if ('jobTitle' in body) data.jobTitle = normalizeText(body.jobTitle);
-    if ('companyName' in body) data.companyName = normalizeText(body.companyName);
-    if ('homeCountry' in body) data.homeCountry = normalizeText(body.homeCountry);
+    const maybeName = 'name' in body ? normalizeText(body.name) : undefined;
+    const maybeEmail = 'email' in body ? normalizeText(body.email) : undefined;
+    const maybeJobTitle = 'jobTitle' in body ? normalizeText(body.jobTitle) : undefined;
+    const maybeCompanyName = 'companyName' in body ? normalizeText(body.companyName) : undefined;
+    const maybeHomeCountry = 'homeCountry' in body ? normalizeText(body.homeCountry) : undefined;
+
+    if (maybeName !== undefined) data.name = maybeName;
+    if (maybeEmail !== undefined) data.email = maybeEmail;
+    if (maybeJobTitle !== undefined) data.jobTitle = maybeJobTitle;
+    if (maybeCompanyName !== undefined) data.companyName = maybeCompanyName;
+    if (maybeHomeCountry !== undefined) data.homeCountry = maybeHomeCountry;
 
     const updated = await prisma.user.update({
       where: { id: userId },

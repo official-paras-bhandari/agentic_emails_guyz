@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { Suspense, useEffect, useMemo, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { CheckCircle2, UserRound, Building2, Globe2, Mail, BriefcaseBusiness } from "lucide-react";
 
@@ -20,7 +20,7 @@ const emptyProfile: Profile = {
   homeCountry: "",
 };
 
-export default function ProfileSettingsPage() {
+function ProfileSettingsPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const workspaceId = searchParams.get("workspaceId");
@@ -131,6 +131,20 @@ export default function ProfileSettingsPage() {
         </div>
       </form>
     </div>
+  );
+}
+
+export default function ProfileSettingsPage() {
+  return (
+    <Suspense fallback={
+      <div className="p-10 max-w-3xl mx-auto space-y-4 animate-pulse">
+        <div className="h-8 w-56 bg-zinc-900 rounded-lg" />
+        <div className="h-4 w-96 bg-zinc-900 rounded-lg" />
+        <div className="h-[420px] bg-zinc-900 rounded-2xl mt-8" />
+      </div>
+    }>
+      <ProfileSettingsPageContent />
+    </Suspense>
   );
 }
 
