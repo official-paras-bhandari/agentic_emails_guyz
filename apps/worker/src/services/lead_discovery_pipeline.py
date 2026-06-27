@@ -6,7 +6,7 @@ Implements the target-aware, queue-based orchestrator loop from Section 4.
 import time
 import re
 from typing import Any, Callable, Dict, List, Optional
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse
 import requests
 from difflib import SequenceMatcher
 
@@ -22,6 +22,7 @@ from src.services.lead_quality_gate import LeadQualityGate
 from src.services.browser_pool import browser_pool
 from src.services.directory_crawler import DirectoryCrawler
 from src.services.normalization import normalize_business_name
+from src.services.snapshot_store import snapshot_store
 from src.config import config
 
 class LeadDiscoveryPipeline:
@@ -316,16 +317,30 @@ class LeadDiscoveryPipeline:
             self.metrics["cache_misses"] += 1
             self.metrics["business_websites_crawled"] += 1
 
-            pages_content = browser_pool.crawl_domain(
-                url,
-                user_id=self.workspace_id,
-                job_id=self.job_id,
-            )
+            pages_content = self._fetch_static_pages(url)
+            rendered = False
             if not pages_content:
-                continue
+                pages_content = browser_pool.crawl_domain(
+                    url,
+                    user_id=self.workspace_id,
+                    job_id=self.job_id,
+                )
+                rendered = True
+                if not pages_content:
+                    continue
 
             # Extract contacts using cheap extractor (Section 17)
             result = self.contact_extractor.extract_from_pages(pages_content, url)
+            if self.fallback_extractor.should_fallback(result) and not rendered:
+                rendered_pages = browser_pool.crawl_domain(
+                    url,
+                    user_id=self.workspace_id,
+                    job_id=self.job_id,
+                )
+                if rendered_pages:
+                    pages_content = {**pages_content, **rendered_pages}
+                    rendered = True
+                    result = self.contact_extractor.extract_from_pages(pages_content, url)
             
             emails = result.get("emails", [])
             phones = result.get("phones", [])
@@ -334,6 +349,12 @@ class LeadDiscoveryPipeline:
             confidence_score = float(result.get("confidence_score") or 0.0)
             evidence: List[str] = []
             services = None
+            source_snapshots = snapshot_store.store_pages(
+                job_id=self.job_id,
+                base_url=url,
+                pages=pages_content,
+                rendered=rendered,
+            )
 
             # Cache the new result
             cache_entry = CacheEntry(
@@ -407,6 +428,7 @@ class LeadDiscoveryPipeline:
                 confidence_score=confidence_score,
                 evidence=evidence,
                 services=services,
+                source_snapshots=source_snapshots,
             )
 
     def _process_directories_batch(self, industry: str, batch_size: int = 1):
@@ -575,6 +597,7 @@ class LeadDiscoveryPipeline:
         confidence_score: float = 0.0,
         evidence: Optional[List[str]] = None,
         services: Optional[List[str]] = None,
+        source_snapshots: Optional[List[Dict[str, Any]]] = None,
     ):
         """Validate, deduplicate, score, and tier leads before saving."""
         email = emails[0] if emails else None
@@ -657,6 +680,7 @@ class LeadDiscoveryPipeline:
             confidence_score=confidence_score,
             evidence=evidence or [],
             services=services or [],
+            source_snapshots=source_snapshots or [],
             location_status=quality.get("location_status"),
             location_confidence=quality.get("location_confidence"),
             location_evidence=quality.get("location_evidence", []),
@@ -770,6 +794,65 @@ class LeadDiscoveryPipeline:
     def _emit_internal_event(self, **kwargs):
         """Interface helper for sub-services to raise webhook events."""
         self.emit_event(job_id=self.job_id, **kwargs)
+
+    def _fetch_static_pages(self, base_url: str) -> Dict[str, str]:
+        """Fetch homepage and priority internal pages without browser rendering."""
+        headers = {
+            "User-Agent": "Mozilla/5.0 (compatible; AzuraLeadDiscovery/1.0)",
+            "Accept": "text/html,application/xhtml+xml",
+        }
+        pages: Dict[str, str] = {}
+        try:
+            response = requests.get(base_url, headers=headers, timeout=min(config.SCRAPE_TIMEOUT_SECONDS, 15))
+            content_type = response.headers.get("content-type", "")
+            if response.status_code >= 400 or "html" not in content_type.lower():
+                return {}
+            pages["homepage"] = response.text
+            links = re.findall(r'href=["\']([^"\']+)["\']', response.text, flags=re.IGNORECASE)
+            priority = self._priority_static_links(base_url, links)
+            for page_type, link in priority[: max(0, config.MAX_PAGES_PER_SITE - 1)]:
+                try:
+                    page_response = requests.get(link, headers=headers, timeout=min(config.SCRAPE_TIMEOUT_SECONDS, 15))
+                    page_content_type = page_response.headers.get("content-type", "")
+                    if page_response.status_code < 400 and "html" in page_content_type.lower():
+                        pages[page_type] = page_response.text
+                except requests.RequestException:
+                    continue
+        except requests.RequestException:
+            return {}
+        return pages
+
+    def _priority_static_links(self, base_url: str, links: List[str]) -> List[tuple[str, str]]:
+        base_domain = self._extract_domain(base_url)
+        seen = {base_url.rstrip("/")}
+        priority: List[tuple[str, str]] = []
+        for raw_link in links:
+            if not raw_link or raw_link.startswith(("mailto:", "tel:", "#", "javascript:")):
+                continue
+            link = urljoin(base_url, raw_link).split("#")[0].rstrip("/")
+            if link in seen:
+                continue
+            domain = self._extract_domain(link)
+            if domain and base_domain and domain != base_domain:
+                continue
+            page_type = self._page_type_from_url(link)
+            if page_type in {"contact", "about", "services", "location"}:
+                seen.add(link)
+                priority.append((page_type, link))
+        return priority
+
+    @staticmethod
+    def _page_type_from_url(url: str) -> str:
+        path = urlparse(url).path.lower()
+        if "contact" in path:
+            return "contact"
+        if "about" in path:
+            return "about"
+        if "service" in path:
+            return "services"
+        if "location" in path:
+            return "location"
+        return "internal"
 
     @staticmethod
     def _format_location(location: str, country: Optional[str] = None) -> str:

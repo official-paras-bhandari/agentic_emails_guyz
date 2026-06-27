@@ -6,6 +6,7 @@ Queries are structured to find official business websites, not directory listing
 """
 
 from typing import Dict, Any, List
+from src.services.country_adapters import adapter_for_country
 
 
 # Query templates that rotate phrasing to get different search results.
@@ -73,14 +74,23 @@ class QueryPlannerService:
         keywords = expanded_location.get("keywords", [])
         city = expanded_location.get("city", "")
         targets = expanded_location.get("search_targets", [])
+        country = expanded_location.get("country")
+        adapter = adapter_for_country(country)
 
         # Build direct queries — one template × each location target
         direct_queries = []
         for target in targets:
-            for template in self.direct_templates:
-                q = template.format(industry=industry, location=target).strip()
-                if q:
-                    direct_queries.append(q)
+            for language in adapter.languages:
+                templates = adapter.templates(language, self.direct_templates)
+                industry_terms = adapter.industry_terms(industry, language)
+                if language != "en" and industry_terms == [industry]:
+                    continue
+                for location_term in adapter.location_terms(target):
+                    for industry_term in industry_terms:
+                        for template in templates:
+                            q = template.format(industry=industry_term, location=location_term).strip()
+                            if q:
+                                direct_queries.append(q)
 
         # Build directory queries (optional)
         directory_queries = []

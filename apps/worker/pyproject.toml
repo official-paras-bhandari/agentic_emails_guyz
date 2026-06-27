@@ -18,6 +18,7 @@ dependencies = [
   "requests==2.31.0",
   "redis==5.0.3",
   "rq==1.16.1",
+  "celery==5.3.6",
   "dnspython>=2.6.1",
 ]
 

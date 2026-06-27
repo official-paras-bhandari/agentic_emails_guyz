@@ -170,7 +170,7 @@ If blocked/clarification required:
                 "message": "I’m focused on outreach tasks only. I can help you find leads, scrape public business contact info, write emails, manage follow-ups, check replies, and track campaigns."
             }
 
-        scrape_keywords = ["find", "scrape", "extract", "get", "leads", "business", "salon", "plumber", "prospect", "gather", "collect"]
+        scrape_keywords = ["find", "scrape", "extract", "get", "lead", "mail", "email", "emial", "business", "salon", "plumber", "prospect", "gather", "collect"]
         if any(word in p for word in scrape_keywords):
             quantity_match = re.search(r"\b(\d{1,3})\b", p)
             quantity = min(int(quantity_match.group(1)), config.MAX_SITES_PER_JOB) if quantity_match else 5
@@ -186,7 +186,7 @@ If blocked/clarification required:
             explicit_location = None
             explicit_country = self._extract_explicit_country(prompt)
             
-            location_match = re.search(r"\bin\s+([a-z][a-z\s,-]*)", p)
+            location_match = re.search(r"\b(?:in|from|near)\s+([a-z][a-z\s,-]*)", p)
             if location_match:
                 loc_cand = location_match.group(1).strip()
                 if "," in loc_cand:
@@ -195,10 +195,15 @@ If blocked/clarification required:
                 else:
                     explicit_location = loc_cand.strip().title()
 
+            if re.search(r"\bcampi(?:s|se|ses|se)?\b|\bcampsie\b", p):
+                explicit_location = "Campsie"
+            elif "sydney" in p and not explicit_location:
+                explicit_location = "Sydney"
+
             # Apply simulation spelling/dictation corrections
             if explicit_location:
                 loc_lower = explicit_location.lower()
-                if loc_lower in {"campuses", "campises", "campoise", "campes"}:
+                if loc_lower in {"campuses", "campises", "campise", "campoise", "campes", "campsie"}:
                     explicit_location = "Campsie"
                 elif loc_lower == "vectoria":
                     explicit_location = "Victoria"

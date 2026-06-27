@@ -423,6 +423,7 @@ async function handleLeadFound(jobId: string, workspaceId: string, data: any) {
     extraction_location,
     extracted_fields,
     evidence,
+    source_snapshots,
   } = data;
 
   // 1. Policy check (Discovery)
@@ -481,6 +482,13 @@ async function handleLeadFound(jobId: string, workspaceId: string, data: any) {
           },
         });
       }
+      await persistLeadSnapshots(jobId, existing.lead.id, {
+        source_url,
+        website_url,
+        page_type,
+        extracted_fields,
+        source_snapshots,
+      });
     }
     return;
   }
@@ -536,4 +544,111 @@ async function handleLeadFound(jobId: string, workspaceId: string, data: any) {
       data: { lead_id: newLead.id, email },
     },
   });
+
+  await persistLeadSnapshots(jobId, newLead.id, {
+    source_url,
+    website_url,
+    page_type,
+    extracted_fields,
+    source_snapshots,
+  });
+}
+
+const ALLOWED_SOURCE_ROLES = new Set([
+  'primary_official_site',
+  'contact_page',
+  'about_page',
+  'directory_listing',
+  'schema_source',
+  'rendered_page',
+  'llm_extraction_source',
+]);
+
+const ALLOWED_EVIDENCE_TYPES = new Set([
+  'business_name',
+  'email',
+  'phone',
+  'address',
+  'location',
+  'industry',
+  'services',
+  'website',
+]);
+
+function evidenceTypesFromFields(fields: any): string[] {
+  const rawFields = Array.isArray(fields) ? fields : [];
+  const mapped = rawFields
+    .map((field) => String(field || '').trim())
+    .filter((field) => ALLOWED_EVIDENCE_TYPES.has(field));
+  return mapped.length ? Array.from(new Set(mapped)) : ['website'];
+}
+
+function sourceRoleFromPageType(pageType: any): string {
+  const value = String(pageType || '').toLowerCase();
+  if (value.includes('contact')) return 'contact_page';
+  if (value.includes('about')) return 'about_page';
+  if (value.includes('directory')) return 'directory_listing';
+  if (value.includes('schema')) return 'schema_source';
+  if (value.includes('render')) return 'rendered_page';
+  if (value.includes('llm') || value.includes('scrapegraph')) return 'llm_extraction_source';
+  return 'primary_official_site';
+}
+
+async function persistLeadSnapshots(jobId: string, leadId: string, data: any) {
+  const snapshots = Array.isArray(data.source_snapshots) && data.source_snapshots.length
+    ? data.source_snapshots
+    : [{
+        url: data.source_url || data.website_url,
+        source_role: sourceRoleFromPageType(data.page_type),
+        evidence_types: evidenceTypesFromFields(data.extracted_fields),
+      }];
+
+  for (const snapshot of snapshots) {
+    const snapshotUrl = snapshot?.url || data.source_url || data.website_url;
+    if (!snapshotUrl) continue;
+
+    const crawlSnapshot = await (prisma as any).crawlSnapshot.create({
+      data: {
+        jobId,
+        candidateUrlId: snapshot.candidate_url_id || null,
+        url: snapshotUrl,
+        finalUrl: snapshot.final_url || snapshotUrl,
+        httpStatus: Number.isFinite(Number(snapshot.http_status)) ? Number(snapshot.http_status) : null,
+        contentHash: snapshot.content_hash || null,
+        rawHtmlStorageKey: snapshot.raw_html_storage_key || null,
+        renderedHtmlStorageKey: snapshot.rendered_html_storage_key || null,
+        cleanedTextStorageKey: snapshot.cleaned_text_storage_key || null,
+        fetchedAt: snapshot.fetched_at ? new Date(Number(snapshot.fetched_at) * 1000) : new Date(),
+        expiresAt: snapshot.expires_at ? new Date(Number(snapshot.expires_at) * 1000) : null,
+      },
+    });
+
+    const sourceRole = ALLOWED_SOURCE_ROLES.has(snapshot.source_role)
+      ? snapshot.source_role
+      : sourceRoleFromPageType(data.page_type);
+    const evidenceTypes = Array.isArray(snapshot.evidence_types)
+      ? snapshot.evidence_types.filter((type: any) => ALLOWED_EVIDENCE_TYPES.has(String(type)))
+      : evidenceTypesFromFields(data.extracted_fields);
+
+    for (const evidenceType of (evidenceTypes.length ? evidenceTypes : ['website'])) {
+      await (prisma as any).leadSnapshotSource.upsert({
+        where: {
+          leadId_crawlSnapshotId_evidenceType: {
+            leadId,
+            crawlSnapshotId: crawlSnapshot.id,
+            evidenceType,
+          },
+        },
+        update: {},
+        create: {
+          leadId,
+          crawlSnapshotId: crawlSnapshot.id,
+          candidateUrlId: snapshot.candidate_url_id || null,
+          extractionResultId: snapshot.extraction_result_id || null,
+          sourceRole,
+          evidenceType,
+        },
+      });
+    }
+  }
 }

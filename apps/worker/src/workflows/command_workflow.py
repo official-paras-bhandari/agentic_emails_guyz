@@ -9,6 +9,16 @@ import requests
 
 from src.config import config
 
+try:
+    from src.agents.command_understanding_agent import CommandUnderstandingAgent
+except Exception:
+    CommandUnderstandingAgent = None
+
+try:
+    from src.services.lead_discovery_pipeline import LeadDiscoveryPipeline
+except Exception:
+    LeadDiscoveryPipeline = None
+
 
 def _backend_headers() -> dict[str, str]:
     return {"X-Internal-Api-Key": config.INTERNAL_API_KEY} if config.INTERNAL_API_KEY else {}
@@ -82,7 +92,8 @@ def run_command_workflow(
         else:
             # --- Normal user-driven command path ---
             notify("step_running", {"job_id": job_id, "step": "understanding", "message": "Analyzing request"})
-            from src.agents.command_understanding_agent import CommandUnderstandingAgent
+            if CommandUnderstandingAgent is None:
+                raise RuntimeError("CommandUnderstandingAgent is unavailable")
             plan = CommandUnderstandingAgent().understand(prompt, user_profile, workspace_profile)
             if not plan.get("allowed", False):
                 raise ValueError("Command was rejected by the outreach domain guard")
@@ -163,7 +174,8 @@ def run_command_workflow(
             )
         else:
             # New regex-first pipeline
-            from src.services.lead_discovery_pipeline import LeadDiscoveryPipeline
+            if LeadDiscoveryPipeline is None:
+                raise RuntimeError("LeadDiscoveryPipeline is unavailable")
             pipeline = LeadDiscoveryPipeline(
                 job_id=job_id,
                 workspace_id=workspace_id,
@@ -443,6 +455,9 @@ def _save_pipeline_lead(
     confidence_score: float | None = None,
     evidence: list | None = None,
     services: list | None = None,
+    address: str | None = None,
+    source_snapshots: list | None = None,
+    **extra,
 ):
     """Save a lead discovered by the new pipeline via the backend webhook."""
     _notify_webhook("lead_found", {
@@ -453,6 +468,7 @@ def _save_pipeline_lead(
         "website_url": website,
         "phone": phone,
         "suburb": suburb,
+        "address": address,
         "source_url": source_url or website,
         "page_type": page_type or "website",
         "extraction_location": extraction_method or "regex",
@@ -463,4 +479,6 @@ def _save_pipeline_lead(
         "confidence_score": confidence_score if confidence_score is not None else quality_score,
         "evidence": evidence or [],
         "services": services or [],
+        "source_snapshots": source_snapshots or [],
+        **extra,
     })

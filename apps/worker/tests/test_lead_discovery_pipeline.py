@@ -6,6 +6,8 @@ import sys
 import tempfile
 import time
 import unittest
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
 from unittest.mock import patch, MagicMock
 
 os.environ.setdefault("WEBHOOK_SECRET", "unit-test-webhook-secret")
@@ -23,6 +25,8 @@ from services.cheap_contact_extractor import CheapContactExtractor
 from services.scrapegraph_fallback_extractor import ScrapeGraphFallbackExtractor
 from services.lead_quality_gate import LeadQualityGate
 from services.normalization import normalize_business_name
+from services.snapshot_store import SnapshotStore
+from services.source_health_checker import SourceHealthChecker, SourceHealthInput
 
 
 class TestLocationExpansionService(unittest.TestCase):
@@ -111,6 +115,20 @@ class TestQueryPlannerService(unittest.TestCase):
         plan_with_dir = self.planner.plan("salon", self.sydney_expansion, include_directory_queries=True)
         plan_no_dir = self.planner.plan("salon", self.sydney_expansion, include_directory_queries=False)
         self.assertGreaterEqual(len(plan_with_dir["queries"]), len(plan_no_dir["queries"]))
+
+    def test_country_adapter_adds_local_language_queries_after_english(self):
+        expansion = {
+            "city": "Montreal",
+            "country": "Canada",
+            "suburbs": ["Montreal QC"],
+            "keywords": [],
+            "search_targets": ["Montreal QC"],
+        }
+        plan = self.planner.plan("dentist", expansion, include_directory_queries=False)
+        joined = " ".join(plan["queries"]).lower()
+        self.assertIn("dentist", joined)
+        self.assertIn("dentiste", joined)
+        self.assertLess(joined.index("dentist"), joined.index("dentiste"))
 
 
 class TestQueryRateLimiter(unittest.TestCase):
@@ -473,6 +491,53 @@ class TestBusinessNameNormalizer(unittest.TestCase):
     def test_keeps_industry_words(self):
         self.assertEqual(normalize_business_name("Royal Cuts Barber"), "royal cuts barber")
         self.assertEqual(normalize_business_name("The Dental Studio LLC"), "dental studio")
+
+
+class TestSnapshotStore(unittest.TestCase):
+    def test_stores_raw_html_snapshot_descriptor(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            store = SnapshotStore(base_dir=Path(temp_dir))
+            snapshots = store.store_pages(
+                job_id="job-1",
+                base_url="https://example.com",
+                pages={"contact": "<html>Email hello@example.com Call +61 2 9000 1234</html>"},
+            )
+            self.assertEqual(len(snapshots), 1)
+            self.assertEqual(snapshots[0]["source_role"], "contact_page")
+            self.assertIn("email", snapshots[0]["evidence_types"])
+            self.assertTrue(os.path.exists(snapshots[0]["raw_html_storage_key"]))
+
+
+class TestSourceHealthChecker(unittest.TestCase):
+    def setUp(self):
+        self.checker = SourceHealthChecker()
+
+    def test_cadence_matches_source_status(self):
+        self.assertEqual(self.checker.next_check_after("approved"), timedelta(days=7))
+        self.assertEqual(self.checker.next_check_after("limited"), timedelta(days=3))
+        self.assertEqual(self.checker.next_check_after("approved", recent_failures=True), timedelta(days=1))
+        self.assertIsNone(self.checker.next_check_after("unknown"))
+        self.assertIsNone(self.checker.next_check_after("blocked"))
+
+    def test_due_for_check_uses_cadence(self):
+        now = datetime(2026, 6, 27, tzinfo=timezone.utc)
+        source = SourceHealthInput(
+            source_id="src-1",
+            status="approved",
+            last_checked_at=now - timedelta(days=8),
+        )
+        self.assertTrue(self.checker.due_for_check(source, now=now))
+
+    def test_auto_status_rules(self):
+        limited = self.checker.decide_status(SourceHealthInput("src-1", "approved", failure_rate_7d=0.6))
+        self.assertEqual(limited.new_status, "limited")
+        self.assertTrue(limited.should_write_event)
+
+        manual = self.checker.decide_status(SourceHealthInput("src-1", "limited", failure_rate_7d=0.9))
+        self.assertEqual(manual.new_status, "manual_only")
+
+        blocked = self.checker.decide_status(SourceHealthInput("src-1", "approved", robots_disallows=True))
+        self.assertEqual(blocked.new_status, "blocked")
 
 
 class TestLocationScopeDecider(unittest.TestCase):
