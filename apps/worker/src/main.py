@@ -30,6 +30,9 @@ class CommandRequest(BaseModel):
     job_id: str
     message: str
     mock_mode: bool = True
+    plan: Optional[Dict[str, Any]] = None
+    workspaceProfile: Optional[Dict[str, Any]] = None
+    userProfile: Optional[Dict[str, Any]] = None
 
 @app.get("/")
 async def root():
@@ -39,9 +42,28 @@ async def root():
     except Exception as error:
         return JSONResponse({"status": "degraded", "redis": "unavailable", "error": str(error)}, status_code=503)
 
+@app.get("/health/live")
+async def health_live():
+    """Liveness check - verify FastAPI process is running."""
+    return {"status": "alive"}
+
+@app.get("/health/ready")
+async def health_ready():
+    """Readiness check - verify Redis connection and configuration."""
+    try:
+        redis_conn.ping()
+    except Exception as error:
+        raise HTTPException(status_code=503, detail=f"Redis is unavailable: {error}")
+    
+    if not config.INTERNAL_API_KEY or not config.WEBHOOK_SECRET:
+        raise HTTPException(status_code=503, detail="Required configuration keys are missing")
+        
+    return {"status": "ready"}
+
 class PlanRequest(BaseModel):
     message: str
     userProfile: Optional[Dict[str, Any]] = None
+    workspaceProfile: Optional[Dict[str, Any]] = None
 
 @app.post("/commands/plan")
 async def plan_command(request: PlanRequest):
@@ -51,7 +73,7 @@ async def plan_command(request: PlanRequest):
     """
     from src.agents.command_understanding_agent import CommandUnderstandingAgent
     understander = CommandUnderstandingAgent()
-    plan = understander.understand(request.message, request.userProfile)
+    plan = understander.understand(request.message, request.userProfile, request.workspaceProfile)
     return plan
 
 @app.post("/commands/execute")
@@ -66,7 +88,16 @@ async def execute_command(request: CommandRequest):
     # retry: 3 attempts
     job = job_queue.enqueue(
         run_command_workflow,
-        args=(request.workspace_id, request.command_id, request.message, request.job_id, request.mock_mode),
+        args=(
+            request.workspace_id,
+            request.command_id,
+            request.message,
+            request.job_id,
+            request.mock_mode,
+            request.plan,
+            request.workspaceProfile,
+            request.userProfile
+        ),
         job_id=request.job_id,
         job_timeout=1800,
         retry=Retry(max=3, interval=[10, 30, 60]),

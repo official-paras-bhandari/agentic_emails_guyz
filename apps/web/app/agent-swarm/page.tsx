@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Bot, Activity, ShieldCheck, Zap } from "lucide-react";
+import { Bot, Activity, Zap } from "lucide-react";
 
 export default function AgentSwarmPage() {
   return (
@@ -23,7 +23,7 @@ export default function AgentSwarmPage() {
         <AgentCard name="Scraper-B" type="ScrapeGraphAI" status="active" />
         <AgentCard name="Enricher-01" type="Lead Enrichment" status="idle" />
         <AgentCard name="Writer-01" type="Email Generation" status="idle" />
-        <AgentCard name="Safety-01" type="Compliance Guard" status="locked" />
+        <AgentCard name="Safety-01" type="Policy Guard" status="locked" />
       </div>
     </div>
   );

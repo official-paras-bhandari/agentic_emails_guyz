@@ -5,6 +5,7 @@ const repositoryRoot = path.resolve(process.cwd(), "../..");
 
 const nextConfig: NextConfig = {
   outputFileTracingRoot: repositoryRoot,
+  allowedDevOrigins: ['localhost', '127.0.0.1'],
   turbopack: {
     root: repositoryRoot,
   },

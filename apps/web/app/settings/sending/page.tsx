@@ -116,7 +116,7 @@ function SendingSettingsContent() {
           </div>
 
           <p className="text-xs text-zinc-500 leading-relaxed font-medium">
-            The maximum number of emails sent across all campaigns in this workspace per 24-hour cycle. Ensures compliance with Gmail standard limits.
+            The maximum number of emails sent across all campaigns in this workspace per 24-hour cycle.
           </p>
         </div>
 

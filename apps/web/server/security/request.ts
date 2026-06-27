@@ -1,7 +1,14 @@
 import crypto from 'crypto';
 import { NextRequest } from 'next/server';
+import { controlPrisma, getTenantPrismaForTenant, tenantPrismaStorage } from '@packages/db';
 
-type SessionPayload = { workspaceId: string; userId?: string; username?: string; exp: number };
+export type SessionPayload = {
+  tenantId: string;
+  workspaceId: string;
+  userId?: string;
+  username?: string;
+  exp: number;
+};
 
 function authSecret() {
   const secret = process.env.INTERNAL_AUTH_SECRET;
@@ -12,12 +19,14 @@ function authSecret() {
 }
 
 export function createSessionToken(
+  tenantId: string,
   workspaceId: string,
   ttlSeconds = 12 * 60 * 60,
   user?: { userId?: string; username?: string }
 ) {
   const encoded = Buffer.from(
     JSON.stringify({
+      tenantId,
       workspaceId,
       userId: user?.userId,
       username: user?.username,
@@ -37,10 +46,79 @@ export function readSignedWorkspaceToken(token?: string): SessionPayload | null 
   if (actual.length !== expected.length || !crypto.timingSafeEqual(actual, expected)) return null;
   try {
     const payload = JSON.parse(Buffer.from(encoded, 'base64url').toString()) as SessionPayload;
-    return payload.exp > Date.now() && payload.workspaceId ? payload : null;
+    return payload.exp > Date.now() && payload.workspaceId && payload.tenantId ? payload : null;
   } catch {
     return null;
   }
+}
+
+export async function getTenantPrismaAndWorkspace(
+  req: NextRequest,
+  requestedWorkspaceId?: string | null
+) {
+  const configuredWorkspace = process.env.INTERNAL_WORKSPACE_ID;
+  const apiKey = req.headers.get('x-internal-api-key');
+  const bearer = req.headers.get('authorization')?.replace(/^Bearer\s+/i, '');
+  const validApiKey = process.env.INTERNAL_API_KEY && (apiKey === process.env.INTERNAL_API_KEY || bearer === process.env.INTERNAL_API_KEY);
+  const session = readSignedWorkspaceToken(req.cookies.get('agentic_session')?.value);
+
+  if (!validApiKey && !session) {
+    throw new Error('UNAUTHORIZED');
+  }
+
+  let workspaceId: string;
+  let tenantId: string;
+
+  if (session) {
+    workspaceId = session.workspaceId;
+    tenantId = session.tenantId;
+
+    // Check if onboarding is completed, unless we are on the onboarding API endpoint
+    const pathname = req.nextUrl.pathname;
+    if (!pathname.startsWith('/api/user/onboarding') && !pathname.startsWith('/api/auth/logout')) {
+      const user = await controlPrisma.user.findUnique({
+        where: { id: session.userId },
+        select: { onboardingCompleted: true },
+      });
+      if (user && !user.onboardingCompleted) {
+        throw new Error('ONBOARDING_REQUIRED');
+      }
+    }
+  } else {
+    // API key auth (internal worker calls)
+    const wsId = requestedWorkspaceId || configuredWorkspace;
+    if (!wsId) throw new Error('WORKSPACE_REQUIRED');
+    
+    // Resolve tenantId from the Control DB
+    const ws = await controlPrisma.workspace.findUnique({
+      where: { id: wsId },
+      select: { tenantId: true },
+    });
+    if (!ws || !ws.tenantId) {
+      throw new Error('WORKSPACE_REQUIRED');
+    }
+    workspaceId = wsId;
+    tenantId = ws.tenantId;
+  }
+
+  if (requestedWorkspaceId && workspaceId !== requestedWorkspaceId) {
+    throw new Error('FORBIDDEN');
+  }
+
+  const tenantPrisma = await getTenantPrismaForTenant(tenantId);
+  return { prisma: tenantPrisma, workspaceId, tenantId, userId: session?.userId };
+}
+
+/**
+ * Runs a NextJS request handler scoped to the correct tenant Prisma instance.
+ */
+export async function withTenantContext<T>(
+  req: NextRequest,
+  requestedWorkspaceId: string | null,
+  fn: (ctx: { prisma: any; workspaceId: string; tenantId: string; userId?: string }) => Promise<T>
+): Promise<T> {
+  const ctx = await getTenantPrismaAndWorkspace(req, requestedWorkspaceId);
+  return tenantPrismaStorage.run(ctx.prisma, () => fn(ctx));
 }
 
 export function requireWorkspace(req: NextRequest, requestedWorkspaceId?: string | null) {
@@ -73,6 +151,7 @@ export function readSessionUserId(req: NextRequest) {
 export function securityErrorStatus(error: unknown) {
   const message = error instanceof Error ? error.message : '';
   if (message === 'UNAUTHORIZED') return 401;
+  if (message === 'ONBOARDING_REQUIRED') return 403;
   if (message === 'FORBIDDEN') return 403;
   if (message === 'WORKSPACE_REQUIRED') return 400;
   return 500;

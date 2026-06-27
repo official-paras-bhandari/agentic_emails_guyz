@@ -22,7 +22,14 @@ export class JobService {
     });
   }
 
-  async startWorkerJob(job: any, prompt: string, userId?: string) {
+  async startWorkerJob(
+    job: any,
+    prompt: string,
+    userId?: string,
+    plan?: any,
+    workspaceProfile?: any,
+    userProfile?: any
+  ) {
     const workerUrl = process.env.WORKER_URL || 'http://localhost:8000';
     const payload = {
       command_id: job.commandId,
@@ -30,7 +37,10 @@ export class JobService {
       user_id: userId,
       job_id: job.id,
       message: prompt,
-      mock_mode: process.env.MOCK_MODE === 'true'
+      mock_mode: process.env.MOCK_MODE === 'true',
+      plan,
+      workspaceProfile,
+      userProfile,
     };
 
     const response = await fetch(`${workerUrl}/commands/execute`, {

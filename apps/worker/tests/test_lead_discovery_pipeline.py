@@ -8,6 +8,10 @@ import time
 import unittest
 from unittest.mock import patch, MagicMock
 
+os.environ.setdefault("WEBHOOK_SECRET", "unit-test-webhook-secret")
+os.environ.setdefault("OPENAI_API_KEY", "unit-test-openai-key")
+os.environ.setdefault("MOCK_MODE", "false")
+
 # Ensure src is on path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
@@ -16,7 +20,9 @@ from services.query_planner_service import QueryPlannerService
 from services.query_rate_limiter import QueryRateLimiter
 from services.url_classifier_service import URLClassifierService
 from services.cheap_contact_extractor import CheapContactExtractor
+from services.scrapegraph_fallback_extractor import ScrapeGraphFallbackExtractor
 from services.lead_quality_gate import LeadQualityGate
+from services.normalization import normalize_business_name
 
 
 class TestLocationExpansionService(unittest.TestCase):
@@ -263,9 +269,74 @@ class TestCheapContactExtractor(unittest.TestCase):
         self.assertGreater(result["confidence_score"], 0.85)
 
 
+class TestScrapeGraphFallbackExtractor(unittest.TestCase):
+    def setUp(self):
+        self.extractor = ScrapeGraphFallbackExtractor()
+
+    def test_does_not_trigger_for_strong_cheap_result(self):
+        cheap = {
+            "emails": ["hello@salon.com.au"],
+            "business_name": "Sydney Hair Co",
+            "confidence_score": 0.9,
+        }
+        self.assertFalse(self.extractor.should_fallback(cheap))
+
+    def test_triggers_for_weak_cheap_result(self):
+        self.assertTrue(self.extractor.should_fallback({"emails": [], "business_name": "Sydney Hair Co", "confidence_score": 0.9}))
+        self.assertTrue(self.extractor.should_fallback({"emails": ["hello@salon.com.au"], "business_name": None, "confidence_score": 0.9}))
+        self.assertTrue(self.extractor.should_fallback({"emails": ["hello@salon.com.au"], "business_name": "Sydney Hair Co", "confidence_score": 0.4}))
+
+    def test_accepts_visible_evidence_based_result(self):
+        pages = {
+            "contact": """
+                <html><body>
+                <h1>Sydney Hair Co</h1>
+                <p>Email hello@sydneyhairco.com.au or call (02) 9000 1234.</p>
+                <p>Located in Bondi. Services: haircuts and colour.</p>
+                </body></html>
+            """
+        }
+        with patch.object(self.extractor, "_run_scrapegraphai", return_value={
+            "businessName": "Sydney Hair Co",
+            "email": "hello@sydneyhairco.com.au",
+            "phone": "(02) 9000 1234",
+            "website": "https://sydneyhairco.com.au",
+            "suburb": "Bondi",
+            "services": ["haircuts", "colour"],
+            "confidence": 0.91,
+            "evidence": ["Email hello@sydneyhairco.com.au or call (02) 9000 1234"],
+        }):
+            result = self.extractor.extract(pages, "https://sydneyhairco.com.au", "salon", "Bondi", "Australia")
+
+        self.assertEqual(result["status"], "ok")
+        self.assertEqual(result["email"], "hello@sydneyhairco.com.au")
+        self.assertEqual(result["businessName"], "Sydney Hair Co")
+        self.assertEqual(result["suburb"], "Bondi")
+        self.assertIn("haircuts", result["services"])
+        self.assertTrue(result["evidence"])
+
+    def test_rejects_hallucinated_fields_without_visible_support(self):
+        source = "Sydney Hair Co is a salon in Bondi. Call (02) 9000 1234."
+        result = self.extractor._validate({
+            "businessName": "Sydney Hair Co",
+            "email": "owner@invented.com",
+            "phone": "(02) 9000 1234",
+            "website": "https://sydneyhairco.com.au",
+            "suburb": "Parramatta",
+            "services": ["laser tattoo removal"],
+            "confidence": 0.9,
+            "evidence": ["Call (02) 9000 1234"],
+        }, source, "https://sydneyhairco.com.au")
+
+        self.assertEqual(result["email"], None)
+        self.assertEqual(result["suburb"], None)
+        self.assertEqual(result["services"], [])
+
+
 class TestLeadQualityGate(unittest.TestCase):
     def setUp(self):
         self.gate = LeadQualityGate()
+        self.gate._check_mx = MagicMock(return_value=True)
 
     def test_passes_valid_lead(self):
         result = self.gate.evaluate(
@@ -283,6 +354,7 @@ class TestLeadQualityGate(unittest.TestCase):
         self.assertTrue(result["email_valid"])
         self.assertTrue(result["industry_match"])
         self.assertTrue(result["location_match"])
+        self.assertEqual(result["location_status"], "weak")
         self.assertGreater(result["icp_score"], 0.7)
 
     def test_blocks_disposable_email(self):
@@ -350,6 +422,39 @@ class TestLeadQualityGate(unittest.TestCase):
         )
         self.assertGreater(high["icp_score"], low["icp_score"])
 
+    def test_blocks_explicit_location_mismatch(self):
+        result = self.gate.evaluate(
+            email="owner@salon.com.au",
+            business_name="Salon Name",
+            website="https://salon.com.au",
+            phone="(02) 9000 1234",
+            suburb="Liverpool",
+            industry="salon",
+            target_location="Parramatta",
+            services="Full service salon",
+            confidence_score=0.9,
+        )
+        self.assertFalse(result["passed"])
+        self.assertIn("location_mismatch", result["blocks"])
+        self.assertEqual(result["location_status"], "mismatch")
+        self.assertLess(result["location_confidence"], 0.5)
+
+    def test_allows_broad_city_with_weaker_proof(self):
+        result = self.gate.evaluate(
+            email="owner@salon.com.au",
+            business_name="Salon Name",
+            website="https://salon.com.au",
+            phone="(02) 9000 1234",
+            suburb="Bondi",
+            industry="salon",
+            target_location="Sydney",
+            services="Full service salon",
+            confidence_score=0.9,
+        )
+        self.assertTrue(result["passed"])
+        self.assertEqual(result["location_status"], "weak")
+        self.assertIn("location_needs_review", result["flags"])
+
 
 class TestSearchResultNormalizer(unittest.TestCase):
     def test_normalizes_url(self):
@@ -357,6 +462,17 @@ class TestSearchResultNormalizer(unittest.TestCase):
         url = "https://WWW.BellaHairStudio.com.au/contact/?utm_source=fb&fbclid=123#about"
         normalized = SearchResultNormalizer.normalize(url)
         self.assertEqual(normalized, "https://www.bellahairstudio.com.au/contact")
+
+
+class TestBusinessNameNormalizer(unittest.TestCase):
+    def test_strips_legal_suffixes_deterministically(self):
+        self.assertEqual(normalize_business_name("Royal Cuts Barber Pty Ltd"), "royal cuts barber")
+        self.assertEqual(normalize_business_name("Royal Cuts Barber, Pty. Ltd."), "royal cuts barber")
+        self.assertEqual(normalize_business_name("ROYAL CUTS BARBER & CO"), "royal cuts barber")
+
+    def test_keeps_industry_words(self):
+        self.assertEqual(normalize_business_name("Royal Cuts Barber"), "royal cuts barber")
+        self.assertEqual(normalize_business_name("The Dental Studio LLC"), "dental studio")
 
 
 class TestLocationScopeDecider(unittest.TestCase):
@@ -409,6 +525,100 @@ class TestLeadQualityScorerAndOverrides(unittest.TestCase):
             extraction_method="scrapegraph_fallback"
         )
         self.assertEqual(result["tier"], "B")
+
+    def test_scrapegraphai_override_caps_at_tier_b(self):
+        result = self.gate.evaluate(
+            email="owner@salon.com.au",
+            business_name="Super Salon",
+            website="https://salon.com.au",
+            phone="0290001234",
+            suburb="Bondi",
+            industry="salon",
+            target_location="Sydney",
+            source_type="direct_website",
+            extraction_method="scrapegraphai"
+        )
+        self.assertEqual(result["tier"], "B")
+
+
+class TestLeadDiscoveryPipelineMetadata(unittest.TestCase):
+    def test_save_lead_receives_scrapegraphai_evidence_metadata(self):
+        from services.lead_discovery_pipeline import LeadDiscoveryPipeline
+
+        saved = []
+        pipeline = LeadDiscoveryPipeline(
+            job_id="job-1",
+            workspace_id="ws-1",
+            emit_event=lambda **kwargs: None,
+            save_lead=lambda **kwargs: saved.append(kwargs),
+            check_cancelled=lambda: False,
+            prompt="Find salons in Bondi",
+        )
+        pipeline.location_raw = "Bondi"
+        pipeline.quality_gate._check_mx = MagicMock(return_value=True)
+
+        pipeline._process_extracted_data(
+            target={"url": "https://sydneyhairco.com.au", "source_type": "direct_website", "source_url": "https://sydneyhairco.com.au"},
+            emails=["hello@sydneyhairco.com.au"],
+            phones=["(02) 9000 1234"],
+            biz_name="Sydney Hair Co",
+            address="Bondi NSW",
+            industry="salon",
+            extraction_method="scrapegraphai",
+            confidence_score=0.91,
+            evidence=["Email hello@sydneyhairco.com.au"],
+            services=["haircuts"],
+        )
+
+        self.assertEqual(len(saved), 1)
+        self.assertEqual(saved[0]["extraction_method"], "scrapegraphai")
+        self.assertEqual(saved[0]["evidence"], ["Email hello@sydneyhairco.com.au"])
+        self.assertEqual(saved[0]["services"], ["haircuts"])
+        self.assertEqual(saved[0]["confidence_score"], 0.91)
+
+    def test_dedupe_uses_business_name_normalizer(self):
+        from services.lead_discovery_pipeline import LeadDiscoveryPipeline
+
+        pipeline = LeadDiscoveryPipeline(
+            job_id="job-1",
+            workspace_id="ws-1",
+            emit_event=lambda **kwargs: None,
+            save_lead=lambda **kwargs: None,
+            check_cancelled=lambda: False,
+            prompt="Find barbers in Bondi",
+        )
+        pipeline.discovered_names_suburbs[("royal cuts barber", "bondi")] = "tier_c"
+
+        duplicate = pipeline._check_and_merge_duplicate(
+            email=None,
+            website=None,
+            phone=None,
+            name="Royal Cuts Barber Pty. Ltd.",
+            suburb="Bondi",
+            address=None,
+            source_url="https://directory.example/royal-cuts",
+            source_type="directory_listing",
+        )
+
+        self.assertTrue(duplicate)
+
+    def test_unknown_location_queries_include_country_fallback(self):
+        from services.lead_discovery_pipeline import LeadDiscoveryPipeline
+
+        pipeline = LeadDiscoveryPipeline(
+            job_id="job-1",
+            workspace_id="ws-1",
+            emit_event=lambda **kwargs: None,
+            save_lead=lambda **kwargs: None,
+            check_cancelled=lambda: False,
+            prompt="Find dentists in Pokhara",
+        )
+        pipeline.city_data = {"city": "Pokhara", "country": None}
+        pipeline.country_raw = "Nepal"
+        pipeline._generate_queries_for_locations("dentists", ["Pokhara"])
+
+        all_queries = " ".join(pipeline.search_query_pool).lower()
+        self.assertIn("pokhara, nepal", all_queries)
 
 
 if __name__ == "__main__":

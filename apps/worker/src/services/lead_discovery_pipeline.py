@@ -9,7 +9,6 @@ from typing import Any, Callable, Dict, List, Optional
 from urllib.parse import urlparse
 import requests
 from difflib import SequenceMatcher
-from bs4 import BeautifulSoup
 
 from src.services.location_expansion_service import location_expander, location_scope_decider
 from src.services.query_planner_service import QueryPlannerService
@@ -18,9 +17,11 @@ from src.services.search_result_normalizer import SearchResultNormalizer
 from src.services.url_classifier_service import URLClassifierService
 from src.services.website_cache_service import WebsiteCacheService, CacheEntry
 from src.services.cheap_contact_extractor import CheapContactExtractor
+from src.services.scrapegraph_fallback_extractor import ScrapeGraphFallbackExtractor
 from src.services.lead_quality_gate import LeadQualityGate
 from src.services.browser_pool import browser_pool
 from src.services.directory_crawler import DirectoryCrawler
+from src.services.normalization import normalize_business_name
 from src.config import config
 
 class LeadDiscoveryPipeline:
@@ -49,8 +50,10 @@ class LeadDiscoveryPipeline:
         self.url_classifier = URLClassifierService()
         self.website_cache = WebsiteCacheService()
         self.contact_extractor = CheapContactExtractor()
+        self.fallback_extractor = ScrapeGraphFallbackExtractor()
         self.quality_gate = LeadQualityGate()
         self.directory_crawler = DirectoryCrawler(browser_pool, self._emit_internal_event)
+        self.max_llm_fallback_calls = config.SCRAPEGRAPH_FALLBACK_MAX_CALLS
 
         # Queue state
         self.business_queue: List[Dict[str, Any]] = []
@@ -69,6 +72,7 @@ class LeadDiscoveryPipeline:
         # Location & query expansion state
         self.scope = "exact_suburb"
         self.location_raw = ""
+        self.country_raw = None
         self.city_data = {}
         self.active_locations = []
         self.pending_locations_expansion = []
@@ -103,50 +107,68 @@ class LeadDiscoveryPipeline:
             "cache_misses": 0
         }
 
-    def run(self, industry: str, location: str, quantity: int = 10) -> Dict[str, Any]:
+    def run(self, industry: str, location: str, quantity: int = 10, country: Optional[str] = None) -> Dict[str, Any]:
         """Run the full adaptive orchestrator loop (Section 4.1)."""
         self.metrics["target_quantity"] = quantity
         self.metrics["email_deficit"] = quantity
-        self.location_raw = location
+        self.country_raw = country
+        self.location_raw = self._format_location(location, country)
 
         self.emit_event(
             job_id=self.job_id, step="searching", status="running",
-            message=f"Starting lead discovery: {industry} in {location} (target: {quantity})",
+            message=f"Starting lead discovery: {industry} in {self.location_raw} (target: {quantity})",
         )
 
         # ── Step 1: Decide Scope & Expand Location ──────────────────────
-        self.scope = location_scope_decider.decide(self.prompt, location)
         self.city_data = self.location_expander.expand(location)
-        self.emit_event(
-            job_id=self.job_id, step="location_expansion", status="success",
-            message=f"Location scope classified as '{self.scope}' for raw target: '{location}'",
-            scope=self.scope
-        )
+        is_structured = self.city_data.get("structured", False)
 
-        # Configure automatic vs requested expansion targets (Section 9)
-        if self.scope == "exact_suburb":
+        if not is_structured:
+            self.scope = "generic"
             self.active_locations = [location]
-            # Nearby suburbs are stored but not searched without approval (Section 9.1)
-            city_suburbs = self.location_expander.get_proximity_groups(location, self.city_data)
-            self.pending_locations_expansion = [sub for group in city_suburbs for sub in group]
-        elif self.scope == "nearby":
-            self.active_locations = [location]
-            # Proximity-ordered list to expand automatically (Section 9.2)
-            city_suburbs = self.location_expander.get_proximity_groups(location, self.city_data)
-            self.pending_locations_expansion = [sub for group in city_suburbs for sub in group]
-        elif self.scope == "metro":
-            # Expand suburbs automatically from start (Section 9.3)
-            suburbs = self.city_data.get("suburbs", [])
-            if location in suburbs:
-                self.active_locations = [location] + [s for s in suburbs if s != location][:5]
-                self.pending_locations_expansion = [s for s in suburbs if s not in self.active_locations]
-            else:
-                self.active_locations = suburbs[:6] if suburbs else [location]
-                self.pending_locations_expansion = suburbs[6:] if suburbs else []
-        elif self.scope == "state":
-            # Search major city centers of state
-            self.active_locations = [location]
-            self.pending_locations_expansion = ["Sydney CBD", "Melbourne CBD", "Brisbane CBD"]
+            self.pending_locations_expansion = []
+            
+            # Formulate the query for fallback log
+            query_loc = f"{location}, {country}" if country and str(country).lower() not in str(location).lower() else location
+            fallback_query = f"{industry} in {query_loc}"
+            
+            self.emit_event(
+                job_id=self.job_id, step="location_expansion", status="info",
+                message=f"Structured location expansion fallback: no local database match for '{location}'. Falling back to generic web search using '{fallback_query}'.",
+                scope=self.scope
+            )
+        else:
+            self.scope = location_scope_decider.decide(self.prompt, location)
+            self.emit_event(
+                job_id=self.job_id, step="location_expansion", status="success",
+                message=f"Location scope classified as '{self.scope}' for raw target: '{location}'",
+                scope=self.scope
+            )
+
+            # Configure automatic vs requested expansion targets (Section 9)
+            if self.scope == "exact_suburb":
+                self.active_locations = [location]
+                # Nearby suburbs are stored but not searched without approval (Section 9.1)
+                city_suburbs = self.location_expander.get_proximity_groups(location, self.city_data)
+                self.pending_locations_expansion = [sub for group in city_suburbs for sub in group]
+            elif self.scope == "nearby":
+                self.active_locations = [location]
+                # Proximity-ordered list to expand automatically (Section 9.2)
+                city_suburbs = self.location_expander.get_proximity_groups(location, self.city_data)
+                self.pending_locations_expansion = [sub for group in city_suburbs for sub in group]
+            elif self.scope == "metro":
+                # Expand suburbs automatically from start (Section 9.3)
+                suburbs = self.city_data.get("suburbs", [])
+                if location in suburbs:
+                    self.active_locations = [location] + [s for s in suburbs if s != location][:5]
+                    self.pending_locations_expansion = [s for s in suburbs if s not in self.active_locations]
+                else:
+                    self.active_locations = suburbs[:6] if suburbs else [location]
+                    self.pending_locations_expansion = suburbs[6:] if suburbs else []
+            elif self.scope == "state":
+                # Search major city centers of state
+                self.active_locations = [location]
+                self.pending_locations_expansion = ["Sydney CBD", "Melbourne CBD", "Brisbane CBD"]
 
         # Generate initial query pool
         self._generate_queries_for_locations(industry, self.active_locations)
@@ -225,13 +247,14 @@ class LeadDiscoveryPipeline:
     def _generate_queries_for_locations(self, industry: str, locations: List[str]):
         """Generate targeted search queries for a list of locations."""
         for loc in locations:
+            target = self._format_location(loc, self.country_raw) if self.country_raw and not self.city_data.get("country") else loc
             mock_expanded = {
-                "city": self.city_data.get("city", loc),
+                "city": self.city_data.get("city", target),
                 "state": self.city_data.get("state"),
-                "country": self.city_data.get("country"),
-                "suburbs": [loc],
+                "country": self.city_data.get("country") or self.country_raw,
+                "suburbs": [target],
                 "keywords": [],
-                "search_targets": [loc]
+                "search_targets": [target]
             }
             plan = self.query_planner.plan(industry, mock_expanded, quantity=self.metrics["target_quantity"])
             self.search_query_pool.extend(plan["queries"])
@@ -282,7 +305,10 @@ class LeadDiscoveryPipeline:
                         biz_name=cached.business_name or target.get("business_name"),
                         address=target.get("address"),
                         industry=industry,
-                        extraction_method="cache"
+                        extraction_method="cache",
+                        confidence_score=cached.confidence_score or 0.0,
+                        evidence=[],
+                        services=None,
                     )
                     continue
 
@@ -290,7 +316,11 @@ class LeadDiscoveryPipeline:
             self.metrics["cache_misses"] += 1
             self.metrics["business_websites_crawled"] += 1
 
-            pages_content = browser_pool.crawl_domain(url)
+            pages_content = browser_pool.crawl_domain(
+                url,
+                user_id=self.workspace_id,
+                job_id=self.job_id,
+            )
             if not pages_content:
                 continue
 
@@ -301,6 +331,9 @@ class LeadDiscoveryPipeline:
             phones = result.get("phones", [])
             biz_name = result.get("business_name") or target.get("business_name")
             extraction_method = "cheap_extractor"
+            confidence_score = float(result.get("confidence_score") or 0.0)
+            evidence: List[str] = []
+            services = None
 
             # Cache the new result
             cache_entry = CacheEntry(
@@ -318,17 +351,50 @@ class LeadDiscoveryPipeline:
             )
             self.website_cache.put(cache_entry)
 
-            # 2. Fallback to ScrapeGraphAI if cheap extractor fails (Section 18)
-            if not emails:
+            # 2. Fallback to ScrapeGraphAI if deterministic extraction is weak.
+            if (
+                self.fallback_extractor.should_fallback(result)
+                and self.metrics["llm_fallback_calls"] < self.max_llm_fallback_calls
+            ):
                 self.metrics["llm_fallback_calls"] += 1
-                sg_result = self._run_scrapegraph_fallback(pages_content, url)
-                if sg_result.get("email"):
-                    emails = [sg_result["email"]]
-                    extraction_method = "scrapegraph_fallback"
-                    if sg_result.get("business_name"):
-                        biz_name = sg_result["business_name"]
+                sg_result = self._run_scrapegraph_fallback(
+                    pages_content=pages_content,
+                    url=url,
+                    industry=industry,
+                    target_location=self.location_raw,
+                    country=self.city_data.get("country"),
+                )
+                if sg_result.get("status") == "ok":
+                    if sg_result.get("email"):
+                        emails = [sg_result["email"]]
+                    if sg_result.get("businessName"):
+                        biz_name = sg_result["businessName"]
                     if sg_result.get("phone"):
                         phones = [sg_result["phone"]]
+                    if sg_result.get("suburb"):
+                        target["suburb"] = sg_result["suburb"]
+                    services = sg_result.get("services") or None
+                    evidence = sg_result.get("evidence") or []
+                    confidence_score = max(confidence_score, float(sg_result.get("confidence") or 0.0))
+                    extraction_method = "scrapegraphai"
+                else:
+                    self.emit_event(
+                        job_id=self.job_id,
+                        step="llm_fallback",
+                        status="info",
+                        message=f"ScrapeGraphAI fallback skipped for {url}: {sg_result.get('reason', 'no_result')}",
+                        website_url=url,
+                        extraction_method="scrapegraphai",
+                    )
+            elif self.fallback_extractor.should_fallback(result):
+                self.emit_event(
+                    job_id=self.job_id,
+                    step="llm_fallback",
+                    status="info",
+                    message=f"ScrapeGraphAI fallback cap reached for job ({self.max_llm_fallback_calls}).",
+                    website_url=url,
+                    extraction_method="scrapegraphai",
+                )
 
             self._process_extracted_data(
                 target=target,
@@ -337,7 +403,10 @@ class LeadDiscoveryPipeline:
                 biz_name=biz_name,
                 address=target.get("address") or result.get("address"),
                 industry=industry,
-                extraction_method=extraction_method
+                extraction_method=extraction_method,
+                confidence_score=confidence_score,
+                evidence=evidence,
+                services=services,
             )
 
     def _process_directories_batch(self, industry: str, batch_size: int = 1):
@@ -408,7 +477,10 @@ class LeadDiscoveryPipeline:
                             biz_name=biz_name,
                             address=address,
                             industry=industry,
-                            extraction_method="directory_cheap"
+                            extraction_method="directory_cheap",
+                            confidence_score=0.6,
+                            evidence=[],
+                            services=None,
                         )
 
     def _execute_search_query_batch(self, batch_size: int = 5):
@@ -467,44 +539,27 @@ class LeadDiscoveryPipeline:
                     
                 # bad classification gets skipped completely (IgnoreQueue)
 
-    def _run_scrapegraph_fallback(self, domain_htmls: Dict[str, str], url: str) -> Dict[str, Any]:
-        """Extract email from clean combined page texts using ScrapeGraphAI fallback (Section 18)."""
-        combined_text = ""
-        for page_type, html in domain_htmls.items():
-            soup = BeautifulSoup(html, "html.parser")
-            for script in soup(["script", "style"]):
-                script.decompose()
-            text = soup.get_text(separator=" ", strip=True)
-            combined_text += f"\n--- PAGE: {page_type} ---\n{text[:2000]}\n"
-
+    def _run_scrapegraph_fallback(
+        self,
+        pages_content: Dict[str, str],
+        url: str,
+        industry: str,
+        target_location: str,
+        country: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """Run evidence-gated ScrapeGraphAI fallback extraction."""
         self.emit_event(
             job_id=self.job_id, step="llm_fallback", status="running",
             message=f"Calling ScrapeGraphAI fallback for website: {url}",
             website_url=url
         )
-
-        try:
-            from scrapegraphai.graphs import SmartScraperGraph
-            
-            graph_config = {
-                **config.get_llm_config(),
-                **config.get_embeddings_config(),
-                "headless": True,
-            }
-            
-            # Send cleaned text rather than raw HTML (Section 18)
-            result = SmartScraperGraph(
-                prompt="Find the public contact email of this business. Return: email, business_name, phone, address.",
-                source=combined_text[:10000],
-                config=graph_config
-            ).run() or {}
-            
-            if isinstance(result, dict):
-                return result
-        except Exception as e:
-            print(f"[LeadDiscoveryPipeline] ScrapeGraphAI fallback failed for {url}: {e}")
-            
-        return {}
+        return self.fallback_extractor.extract(
+            pages=pages_content,
+            url=url,
+            industry=industry,
+            target_location=target_location,
+            country=country,
+        )
 
     # ─── Data & Deduplication logic (Section 20 & 22) ───────────────────
 
@@ -516,7 +571,10 @@ class LeadDiscoveryPipeline:
         biz_name: Optional[str],
         address: Optional[str],
         industry: str,
-        extraction_method: str
+        extraction_method: str,
+        confidence_score: float = 0.0,
+        evidence: Optional[List[str]] = None,
+        services: Optional[List[str]] = None,
     ):
         """Validate, deduplicate, score, and tier leads before saving."""
         email = emails[0] if emails else None
@@ -532,8 +590,8 @@ class LeadDiscoveryPipeline:
             suburb=suburb,
             industry=industry,
             target_location=self.location_raw,
-            services=None,
-            confidence_score=0.9 if email else 0.5,
+            services=", ".join(services) if services else None,
+            confidence_score=confidence_score,
             source_type=target.get("source_type", "direct_website"),
             extraction_method=extraction_method,
             address=address
@@ -590,8 +648,19 @@ class LeadDiscoveryPipeline:
             website=target.get("url"),
             phone=phone,
             suburb=suburb,
+            address=address,
             quality_score=quality["quality_score"],
-            quality_flags=quality["flags"] + [f"tier_{tier}"]
+            quality_flags=quality["flags"] + [f"tier_{tier}"],
+            source_url=target.get("source_url") or target.get("url"),
+            page_type=target.get("source_type", "direct_website"),
+            extraction_method=extraction_method,
+            confidence_score=confidence_score,
+            evidence=evidence or [],
+            services=services or [],
+            location_status=quality.get("location_status"),
+            location_confidence=quality.get("location_confidence"),
+            location_evidence=quality.get("location_evidence", []),
+            detected_location=quality.get("detected_location"),
         )
 
         # Add to tracking index for future dedups
@@ -611,9 +680,13 @@ class LeadDiscoveryPipeline:
         if phone:
             self.discovered_phones[phone] = email or "tier_c"
         if biz_name and suburb:
-            self.discovered_names_suburbs[(biz_name.lower().strip(), suburb.lower().strip())] = email or "tier_c"
+            normalized_name = normalize_business_name(biz_name)
+            if normalized_name:
+                self.discovered_names_suburbs[(normalized_name, suburb.lower().strip())] = email or "tier_c"
         if biz_name and address:
-            self.discovered_names_addresses[(biz_name.lower().strip(), address.lower().strip())] = email or "tier_c"
+            normalized_name = normalize_business_name(biz_name)
+            if normalized_name:
+                self.discovered_names_addresses[(normalized_name, address.lower().strip())] = email or "tier_c"
 
         self.emit_event(
             job_id=self.job_id, step="lead_found", status="success",
@@ -624,7 +697,9 @@ class LeadDiscoveryPipeline:
             website_url=target.get("url"),
             suburb=suburb,
             tier=tier,
-            quality_score=quality["quality_score"]
+            quality_score=quality["quality_score"],
+            extraction_method=extraction_method,
+            confidence_score=confidence_score,
         )
 
     def _check_and_merge_duplicate(
@@ -654,7 +729,10 @@ class LeadDiscoveryPipeline:
 
         # 4. Secondary dedupe: name + location with fuzzy matching (85% threshold)
         if name:
-            name_norm = re.sub(r'[^a-z0-9]', '', name.lower())
+            normalized_name = normalize_business_name(name)
+            if not normalized_name:
+                return False
+            name_norm = re.sub(r'[^a-z0-9]', '', normalized_name)
             
             # Check name + suburb
             if suburb:
@@ -692,6 +770,14 @@ class LeadDiscoveryPipeline:
     def _emit_internal_event(self, **kwargs):
         """Interface helper for sub-services to raise webhook events."""
         self.emit_event(job_id=self.job_id, **kwargs)
+
+    @staticmethod
+    def _format_location(location: str, country: Optional[str] = None) -> str:
+        loc = (location or "").strip()
+        c = (country or "").strip()
+        if not c or not loc or c.lower() in loc.lower():
+            return loc
+        return f"{loc}, {c}"
 
     def _build_final_report(self, success: bool = True, rec_suburbs: List[str] = None) -> str:
         """Generate final Markdown result report (Section 26)."""

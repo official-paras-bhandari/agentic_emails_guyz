@@ -2,14 +2,15 @@ fastapi==0.110.0
 uvicorn==0.27.1
 pydantic==2.6.3
 python-dotenv==1.0.1
+setuptools<81
 openai>=1.24.0
 litellm==1.34.22
 scrapegraphai==1.5.0
 duckduckgo-search>=7.2.1
+ddgs>=9.14.4
 sqlalchemy==2.0.28
 psycopg2-binary==2.9.9
 requests==2.31.0
 redis==5.0.3
 rq==1.16.1
 dnspython>=2.6.1
-

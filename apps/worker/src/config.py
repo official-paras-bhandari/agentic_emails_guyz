@@ -32,6 +32,13 @@ class Config:
     SCRAPE_TIMEOUT_SECONDS = int(os.getenv("SCRAPE_TIMEOUT_SECONDS", "60"))
     SCRAPE_CONCURRENCY = int(os.getenv("SCRAPE_CONCURRENCY", "2"))
     SEARCH_ENGINE = os.getenv("SEARCH_ENGINE", "duckduckgo") # google, duckduckgo, bing
+    SCRAPEGRAPH_FALLBACK_MAX_CALLS = int(os.getenv("SCRAPEGRAPH_FALLBACK_MAX_CALLS", "5"))
+    MAX_CONCURRENT_RENDERS_GLOBAL = int(os.getenv("MAX_CONCURRENT_RENDERS_GLOBAL", "5"))
+    MAX_CONCURRENT_RENDERS_PER_DOMAIN = int(os.getenv("MAX_CONCURRENT_RENDERS_PER_DOMAIN", "1"))
+    MAX_CONCURRENT_RENDERS_PER_USER = int(os.getenv("MAX_CONCURRENT_RENDERS_PER_USER", "2"))
+    MAX_RENDER_TIME_SECONDS = int(os.getenv("MAX_RENDER_TIME_SECONDS", "30"))
+    MAX_RENDERED_PAGES_PER_JOB = int(os.getenv("MAX_RENDERED_PAGES_PER_JOB", "10"))
+    MAX_RENDERED_PAGES_PER_DOMAIN_PER_JOB = int(os.getenv("MAX_RENDERED_PAGES_PER_DOMAIN_PER_JOB", "3"))
     # Source strategy: duckduckgo | yellowpages | truelocal | google_maps
     SCRAPE_SOURCE = os.getenv("SCRAPE_SOURCE", "yellowpages")
     # Home country used as fallback when location can't be detected from query
@@ -46,6 +53,20 @@ class Config:
             raise ValueError("SCRAPE_CONCURRENCY must be between 1 and 10")
         if self.MAX_SITES_PER_JOB < 1 or self.MAX_SITES_PER_JOB > 100:
             raise ValueError("MAX_SITES_PER_JOB must be between 1 and 100")
+        if self.SCRAPEGRAPH_FALLBACK_MAX_CALLS < 0 or self.SCRAPEGRAPH_FALLBACK_MAX_CALLS > 50:
+            raise ValueError("SCRAPEGRAPH_FALLBACK_MAX_CALLS must be between 0 and 50")
+        if self.MAX_CONCURRENT_RENDERS_GLOBAL < 1:
+            raise ValueError("MAX_CONCURRENT_RENDERS_GLOBAL must be at least 1")
+        if self.MAX_CONCURRENT_RENDERS_PER_DOMAIN < 1:
+            raise ValueError("MAX_CONCURRENT_RENDERS_PER_DOMAIN must be at least 1")
+        if self.MAX_CONCURRENT_RENDERS_PER_USER < 1:
+            raise ValueError("MAX_CONCURRENT_RENDERS_PER_USER must be at least 1")
+        if self.MAX_RENDER_TIME_SECONDS < 1 or self.MAX_RENDER_TIME_SECONDS > 120:
+            raise ValueError("MAX_RENDER_TIME_SECONDS must be between 1 and 120")
+        if self.MAX_RENDERED_PAGES_PER_JOB < 1:
+            raise ValueError("MAX_RENDERED_PAGES_PER_JOB must be at least 1")
+        if self.MAX_RENDERED_PAGES_PER_DOMAIN_PER_JOB < 1:
+            raise ValueError("MAX_RENDERED_PAGES_PER_DOMAIN_PER_JOB must be at least 1")
 
     def get_llm_config(self) -> Dict[str, Any]:
         """Returns the configuration for ScrapeGraphAI and LiteLLM."""

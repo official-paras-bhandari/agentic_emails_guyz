@@ -7,11 +7,6 @@ from typing import Any
 
 import requests
 
-from src.agents.command_understanding_agent import CommandUnderstandingAgent
-from src.agents.scrapegraph_agent import ScrapeGraphAgent
-from src.agents.email_writer_agent import EmailWriterAgent
-from src.agents.followup_agent import FollowUpAgent
-from src.services.lead_discovery_pipeline import LeadDiscoveryPipeline
 from src.config import config
 
 
@@ -30,17 +25,32 @@ def is_job_cancelled(job_id: str, workspace_id: str) -> bool:
     return False
 
 
-def run_command_workflow(workspace_id: str, command_id: str | None, prompt: str, job_id: str, mock_mode: bool | None = None):
+def run_command_workflow(
+    workspace_id: str,
+    command_id: str | None,
+    prompt: str,
+    job_id: str,
+    mock_mode: bool | None = None,
+    plan: dict | None = None,
+    workspace_profile: dict | None = None,
+    user_profile: dict | None = None
+):
     if not all([workspace_id, prompt, job_id]):
         raise ValueError("workspace_id, prompt and job_id are required")
     worker_id = f"worker-{os.getpid()}"
+
+    def notify(event_type: str, data: dict):
+        if workspace_id and "workspace_id" not in data:
+            data["workspace_id"] = workspace_id
+        _notify_webhook(event_type, data)
+
     try:
-        _notify_webhook("job_started", {
+        notify("job_started", {
             "job_id": job_id, "workspace_id": workspace_id, "command_id": command_id,
             "worker_id": worker_id, "message": "Worker picked up the job",
         })
         if is_job_cancelled(job_id, workspace_id):
-            _notify_webhook("job_cancelled", {"job_id": job_id})
+            notify("job_cancelled", {"job_id": job_id})
             return
 
         # --- Internal intent fast path ---
@@ -61,14 +71,19 @@ def run_command_workflow(workspace_id: str, command_id: str | None, prompt: str,
         elif prompt.startswith("draft_emails"):
             internal_intent = "draft_emails"
 
-        if internal_intent:
+        if plan:
+            # We already have the planned parameters from Next.js planning step!
+            intent = plan.get("intent") or plan.get("command_type")
+            parameters = plan.get("parameters") or plan
+        elif internal_intent:
             intent = internal_intent
             parameters = internal_params
-            plan: dict[str, Any] = {"allowed": True, "intent": intent}
+            plan = {"allowed": True, "intent": intent}
         else:
             # --- Normal user-driven command path ---
-            _notify_webhook("step_running", {"job_id": job_id, "step": "understanding", "message": "Analyzing request"})
-            plan = CommandUnderstandingAgent().understand(prompt)
+            notify("step_running", {"job_id": job_id, "step": "understanding", "message": "Analyzing request"})
+            from src.agents.command_understanding_agent import CommandUnderstandingAgent
+            plan = CommandUnderstandingAgent().understand(prompt, user_profile, workspace_profile)
             if not plan.get("allowed", False):
                 raise ValueError("Command was rejected by the outreach domain guard")
 
@@ -78,31 +93,30 @@ def run_command_workflow(workspace_id: str, command_id: str | None, prompt: str,
             parameters = plan.get("parameters") or plan
 
         if is_job_cancelled(job_id, workspace_id):
-            _notify_webhook("job_cancelled", {"job_id": job_id})
+            notify("job_cancelled", {"job_id": job_id})
             return
 
-
         if intent == "export_leads":
-            _notify_webhook("export_requested", {
+            notify("export_requested", {
                 "job_id": job_id,
                 "workspace_id": workspace_id,
                 "message": "Export to Google Sheets requested"
             })
-            _notify_webhook("job_completed", {"job_id": job_id, "message": "Export job finished"})
+            notify("job_completed", {"job_id": job_id, "message": "Export job finished"})
             return
 
         if intent == "analyze_business":
             from src.services.business_analyzer import BusinessAnalyzer
             analyzer = BusinessAnalyzer(
                 job_id=job_id,
-                emit_event_fn=lambda event_type, data: _notify_webhook(event_type, {"job_id": job_id, "workspace_id": workspace_id, **data})
+                emit_event_fn=lambda event_type, data: notify(event_type, {"job_id": job_id, "workspace_id": workspace_id, **data})
             )
             campaign_id = parameters.get("campaign_id") or plan.get("campaign_id")
             website_url = parameters.get("businessWebsite") or plan.get("businessWebsite")
             if not campaign_id or not website_url:
                 raise ValueError("campaign_id and businessWebsite are required for business analysis")
             analyzer.analyze(campaign_id, website_url)
-            _notify_webhook("job_completed", {"job_id": job_id, "message": "Workflow completed"})
+            notify("job_completed", {"job_id": job_id, "message": "Workflow completed"})
             return
 
         if intent == "draft_followup":
@@ -114,7 +128,7 @@ def run_command_workflow(workspace_id: str, command_id: str | None, prompt: str,
             if not campaign_id or not lead_id:
                 raise ValueError("campaign_id and lead_id are required for draft_followup")
             _process_followup_task(workspace_id, campaign_id, lead_id, step_number, followup_task_id, past_emails, job_id)
-            _notify_webhook("job_completed", {"job_id": job_id, "message": f"Follow-up step {step_number} drafted"})
+            notify("job_completed", {"job_id": job_id, "message": f"Follow-up step {step_number} drafted"})
             return
 
         if intent == "draft_emails":
@@ -128,23 +142,28 @@ def run_command_workflow(workspace_id: str, command_id: str | None, prompt: str,
             if not campaign_id:
                 raise ValueError("campaign_id is required for email drafting")
             _draft_campaign_leads(workspace_id, campaign_id, job_id)
-            _notify_webhook("job_completed", {"job_id": job_id, "message": "Drafting job completed"})
+            notify("job_completed", {"job_id": job_id, "message": "Drafting job completed"})
             return
 
         industry = parameters.get("industry") or "businesses"
-        location = parameters.get("country") or parameters.get("location") or "Sydney"
+        location = parameters.get("location") or parameters.get("city") or parameters.get("region") or "Sydney"
+        country = parameters.get("country")
         requested = int(parameters.get("quantity") or 5)
         quantity = max(1, min(requested, config.MAX_SITES_PER_JOB))
-        query = f"{industry} in {location}"
-        _notify_webhook("step_running", {"job_id": job_id, "step": "searching", "message": f"Starting lead discovery for {query}"})
+        query_location = f"{location}, {country}" if country and str(country).lower() not in str(location).lower() else location
+        query = f"{industry} in {query_location}"
+        notify("step_running", {"job_id": job_id, "step": "searching", "message": f"Starting lead discovery for {query}"})
 
-        if config.MOCK_MODE:
+        use_mock = config.MOCK_MODE if mock_mode is None else mock_mode
+        if use_mock:
             # Keep old mock behaviour for testing
+            from src.agents.scrapegraph_agent import ScrapeGraphAgent
             ScrapeGraphAgent(mock_mode=True).run_integrated_scrape(
                 job_id, plan.get("goal", prompt), query, quantity, workspace_id,
             )
         else:
             # New regex-first pipeline
+            from src.services.lead_discovery_pipeline import LeadDiscoveryPipeline
             pipeline = LeadDiscoveryPipeline(
                 job_id=job_id,
                 workspace_id=workspace_id,
@@ -153,16 +172,16 @@ def run_command_workflow(workspace_id: str, command_id: str | None, prompt: str,
                 check_cancelled=lambda: is_job_cancelled(job_id, workspace_id),
                 prompt=prompt,
             )
-            pipeline.run(industry=industry, location=location, quantity=quantity)
+            pipeline.run(industry=industry, location=location, quantity=quantity, country=country)
 
         flags = plan.get("intent_flags") or {}
         if flags.get("drafting_requested") or "draft" in prompt.lower():
             _draft_job_leads(workspace_id, job_id)
 
         if is_job_cancelled(job_id, workspace_id):
-            _notify_webhook("job_cancelled", {"job_id": job_id})
+            notify("job_cancelled", {"job_id": job_id})
             return
-        _notify_webhook("job_completed", {"job_id": job_id, "message": "Workflow completed"})
+        notify("job_completed", {"job_id": job_id, "message": "Workflow completed"})
     except Exception as error:
         try:
             _notify_webhook("job_failed", {
@@ -178,6 +197,7 @@ def _draft_job_leads(workspace_id: str, job_id: str):
     response = requests.get(f"{base_url}/api/jobs/{job_id}", params={"workspaceId": workspace_id}, headers=_backend_headers(), timeout=15)
     response.raise_for_status()
     leads = response.json().get("leads", [])
+    from src.agents.email_writer_agent import EmailWriterAgent
     writer = EmailWriterAgent()
     from src.agents.lead_enrichment_agent import LeadEnrichmentAgent
     enrichment_agent = LeadEnrichmentAgent()
@@ -234,6 +254,7 @@ def _draft_campaign_leads(workspace_id: str, campaign_id: str, job_id: str):
     # Active leads in this campaign
     campaign_leads = campaign.get("campaignLeads", [])
     
+    from src.agents.email_writer_agent import EmailWriterAgent
     writer = EmailWriterAgent()
     from src.agents.lead_enrichment_agent import LeadEnrichmentAgent
     enrichment_agent = LeadEnrichmentAgent()
@@ -322,6 +343,7 @@ def _process_followup_task(workspace_id: str, campaign_id: str, lead_id: str, st
         "message": f"Writing follow-up step {step_number} for lead {lead_context.get('businessName') or lead_id}",
     })
 
+    from src.agents.followup_agent import FollowUpAgent
     agent = FollowUpAgent()
     result = agent.write_followup(
         workspace_id=workspace_id,
@@ -378,52 +400,67 @@ def _notify_webhook(event_type: str, data: dict):
 
 
 def report_rq_failure(job, connection, exc_type, exc_value, traceback):
+    workspace_id = job.args[0] if len(job.args) > 0 else None
     job_id = job.args[3] if len(job.args) > 3 else job.id
     try:
-        _notify_webhook("job_failed", {"job_id": job_id, "message": str(exc_value), "error_type": getattr(exc_type, "__name__", "WorkerFailure")})
+        payload = {"job_id": job_id, "message": str(exc_value), "error_type": getattr(exc_type, "__name__", "WorkerFailure")}
+        if workspace_id:
+            payload["workspace_id"] = workspace_id
+        _notify_webhook("job_failed", payload)
     except Exception as error:
         print(f"RQ failure callback could not notify backend: {error}")
 
 
 # ─── New pipeline helpers ──────────────────────────────────────────────
 
-def _emit_pipeline_event(job_id: str, step: str, status: str, message: str, **kwargs):
+def _emit_pipeline_event(job_id: str, step: str, status: str, message: str, workspace_id: str | None = None, **kwargs):
     """Emit an event from the new pipeline via webhook."""
-    _notify_webhook("agent_event", {
+    payload = {
         "job_id": job_id,
         "step": step,
         "status": status,
         "message": message,
         **kwargs,
-    })
+    }
+    if workspace_id:
+        payload["workspace_id"] = workspace_id
+    _notify_webhook("agent_event", payload)
 
 
 def _save_pipeline_lead(
     job_id: str,
     workspace_id: str,
-    email: str,
+    email: str | None,
     business_name: str | None = None,
     website: str | None = None,
     phone: str | None = None,
     suburb: str | None = None,
     quality_score: float = 0.0,
     quality_flags: list | None = None,
+    source_url: str | None = None,
+    page_type: str | None = None,
+    extraction_method: str | None = None,
+    confidence_score: float | None = None,
+    evidence: list | None = None,
+    services: list | None = None,
 ):
     """Save a lead discovered by the new pipeline via the backend webhook."""
-    # The backend's handleLeadFound webhook endpoint handles dedupe + policy + save.
-    # We emit a lead_found event which the existing webhook handler processes.
     _notify_webhook("lead_found", {
         "job_id": job_id,
+        "workspace_id": workspace_id,
         "email": email,
         "business_name": business_name,
         "website_url": website,
         "phone": phone,
         "suburb": suburb,
-        "source_url": website,
-        "page_type": "website",
-        "extraction_location": "regex",
-        "extracted_fields": ["email", "business_name", "phone", "suburb"],
+        "source_url": source_url or website,
+        "page_type": page_type or "website",
+        "extraction_location": extraction_method or "regex",
+        "extracted_fields": ["email", "business_name", "phone", "suburb", "services", "evidence"],
         "scraped_at": time.time(),
         "quality_score": quality_score,
         "quality_flags": quality_flags or [],
+        "confidence_score": confidence_score if confidence_score is not None else quality_score,
+        "evidence": evidence or [],
+        "services": services or [],
     })

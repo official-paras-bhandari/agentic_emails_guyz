@@ -53,7 +53,8 @@ class LocationExpansionService:
                 "country": str or None,
                 "suburbs": [str, ...],
                 "keywords": [str, ...],       # region-level keywords like "inner west"
-                "search_targets": [str, ...]  # suburbs + city + keywords combined
+                "search_targets": [str, ...], # suburbs + city + keywords combined
+                "structured": bool            # true if we loaded a static config file
             }
         """
         loc = location.strip()
@@ -67,6 +68,7 @@ class LocationExpansionService:
             city = city_data.get("city", loc)
             state = city_data.get("state")
             country = city_data.get("country", "Australia")
+            structured = True
         else:
             # No static file — fall back to the location itself
             suburbs = [loc]
@@ -74,6 +76,7 @@ class LocationExpansionService:
             city = loc
             state = None
             country = None
+            structured = False
 
         # Build search targets: each suburb, the city, and keyword phrases
         search_targets = []
@@ -99,6 +102,7 @@ class LocationExpansionService:
             "suburbs": suburbs,
             "keywords": keywords,
             "search_targets": unique_targets,
+            "structured": structured,
         }
 
     def _find_city_data(self, location: str) -> Optional[Dict[str, Any]]:

@@ -154,7 +154,7 @@ export function DashboardView() {
             <div className="space-y-4">
                <SafetyMetric label="Deduplication Engine" status="Optimal" score={98} />
                <SafetyMetric label="Gmail Warmup" status="Active" score={84} />
-               <SafetyMetric label="Compliance Guard" status="Locked" score={100} />
+               <SafetyMetric label="Policy Guard" status="Locked" score={100} />
                <SafetyMetric label="IP Reputation" status="Excellent" score={92} />
             </div>
           </div>

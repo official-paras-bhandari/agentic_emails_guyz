@@ -14,24 +14,29 @@ class CommandUnderstandingAgent:
     def _extract_explicit_country(self, prompt: str) -> str | None:
         p = prompt.lower()
         country_aliases = {
-            "usa": "US",
-            "us": "US",
-            "united states": "US",
-            "america": "US",
-            "uk": "UK",
-            "united kingdom": "UK",
-            "england": "UK",
-            "australia": "AU",
-            "au": "AU",
-            "nepal": "NP",
-            "np": "NP",
+            "usa": "United States",
+            "us": "United States",
+            "united states": "United States",
+            "america": "United States",
+            "uk": "United Kingdom",
+            "united kingdom": "United Kingdom",
+            "england": "United Kingdom",
+            "australia": "Australia",
+            "au": "Australia",
+            "nepal": "Nepal",
+            "np": "Nepal",
         }
-        for alias, code in country_aliases.items():
+        for alias, name in country_aliases.items():
             if re.search(rf"\b{re.escape(alias)}\b", p):
-                return code
+                return name
         return None
 
-    def understand(self, prompt: str, user_profile: Dict[str, Any] | None = None) -> Dict[str, Any]:
+    def understand(
+        self,
+        prompt: str,
+        user_profile: Dict[str, Any] | None = None,
+        workspace_profile: Dict[str, Any] | None = None
+    ) -> Dict[str, Any]:
         clean_prompt = prompt.strip()
         if clean_prompt.startswith('"') and clean_prompt.endswith('"'):
             clean_prompt = clean_prompt[1:-1].strip()
@@ -52,17 +57,26 @@ class CommandUnderstandingAgent:
         elif clean_prompt.lower().startswith("mission:"):
             clean_prompt = clean_prompt[len("mission:"):].strip()
 
-        explicit_country = self._extract_explicit_country(clean_prompt)
-        profile_country = (user_profile or {}).get("homeCountry")
-        country = explicit_country or (profile_country if isinstance(profile_country, str) and profile_country else None)
-
         if self.is_simulation:
-            return self.get_simulation_plan(clean_prompt, country=country)
+            return self.get_simulation_plan(clean_prompt, user_profile, workspace_profile)
             
-        system_prompt = """
+        system_prompt = f"""
 You are not a general assistant. You are an outreach automation agent for my own business. 
 Your only job is to convert outreach-related user messages into structured command plans. 
 If the message is not related to outreach, return intent = out_of_scope.
+
+LOCATION RESOLUTION PRECEDENCE RULES:
+You must resolve the target location (city/region/suburb) and country based on these precedence rules:
+1. Explicit location and/or country mentioned in the user prompt (e.g., "Find salons in Sydney, Australia" -> location="Sydney", country="Australia").
+2. If no location in prompt, use the workspace profile target market default city/region and default country.
+3. If still no location, use the user's home country.
+4. If none of these are available, you MUST reject the request (set "allowed": false, "intent": "out_of_scope") and ask the user to clarify their target location.
+
+IMPORTANT: Do not set location = country. Keep country and location (city/region/suburb) as separate fields in the parameters!
+
+CONTEXT PASSED:
+UserProfile: {json.dumps(user_profile or {})}
+WorkspaceProfile: {json.dumps(workspace_profile or {})}
 
 SPELLING & DICTATION CORRECTION:
 - Correct spelling mistakes, phonetic typos, and dictation errors in locations and industries.
@@ -87,24 +101,31 @@ BLOCKED DOMAINS:
 
 RESPONSE FORMAT (JSON):
 If allowed:
-{
+{{
   "allowed": true,
   "intent": "scrape_leads", // one of: scrape_leads, find_businesses, enrich_leads, draft_emails, rewrite_emails, verify_drafts, send_emails, run_followups, check_replies, unsubscribe_or_block, export_leads, show_status, show_campaigns, show_memory, show_audit
   "goal": "...",
   "industry": "...",
   "location": "...",
+  "country": "...",
   "quantity": 10,
   "requires_confirmation": true,
   "steps": [],
-  "safety_checks": []
-}
+  "safety_checks": [],
+  "parameters": {{
+    "industry": "...",
+    "location": "...",
+    "country": "...",
+    "quantity": 10
+  }}
+}}
 
-If blocked:
-{
+If blocked/clarification required:
+{{
   "allowed": false,
   "intent": "out_of_scope",
-  "message": "I’m focused on outreach tasks only. I can help you find leads, scrape public business contact info, write emails, manage follow-ups, check replies, and track campaigns."
-}
+  "message": "Please specify the location (city or region) where you want to find leads."
+}}
         """.strip()
 
         try:
@@ -117,17 +138,27 @@ If blocked:
                 response_format={"type": "json_object"}
             )
             result = json.loads(response.choices[0].message.content)
+            # Guarantee parameters exists
             result.setdefault("parameters", {})
-            if explicit_country:
-                result["parameters"]["country"] = explicit_country
-            elif country:
-                result["parameters"]["country"] = country
+            if "industry" in result and "industry" not in result["parameters"]:
+                result["parameters"]["industry"] = result["industry"]
+            if "location" in result and "location" not in result["parameters"]:
+                result["parameters"]["location"] = result["location"]
+            if "country" in result and "country" not in result["parameters"]:
+                result["parameters"]["country"] = result["country"]
+            if "quantity" in result and "quantity" not in result["parameters"]:
+                result["parameters"]["quantity"] = result["quantity"]
             return result
         except Exception as e:
-            print(f"Error in CommandUnderstandingAgent: {e}")
-            return self.get_simulation_plan(clean_prompt, country=country)
+            print(f"Error in CommandUnderstandingAgent LLM: {e}")
+            return self.get_simulation_plan(clean_prompt, user_profile, workspace_profile)
 
-    def get_simulation_plan(self, prompt: str, country: str | None = None) -> Dict[str, Any]:
+    def get_simulation_plan(
+        self,
+        prompt: str,
+        user_profile: Dict[str, Any] | None = None,
+        workspace_profile: Dict[str, Any] | None = None
+    ) -> Dict[str, Any]:
         p = prompt.lower()
         
         # Blocked domains check for simulation
@@ -150,39 +181,66 @@ If blocked:
                 industry = "salons"
             elif "plumber" in p:
                 industry = "plumbers"
-                
-            location_match = re.search(r"\bin\s+([a-z][a-z\s-]*)", p)
-            location = location_match.group(1).strip() if location_match else "Sydney"
-            
-            # Apply basic dictation corrections in simulation
-            loc_lower = location.lower()
-            if loc_lower in {"campuses", "campises", "campoise", "campes"}:
-                location = "Campsie"
-                if "salon" not in p and "plumber" not in p:
-                    industry = "businesses"
-            elif loc_lower == "vectoria":
-                location = "Victoria"
-            else:
-                location = location.title()
 
-            if "from campuses in" in p or "from campises in" in p or "from campoise in" in p:
-                location = "Campsie"
-                if "salon" not in p and "plumber" not in p:
-                    industry = "businesses"
+            # 1. Resolve explicit location/country from prompt
+            explicit_location = None
+            explicit_country = self._extract_explicit_country(prompt)
+            
+            location_match = re.search(r"\bin\s+([a-z][a-z\s,-]*)", p)
+            if location_match:
+                loc_cand = location_match.group(1).strip()
+                if "," in loc_cand:
+                    parts = loc_cand.split(",")
+                    explicit_location = parts[0].strip().title()
+                else:
+                    explicit_location = loc_cand.strip().title()
+
+            # Apply simulation spelling/dictation corrections
+            if explicit_location:
+                loc_lower = explicit_location.lower()
+                if loc_lower in {"campuses", "campises", "campoise", "campes"}:
+                    explicit_location = "Campsie"
+                elif loc_lower == "vectoria":
+                    explicit_location = "Victoria"
+                else:
+                    explicit_location = explicit_location.title()
+
+            # 2. Precedence logic resolution
+            resolved_location = None
+            resolved_country = None
+
+            if explicit_location:
+                resolved_location = explicit_location
+                resolved_country = explicit_country or (workspace_profile or {}).get("defaultCountry") or (user_profile or {}).get("homeCountry")
+            elif workspace_profile and (workspace_profile.get("defaultCity") or workspace_profile.get("defaultRegion")):
+                resolved_location = workspace_profile.get("defaultCity") or workspace_profile.get("defaultRegion")
+                resolved_country = workspace_profile.get("defaultCountry")
+            elif user_profile and user_profile.get("homeCountry"):
+                resolved_country = user_profile.get("homeCountry")
+                resolved_location = "Sydney" if resolved_country.lower() in {"au", "australia"} else "New York"
+
+            # If no location/country can be resolved, ask for clarification (blocked)
+            if not resolved_location:
+                return {
+                    "allowed": False,
+                    "intent": "out_of_scope",
+                    "message": "Please specify the location (city or region) where you want to find leads."
+                }
 
             return {
                 "allowed": True,
                 "intent": "scrape_leads",
                 "goal": f"Lead discovery for: {prompt}",
                 "industry": industry,
-                "location": location,
+                "location": resolved_location,
+                "country": resolved_country,
                 "quantity": quantity,
                 "requires_confirmation": True,
                 "parameters": {
                     "industry": industry,
-                    "location": location,
+                    "location": resolved_location,
+                    "country": resolved_country,
                     "quantity": quantity,
-                    **({"country": country} if country else {}),
                 },
                 "intent_flags": {
                     "drafting_requested": "draft" in p or "email" in p,
@@ -196,13 +254,13 @@ If blocked:
                     "Filter duplicates in local database"
                 ],
                 "safety_checks": [
-                    "Simulation mode fallback active" if self.is_simulation else "Production mode",
+                    "Simulation mode fallback active",
                     "Backend dedupe logic active",
                     "User approval required before next step"
                 ]
             }
         
-        # Check for other allowed intents in simulation
+        # Check other allowed intents in simulation
         allowed_keywords = {
             "draft_emails": ["draft", "write email"],
             "rewrite_emails": ["rewrite", "shorter", "longer", "tone", "make these"],

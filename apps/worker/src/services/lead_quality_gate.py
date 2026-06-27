@@ -25,7 +25,7 @@ class LeadQualityGate:
         services: Optional[str] = None,
         confidence_score: float = 0.0,
         source_type: str = "direct_website",  # direct_website, directory_discovered_website, directory_only
-        extraction_method: str = "cheap_extractor",  # cheap_extractor, scrapegraph_fallback
+        extraction_method: str = "cheap_extractor",  # cheap_extractor, scrapegraphai
         address: Optional[str] = None,
     ) -> Dict[str, Any]:
         """
@@ -69,9 +69,17 @@ class LeadQualityGate:
         if not industry_match:
             flags.append("industry_mismatch")
 
-        location_match = self._check_location_match(target_location, suburb, address, website)
-        if not location_match:
-            flags.append("location_mismatch")
+        location_result = self._evaluate_location_match(target_location, suburb, address, website)
+        location_match = location_result["match"]
+        location_status = location_result["status"]
+        location_confidence = location_result["confidence"]
+        location_evidence = location_result["evidence"]
+        detected_location = location_result["detected_location"]
+
+        if location_status == "mismatch":
+            blocks.append("location_mismatch")
+        elif location_status == "weak":
+            flags.append("location_needs_review")
 
         # ── 3. Quality Score & Tier Override (Section 22 & 22.1) ────────
         score = 0
@@ -108,7 +116,7 @@ class LeadQualityGate:
             score += 5
 
         # Extraction method modifier (-5)
-        if extraction_method == "scrapegraph_fallback":
+        if extraction_method in {"scrapegraph_fallback", "scrapegraphai"}:
             score -= 5
 
         # Clamp quality score between 0 and 100
@@ -129,7 +137,7 @@ class LeadQualityGate:
         # Apply Tier Source Override Rules (Section 22.1)
         if email:
             # Rule 3: ScrapeGraphAI-only email extraction -> max Tier B
-            if extraction_method == "scrapegraph_fallback":
+            if extraction_method in {"scrapegraph_fallback", "scrapegraphai"}:
                 tier = "B"
             
             # Rule 4: Directory-only email without official website visit -> max Tier B
@@ -169,6 +177,10 @@ class LeadQualityGate:
             "tier": tier,
             "flags": flags,
             "blocks": blocks,
+            "location_status": location_status,
+            "location_confidence": round(location_confidence, 2),
+            "location_evidence": location_evidence,
+            "detected_location": detected_location,
             "details": {
                 "email": email,
                 "business_name": business_name,
@@ -268,31 +280,81 @@ class LeadQualityGate:
         return True  # Lenient default
 
     @staticmethod
-    def _check_location_match(
+    def _evaluate_location_match(
         target_location: str,
         suburb: Optional[str],
         address: Optional[str],
         website: Optional[str],
-    ) -> bool:
-        """Check if the lead matches target location."""
+    ) -> Dict[str, Any]:
+        """Check if the lead matches target location with evidence-aware scoring."""
         if not target_location:
-            return True
+            return {
+                "match": True,
+                "status": "unknown",
+                "confidence": 0.0,
+                "evidence": [],
+                "detected_location": None,
+            }
 
         target_lower = target_location.lower()
         ignore = {"in", "at", "near", "around", "from", "australia", "nsw", "vic", "qld", "wa", "sa", "tas", "act", "nt"}
         target_words = [w for w in re.split(r"\W+", target_lower) if w and w not in ignore]
 
         if not target_words:
-            return True
+            return {
+                "match": True,
+                "status": "unknown",
+                "confidence": 0.0,
+                "evidence": [],
+                "detected_location": None,
+            }
 
-        if suburb and any(w in suburb.lower() for w in target_words):
-            return True
-        if address and any(w in address.lower() for w in target_words):
-            return True
-        if website and any(w in website.lower() for w in target_words):
-            return True
+        suburb_lower = (suburb or "").lower()
+        address_lower = (address or "").lower()
+        website_lower = (website or "").lower()
+        evidence = [value for value in [suburb, address, website] if value]
 
-        return True  # Lenient default
+        # Exact evidence match
+        for word in target_words:
+            if word in suburb_lower or word in address_lower or word in website_lower:
+                return {
+                    "match": True,
+                    "status": "exact",
+                    "confidence": 0.9,
+                    "evidence": evidence,
+                    "detected_location": suburb or address or website,
+                }
+
+        # Broad city/state targets are allowed to pass with weaker confidence
+        broad_terms = {"sydney", "melbourne", "brisbane", "perth", "adelaide", "hobart", "darwin", "canberra", "cbd"}
+        broad_target = any(word in broad_terms for word in target_words)
+        if evidence and broad_target:
+            return {
+                "match": True,
+                "status": "weak",
+                "confidence": 0.45,
+                "evidence": evidence,
+                "detected_location": suburb or address or website,
+            }
+
+        # If we have evidence but it does not support the target, treat as mismatch.
+        if evidence:
+            return {
+                "match": False,
+                "status": "mismatch",
+                "confidence": 0.1,
+                "evidence": evidence,
+                "detected_location": suburb or address or website,
+            }
+
+        # No location evidence found on the page: review rather than hard fail.
+        return {
+            "match": True,
+            "status": "weak",
+            "confidence": 0.2,
+            "evidence": [],
+            "detected_location": None,
+        }
 
 # Singleton
 lead_quality_gate = LeadQualityGate()

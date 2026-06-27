@@ -30,7 +30,6 @@ function SettingsNavigation() {
       icon: ShieldAlert,
       description: "Limits and reservations",
     },
-
   ];
 
   return (
@@ -80,7 +79,7 @@ export default function SettingsLayout({
       <aside className="w-full md:w-64 border-b md:border-b-0 md:border-r border-zinc-200/50 dark:border-zinc-800/50 p-6 shrink-0 bg-zinc-950/20 backdrop-blur-sm">
         <div className="mb-6 hidden md:block">
           <h2 className="text-lg font-bold tracking-tight text-zinc-100">Control Panel</h2>
-          <p className="text-xs text-zinc-500">Configure outreach settings & policies</p>
+          <p className="text-xs text-zinc-500">Configure outreach settings</p>
         </div>
         <Suspense fallback={<div className="h-40 animate-pulse bg-zinc-900/50 rounded-xl" />}>
           <SettingsNavigation />

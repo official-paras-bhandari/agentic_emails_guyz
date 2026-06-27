@@ -9,7 +9,6 @@ import {
   MessageSquareReply,
   Users,
   CheckSquare,
-  ShieldCheck,
   Settings,
   ChevronRight,
   Monitor,
@@ -211,7 +210,6 @@ export function AppSidebar() {
     { name: "Campaigns", href: withWorkspace("/campaigns"), icon: Folder },
     { name: "Replies", href: withWorkspace("/replies"), icon: MessageSquareReply },
     { name: "Leads", href: withWorkspace("/leads"), icon: Users },
-    { name: "Compliance", href: withWorkspace("/suppression-list"), icon: ShieldCheck },
     { name: "Settings", href: withWorkspace("/settings/workspace"), icon: Settings },
   ];
 

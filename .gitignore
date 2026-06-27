@@ -9,6 +9,7 @@
 # JavaScript
 node_modules/
 .next/
+.next.*/
 out/
 dist/
 *.tsbuildinfo

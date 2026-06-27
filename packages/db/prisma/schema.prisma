@@ -18,17 +18,83 @@ model User {
   homeCountry         String?
   role                String               @default("MEMBER") // "ADMIN" | "MEMBER"
   isActive            Boolean              @default(true)
+  onboardingCompleted Boolean              @default(false)
   createdAt           DateTime             @default(now())
   updatedAt           DateTime             @updatedAt
   telegramConnections TelegramConnection[]
   workspaces          WorkspaceMember[]
+  tenantMemberships   TenantMember[]
+}
+
+model Tenant {
+  id          String         @id @default(cuid())
+  name        String
+  databaseUrl String         // Connection URL for the tenant database
+  status      String         @default("ACTIVE") // "ACTIVE" | "SUSPENDED"
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  workspaces  Workspace[]
+  memberships TenantMember[]
+  invitations Invitation[]
+}
+
+model TenantMember {
+  id        String   @id @default(cuid())
+  tenantId  String
+  userId    String
+  role      String   @default("MEMBER") // "ADMIN" | "MEMBER"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  tenant    Tenant   @relation(fields: [tenantId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@unique([tenantId, userId])
+}
+
+model Invitation {
+  id          String   @id @default(cuid())
+  email       String
+  role        String   @default("MEMBER")
+  tenantId    String
+  workspaceId String
+  token       String   @unique
+  accepted    Boolean  @default(false)
+  expiresAt   DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  tenant      Tenant   @relation(fields: [tenantId], references: [id])
+}
+
+model WorkspaceProfile {
+  id                  String    @id @default(cuid())
+  workspaceId         String    @unique
+  defaultCountry      String?
+  defaultRegion       String?
+  defaultCity         String?
+  defaultAreas        String?   // comma-separated or JSON
+  defaultSearchScope  String?
+  defaultIndustry     String?
+  defaultPersona      String?
+  businessWebsite     String?
+  businessDescription String?
+  offerValueProp      String?
+  senderIdentity      String?
+  companyAddress      String?
+  companyFooter       String?
+  approvalMode        String    @default("manual") // "manual" | "auto"
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  workspace           Workspace @relation(fields: [workspaceId], references: [id])
 }
 
 model Workspace {
   id                  String               @id @default(cuid())
   name                String
+  tenantId            String?
   createdAt           DateTime             @default(now())
   updatedAt           DateTime             @updatedAt
+  tenant              Tenant?              @relation(fields: [tenantId], references: [id])
+  profile             WorkspaceProfile?
   agentRuns           AgentRun[]
   artifacts           Artifact[]
   auditLogs           AuditLog[]
@@ -63,6 +129,7 @@ model WorkspaceMember {
 
   @@unique([userId, workspaceId])
 }
+
 
 model GoogleConnection {
   id                    String    @id @default(cuid())
@@ -170,6 +237,7 @@ model Job {
   workspace       Workspace    @relation(fields: [workspaceId], references: [id])
   jobLogs         JobLog[]
   steps           JobStep[]
+  crawlSnapshots  CrawlSnapshot[]
 
   @@index([workspaceId, createdAt])
   @@index([status, lastHeartbeatAt])
@@ -244,6 +312,7 @@ model Lead {
   enrichments   LeadEnrichment[]
   leadMemories  LeadMemory[]
   sources       LeadSource[]
+  snapshotSources LeadSnapshotSource[]
   replies       Reply[]
   sentEmails    SentEmail[]
   groups        LeadGroupMember[]
@@ -254,6 +323,62 @@ model Lead {
   @@index([workspaceId, normalizedPhone])
   @@index([workspaceId, businessName, suburb])
   @@index([status])
+}
+
+model CrawlSnapshot {
+  id                    String               @id @default(cuid())
+  candidateUrlId        String?
+  jobId                 String
+  url                   String
+  finalUrl              String?
+  httpStatus            Int?
+  contentHash           String?
+  rawHtmlStorageKey     String?
+  renderedHtmlStorageKey String?
+  cleanedTextStorageKey String?
+  fetchedAt             DateTime?
+  expiresAt             DateTime?
+  createdAt             DateTime             @default(now())
+  job                   Job                  @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  leadSources           LeadSnapshotSource[]
+
+  @@index([jobId, createdAt])
+  @@index([candidateUrlId])
+  @@index([contentHash])
+  @@index([expiresAt])
+}
+
+model LeadSnapshotSource {
+  id                 String        @id @default(cuid())
+  leadId             String
+  crawlSnapshotId    String
+  candidateUrlId     String?
+  extractionResultId String?
+  sourceRole         String
+  evidenceType       String
+  createdAt          DateTime      @default(now())
+  lead               Lead          @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  crawlSnapshot      CrawlSnapshot @relation(fields: [crawlSnapshotId], references: [id], onDelete: Cascade)
+
+  @@unique([leadId, crawlSnapshotId, evidenceType])
+  @@index([leadId])
+  @@index([crawlSnapshotId])
+  @@index([candidateUrlId])
+  @@index([extractionResultId])
+  @@index([sourceRole, evidenceType])
+}
+
+model SourceStatusEvent {
+  id        String   @id @default(cuid())
+  sourceId  String
+  oldStatus String?
+  newStatus String
+  reason    String
+  changedBy String
+  createdAt DateTime @default(now())
+
+  @@index([sourceId, createdAt])
+  @@index([newStatus, createdAt])
 }
 
 model LeadSource {

@@ -3,7 +3,7 @@
 import React, { Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { LayoutGrid, Mail, ShieldAlert, ShieldCheck, UserRound } from "lucide-react";
+import { LayoutGrid, Mail, ShieldAlert, UserRound } from "lucide-react";
 
 function SettingsPageContent() {
   const searchParams = useSearchParams();
@@ -34,20 +34,13 @@ function SettingsPageContent() {
       description: "Configure daily limits, lease rules, and dispatch spacing.",
       href: "/settings/sending",
     },
-    {
-      icon: <ShieldCheck className="h-5 w-5 text-emerald-500" />,
-      title: "Compliance & Suppressions",
-      description: "Enforce unsubscribe detection and global suppression lists.",
-      href: "/settings/compliance",
-    },
-
   ];
 
   return (
     <div className="p-10 max-w-4xl mx-auto space-y-10 animate-spring-up">
       <div>
         <h1 className="text-3xl font-extrabold tracking-tight premium-gradient-text">Settings Control Panel</h1>
-        <p className="text-sm text-zinc-500 mt-2 font-medium">Configure workspace isolation, integrations, dispatch safety, and compliance policies.</p>
+        <p className="text-sm text-zinc-500 mt-2 font-medium">Configure workspace isolation, integrations, and dispatch safety.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

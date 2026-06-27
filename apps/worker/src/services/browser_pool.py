@@ -7,6 +7,8 @@ import time
 from urllib.parse import urlparse, urljoin
 from typing import Dict, List, Optional
 from playwright.sync_api import sync_playwright, Browser, BrowserContext
+from src.config import config
+from src.services.render_limiter import render_limiter
 
 class BrowserPool:
     """Manages reusable headless browser context pool."""
@@ -16,11 +18,23 @@ class BrowserPool:
         self.browser = None
         self.domains_crawled = 0
         self.max_domains_before_restart = 40
-        self.max_pages_per_domain = max_pages_per_domain
-        self.page_timeout_ms = page_timeout_sec * 1000
+        self.max_pages_per_domain = min(max_pages_per_domain, config.MAX_RENDERED_PAGES_PER_DOMAIN_PER_JOB)
+        self.page_timeout_ms = min(page_timeout_sec, config.MAX_RENDER_TIME_SECONDS) * 1000
 
-    def fetch_page(self, url: str) -> Optional[str]:
+    def fetch_page(self, url: str, user_id: Optional[str] = None, job_id: Optional[str] = None) -> Optional[str]:
         """Fetch HTML content of a single page."""
+        domain = render_limiter.domain_for_url(url)
+        if not render_limiter.can_render_page(job_id, domain):
+            print(f"[BrowserPool] Render page budget exhausted for job={job_id} domain={domain}")
+            return None
+
+        with render_limiter.lease(url, user_id=user_id) as lease:
+            if not lease.acquired:
+                print(f"[BrowserPool] Render semaphore unavailable for {url}: {lease.reason}")
+                return None
+            return self._fetch_page_with_browser(url)
+
+    def _fetch_page_with_browser(self, url: str) -> Optional[str]:
         browser = self.get_browser()
         context = None
         try:
@@ -60,12 +74,34 @@ class BrowserPool:
             )
         return self.browser
 
-    def crawl_domain(self, base_url: str) -> Dict[str, str]:
+    def crawl_domain(
+        self,
+        base_url: str,
+        user_id: Optional[str] = None,
+        job_id: Optional[str] = None,
+    ) -> Dict[str, str]:
         """
         Crawl up to max_pages_per_domain pages of a business website.
         Blocks images/fonts/media.
         Returns a map of page_type/url -> HTML content.
         """
+        domain = render_limiter.domain_for_url(base_url)
+        if not render_limiter.can_render_page(job_id, domain):
+            print(f"[BrowserPool] Render page budget exhausted for job={job_id} domain={domain}")
+            return {}
+
+        with render_limiter.lease(base_url, user_id=user_id) as lease:
+            if not lease.acquired:
+                print(f"[BrowserPool] Render semaphore unavailable for {base_url}: {lease.reason}")
+                return {}
+            return self._crawl_domain_with_browser(base_url, domain, job_id)
+
+    def _crawl_domain_with_browser(
+        self,
+        base_url: str,
+        domain: str,
+        job_id: Optional[str] = None,
+    ) -> Dict[str, str]:
         browser = self.get_browser()
         context = None
         pages_content = {}
@@ -77,7 +113,7 @@ class BrowserPool:
         ]
 
         start_time = time.time()
-        max_total_crawl_time = 45.0  # Section 16.2
+        max_total_crawl_time = float(config.MAX_RENDER_TIME_SECONDS)
 
         try:
             # Create isolated context for each domain
@@ -115,13 +151,18 @@ class BrowserPool:
 
             # Filter & prioritize internal links
             internal_urls = self._filter_and_prioritize_links(base_url, links, priority_keywords)
-            # homepage counts as 1 page, so crawl max 4 more pages
-            links_to_crawl = internal_urls[:self.max_pages_per_domain - 1]
+            # Homepage counts as 1 page.
+            max_extra_pages = max(0, min(self.max_pages_per_domain, config.MAX_RENDERED_PAGES_PER_DOMAIN_PER_JOB) - 1)
+            links_to_crawl = internal_urls[:max_extra_pages]
 
             for link in links_to_crawl:
                 # Enforce total crawl timeout per domain (Section 16.2)
                 if time.time() - start_time > max_total_crawl_time:
                     print(f"[BrowserPool] Total crawl timeout reached for {base_url}")
+                    break
+
+                if not render_limiter.can_render_page(job_id, domain):
+                    print(f"[BrowserPool] Render page budget reached while crawling {base_url}")
                     break
 
                 try:

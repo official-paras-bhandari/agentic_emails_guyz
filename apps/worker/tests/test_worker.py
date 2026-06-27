@@ -154,5 +154,40 @@ class CampaignDraftingTests(unittest.TestCase):
         self.assertEqual(draft_created_event["lead_id"], "lead-1")
 
 
+class LeadDiscoveryWorkflowTests(unittest.TestCase):
+    @patch("src.workflows.command_workflow.is_job_cancelled", return_value=False)
+    @patch("src.workflows.command_workflow._notify_webhook")
+    @patch("src.workflows.command_workflow.LeadDiscoveryPipeline")
+    @patch("src.workflows.command_workflow.CommandUnderstandingAgent")
+    def test_country_does_not_replace_location_for_live_pipeline(self, agent_cls, pipeline_cls, _notify, _cancelled):
+        agent_cls.return_value.understand.return_value = {
+            "allowed": True,
+            "intent": "scrape_leads",
+            "goal": "Find salons in Sydney",
+            "parameters": {
+                "industry": "salons",
+                "location": "Sydney",
+                "country": "AU",
+                "quantity": 3,
+            },
+            "intent_flags": {},
+        }
+
+        with patch.object(command_workflow.config, "MOCK_MODE", False):
+            command_workflow.run_command_workflow(
+                workspace_id="test-ws-1",
+                command_id="cmd-1",
+                prompt="Find 3 salons in Sydney",
+                job_id="job-live-1",
+            )
+
+        pipeline_cls.return_value.run.assert_called_once_with(
+            industry="salons",
+            location="Sydney",
+            quantity=3,
+            country="AU",
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
